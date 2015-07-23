@@ -1,0 +1,23 @@
+body{
+	font-family: Arial;
+	font-size: 12px;
+	text-align: center;
+	color: white;
+	background-color: #8f8f8f;
+}
+ h1{
+	font-size: 32px;
+ }
+ #header{
+ 
+ }
+ #content{
+ 
+ }
+ #footer{
+	position: absolute;
+	bottom: 0px;
+	left: 25%;
+	right: 25%;
+ }
+
