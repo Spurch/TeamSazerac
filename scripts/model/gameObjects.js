@@ -1,4 +1,4 @@
-var drink = (function () {
+var drawableObject = (function () {
     var drink = {
         init: function (x, y, width, height) {
             this.x = x;
@@ -48,7 +48,7 @@ var cocktail = (function (parent) {
     };
 
     return cocktail;
-}(drink));
+}(drawableObject));
 
 var softDrink = (function (parent) {
 
@@ -61,7 +61,19 @@ var softDrink = (function (parent) {
     };
 
     return softDrink;
-}(drink));
+}(drawableObject));
+
+var obstacle = (function(){
+    var obstacle = Object.create(parent);
+    
+    obstacle.init = function (x, y, width, height) {
+        parent.init.call(this, x, y, width, height);
+
+        return this;
+    };
+    
+    return obstacle;
+}(drawableObject))
 
 var bloodyMarry = Object.create(softDrink).init(20, 30, 50, 100);
 var pepsi = Object.create(cocktail).init(20, 30, 50, 100);
