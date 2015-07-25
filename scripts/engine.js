@@ -10,4 +10,5 @@ window.onload = function () {
             height: CONSTANTS.STAGE_HEIGHT
         });
     //put kinetic layers here e.g stage.add(layerName);
-}
+
+};
