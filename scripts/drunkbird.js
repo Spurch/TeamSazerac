@@ -1,5 +1,4 @@
 var BIRD_DATA = {
-    x: 60, 
     initialRadius: 20,
     isFlayingDefault: false,
     isAliveDefault: true
@@ -12,13 +11,19 @@ var BIRD_DATA = {
 var drunkBird = (function () {
 
     var bird = {
-        init: function (y) {
-            this.x = BIRD_DATA.x;
+        init: function (x, y) {
+            this.x = x;
             this.y = y;
             this.radius = BIRD_DATA.initialRadius;
             this.isFlaying = BIRD_DATA.isFlayingDefault;
             this.isAlive = BIRD_DATA.isAliveDefault;
             return this;
+        },
+        get x() {
+            return this._x
+        },
+        set x(value) {
+            this._x = value;
         },
         get y() {
             return this._y
