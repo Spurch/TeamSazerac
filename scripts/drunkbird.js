@@ -1,11 +1,13 @@
 var BIRD_DATA = {
     x: 60, 
     initialRadius: 20,
-    flies: false
+    isFlayingDefault: false,
+    isAliveDefault: true
 };
 
-//flies -> if set to false the bird will fall
-//else when pressing the space key will climb up
+//isFlaying -> is the state of the bird, it will be manipulated by the engine
+
+//isAlive -> is the state of the bird, it will be manipulated by the engine
 
 var drunkBird = (function () {
 
@@ -14,7 +16,8 @@ var drunkBird = (function () {
             this.x = BIRD_DATA.x;
             this.y = y;
             this.radius = BIRD_DATA.initialRadius;
-            this.flies = BIRD_DATA.flies;
+            this.isFlaying = BIRD_DATA.isFlayingDefault;
+            this.isAlive = BIRD_DATA.isAliveDefault;
             return this;
         },
         get y() {
@@ -29,15 +32,23 @@ var drunkBird = (function () {
         set radius(value) {
             this._radius = value;
         },
-        get flies() {
-            return this._flies
+        get isFlaying() {
+            return this._isFlaying
         },
-        set flies(value) {
-            this._flies = value;
+        set isFlaying(value) {
+            this._isFlaying = value;
+        }        ,
+        get isAlive() {
+            return this._isAlive
+        },
+        set isAlive(value) {
+            this._isAlive = value;
         }
     };
 
     Object.defineProperties(drunkBird, {
+        // Probably better to move to engine
+        /*
         'draw': {
             value: function () {
                 var birdObj = new Kinetic.Circle({
@@ -49,27 +60,30 @@ var drunkBird = (function () {
                 birdLayer.add(birdObj);
             }
         },
-        'updatePosition': {
+        */
+        // Changing Y position depending the state of isFlaying of the object
+        'updateYPosition': {
             value: function (flies, gravity) {
                 if (flies) {
                     this.y -= gravity;
-                    this.flies = BIRD_DATA.flies;
+                    this.isFlaying = false;
                 } else {
                     this.y += gravity / 2;
                 }
-                this.draw();
+                // this.draw();
             }
         },
+        // Changing radius depending the drinks we take if we keep the bird as a circle
         'drinkCocktail': {
             value: function (growRate) {
                 this.radius *= growRate;
-                this.draw();
+                // this.draw();
             }
         },
         'drinkSoftDrink': {
             value: function (skinRate) {
                 this.radius /= skinRate;
-                this.draw();
+                // this.draw();
             }
         }
     });
