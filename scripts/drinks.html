@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Teamwork</title>
+    <style>
+        canvas{
+            border: 2px solid black !important;
+        }
+    </style>
+    <script src="kinetic-v5.1.0.js"></script>
+</head>
+<body>
+    <div id="wrapper"></div>
+    <script>
+
+        function randomNumberInInterval(min, max){
+            var randomNumber = Math.floor(Math.random()*(max - min) + min);
+            return randomNumber;
+        }
+
+        var stage = new Kinetic.Stage({
+            container: 'wrapper',
+            width: 800,
+            height: 600
+        });
+
+        var drinkLayer = new Kinetic.Layer();
+        var x,
+                y,
+                width,
+                height,
+                initialIntervalMinX = 700,
+                initialIntervalMaxX = stage.getWidth(),
+                initialIntervalMinY = 50,
+                initialIntervalMaxY = stage.getHeight() - 50;
+
+        var softDrink = new Kinetic.Rect({
+            x: randomNumberInInterval(initialIntervalMinX, initialIntervalMaxX),
+            y: randomNumberInInterval(initialIntervalMinY, initialIntervalMaxY),
+            width: 6,
+            height: 10,
+            stroke: 'black',
+            fill: 'blue'
+        });
+
+        var cocktail = new Kinetic.Rect({
+            x: randomNumberInInterval(initialIntervalMinX, initialIntervalMaxX),
+            y: randomNumberInInterval(initialIntervalMinY, initialIntervalMaxY),
+            width: 6,
+            height: 10,
+            stroke: 'black',
+            fill: 'red'
+        });
+
+        var drinkX = 0,
+                drinkY = 0,
+                speed = 3;
+
+        function animateSoftDrinkFrame(){
+            drinkLayer.add(softDrink);
+
+            drinkX = softDrink.getX();
+            drinkX -= speed;
+            softDrink.setX(drinkX);
+            console.log(drinkX);
+
+            drinkLayer.draw();
+
+            if(drinkX > -softDrink.getWidth() - 1){ // will stop recoursing when the drink object goes entirely + 1 pixel out of the canvas
+                requestAnimationFrame(animateSoftDrinkFrame);
+            }
+            if(drinkX < 0){
+                softDrink.setX(800);
+            }
+        }
+
+        function animateCocktailFrame(){
+            drinkLayer.add(cocktail);
+
+            drinkX = cocktail.getX();
+            drinkX -= speed;
+            cocktail.setX(drinkX);
+
+            drinkLayer.draw();
+
+            if(drinkX > -cocktail.getWidth() - 1){ // will stop recoursing when the drink object goes entirely + 1 pixel out of the canvas
+                requestAnimationFrame(animateCocktailFrame);
+            }
+            if(drinkX < 0){
+                softDrink.setX(800);
+            }
+        }
+
+        function randomFunctionCall() {
+            var number = Math.random();
+
+            if (number > 0.4) { // 0.4 because soft drinks are with priority
+                animateSoftDrinkFrame();
+            } else {
+                animateCocktailFrame();
+            }
+            //setTimeout(randomFunctionCall(Math.random()), 1000);
+        }
+
+        setInterval(randomFunctionCall, 1000);
+
+        stage.add(drinkLayer);
+
+
+    </script>
+
+</body>
+</html>
