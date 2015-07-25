@@ -75,15 +75,9 @@ var obstacle = (function(){
     return obstacle;
 }(drawableObject))
 
-var bloodyMarry = Object.create(softDrink).init(20, 30, 50, 100);
-var pepsi = Object.create(cocktail).init(20, 30, 50, 100);
+var bloodyMarry = Object.create(cocktail).init(20, 30, 50, 100);
+var pepsi = Object.create(softDrink).init(20, 30, 50, 100);
 
 console.log(drink.isPrototypeOf(bloodyMarry)); //true
-console.log(cocktail.isPrototypeOf(bloodyMarry)); //false
-console.log(bloodyMarry instanceof cocktail); // throw error
-
-
-
-console.log(drink.isPrototypeOf(pepsi)); //false
-
-//console.log(cocktail.getPrototypeOf(bloodyMarry));
+console.log(cocktail.isPrototypeOf(bloodyMarry)); //true
+console.log(drink.isPrototypeOf(pepsi)); //true
