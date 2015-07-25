@@ -1,7 +1,7 @@
 window.onload = function () {
     var CONSTANTS = {
             STAGE_WIDTH: 800,
-            STAGE_HEIGHT: 500
+            STAGE_HEIGHT: 600
         },
 
         stage = new Kinetic.Stage({
