@@ -24,12 +24,9 @@ window.onload = function () {
         stroke: 'black',
         strokeWidth: 4
     });
-
+    
     birdLayer.add(birdShape);
     //put kinetic layers here e.g stage.add(layerName);
-    stage.add(background);
-    stage.add(birdLayer);
-
     function birdAnimationFrame() {
         bird.y += CONSTANTS.GRAVITY;
         if (bird.y - bird.radius > CONSTANTS.STAGE_HEIGHT) {
@@ -67,4 +64,9 @@ window.onload = function () {
     });
 
     birdAnimationFrame();
+    
+    stage.add(background);
+    stage.add(birdLayer);
+
+    
 };
