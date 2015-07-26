@@ -94,5 +94,3 @@ var drunkBird = (function () {
     });
     return bird;
 }());
-
-
