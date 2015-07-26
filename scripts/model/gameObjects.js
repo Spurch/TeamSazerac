@@ -1,5 +1,5 @@
 var drawableObject = (function () {
-    var drink = {
+    var drawableObject = {
         init: function (x, y, width, height) {
             this.x = x;
             this.y = y;
@@ -33,7 +33,7 @@ var drawableObject = (function () {
         }
     };
 
-    return drink;
+    return drawableObject;
 
 }());
 
@@ -63,7 +63,7 @@ var softDrink = (function (parent) {
     return softDrink;
 }(drawableObject));
 
-var obstacle = (function(){
+var obstacle = (function(parent){
     var obstacle = Object.create(parent);
     
     obstacle.init = function (x, y, width, height) {
@@ -73,11 +73,15 @@ var obstacle = (function(){
     };
     
     return obstacle;
-}(drawableObject))
+}(drawableObject));
 
 var bloodyMarry = Object.create(cocktail).init(20, 30, 50, 100);
 var pepsi = Object.create(softDrink).init(20, 30, 50, 100);
+var barrier = Object.create(obstacle).init(20, 30, 50, 100);
 
-console.log(drink.isPrototypeOf(bloodyMarry)); //true
+console.log(drawableObject.isPrototypeOf(bloodyMarry)); //true
 console.log(cocktail.isPrototypeOf(bloodyMarry)); //true
-console.log(drink.isPrototypeOf(pepsi)); //true
+console.log(drawableObject.isPrototypeOf(pepsi)); //true
+console.log(softDrink.isPrototypeOf(pepsi)); //true
+console.log(drawableObject.isPrototypeOf(barrier)); //true
+console.log(obstacle.isPrototypeOf(barrier)); //true
