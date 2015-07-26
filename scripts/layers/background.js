@@ -22,6 +22,8 @@ sky = new Kinetic.Rect({
 
 background.add(sky);
 
+clouds = new Kinetic.Layer();
+
 
 cloudsCollection = ["images/Clouds/CL02.png", "images/Clouds/CL03.png", "images/Clouds/CL07.png"];
 
@@ -63,8 +65,6 @@ cloud = (function () {
                     height: 40
                 });
                 background.add(newCloud);
-                background.draw();
-
             };
 
             img.src = this.image;
@@ -76,17 +76,25 @@ cloud = (function () {
 }());
 
 
-var firstCloud = Object.create(cloud).init(cloudsCollection[generateRandomIntegerPosition(0, cloudsCollection.length)], 801, generateRandomIntegerPosition(5, 35), 1);
+function generateCloud() {
+    return Object.create(cloud).init(cloudsCollection[generateRandomIntegerPosition(0, cloudsCollection.length)], 801, generateRandomIntegerPosition(5, 35), 1);
+}
 
+var cloud = generateCloud();
+//var secondCloud = generateCloud();
 
-cloudsAnimation = new Kinetic.Animation(function (cloud) {
+cloudsAnimation = new Kinetic.Animation(function () {
+    cloud.draw();
+    cloud.x -= cloud.speed;
 
-    firstCloud.draw();
-    firstCloud.x -= firstCloud.speed;
+    if (cloud.x < 0) {
+        cloud = generateCloud();
+    }
+
+    background.draw();
     background.add(sky);
 
 });
-
 
 cloudsAnimation.start();
 
