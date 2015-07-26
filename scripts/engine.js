@@ -73,7 +73,7 @@ window.onload = function () {
             obstacleWidth = obstacleHeight * 0.3,
             // Never to be exactly sure where the object will apear -> TOP or BOTTOM
             obstacleYPosition = Math.random() > 0.5 ? 0 : CONSTANTS.STAGE_HEIGHT - obstacleHeight,
-            obstacleXPosition = CONSTANTS.STAGE_WIDTH-obstacleWidth;
+            obstacleXPosition = CONSTANTS.STAGE_WIDTH;
 
         var genericObstacle = obstacle.init(obstacleXPosition, obstacleYPosition, obstacleWidth, obstacleHeight);
 
