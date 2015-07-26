@@ -15,7 +15,7 @@ var drunkBird = (function () {
             this.x = x;
             this.y = y;
             this.radius = BIRD_DATA.initialRadius;
-            this.isFlaying = BIRD_DATA.isFlayingDefault;
+            this.isFlying = BIRD_DATA.isFlyingDefault;
             this.isAlive = BIRD_DATA.isAliveDefault;
             return this;
         },
@@ -37,11 +37,11 @@ var drunkBird = (function () {
         set radius(value) {
             this._radius = value;
         },
-        get isFlaying() {
-            return this._isFlaying
+        get isFlying() {
+            return this._isFlying
         },
-        set isFlaying(value) {
-            this._isFlaying = value;
+        set isFlying(value) {
+            this._isFlying = value;
         }        ,
         get isAlive() {
             return this._isAlive
@@ -51,7 +51,7 @@ var drunkBird = (function () {
         }
     };
 
-    Object.defineProperties(drunkBird, {
+    Object.defineProperties(bird, {
         // Probably better to move to engine
         /*
         'draw': {
