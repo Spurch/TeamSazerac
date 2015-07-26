@@ -14,7 +14,7 @@ window.onload = function () {
 
     var birdLayer = new Kinetic.Layer();
 
-    var bird = drunkBird.init(50, 50);
+    var bird = drunkBird.init(50, CONSTANTS.STAGE_HEIGHT/2);
 
     var birdShape = new Kinetic.Circle({
         x: bird.x,
