@@ -2,7 +2,7 @@ window.onload = function () {
     var CONSTANTS = {
         STAGE_WIDTH: 800,
         STAGE_HEIGHT: 600,
-        JUMP_SPEED: 75,
+        JUMP_SPEED: 60,
         GRAVITY: 3
     }
 
@@ -29,7 +29,7 @@ window.onload = function () {
     //put kinetic layers here e.g stage.add(layerName);
     function birdAnimationFrame() {
         bird.y += CONSTANTS.GRAVITY;
-        if (bird.y - bird.radius > CONSTANTS.STAGE_HEIGHT) {
+        if (bird.y >= CONSTANTS.STAGE_HEIGHT - bird.radius) {
             bird.y = CONSTANTS.STAGE_HEIGHT - bird.radius;
             bird.isFlying = false;
 
