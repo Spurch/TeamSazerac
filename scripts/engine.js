@@ -165,11 +165,11 @@ function generateObject(x, y, width, height, type) {
     });
 
     if (type) {
-        setCocktailImage(kineticObject);
+        setCocktailImage(drink);
     } else {
-        setSoftDrinkImage(kineticObject);
+        setSoftDrinkImage(drink);
     }
-    return kineticObject;
+    return drink;
 }
 
 setInterval(function () {
