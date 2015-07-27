@@ -1,4 +1,4 @@
-window.onload = function() {
+window.onload = function () {
     var CONSTANTS = {
         STAGE_WIDTH: 800,
         STAGE_HEIGHT: 600,
@@ -56,11 +56,11 @@ window.onload = function() {
         }
     }
 
-    (function() {
+    (function () {
         //if you want to jump as long as you press SPACE btn comment 'keyup EventListener'
         //and the logic with btnIsDown
         var btnIsDown = false;
-        window.addEventListener('keydown', function(ev) {
+        window.addEventListener('keydown', function (ev) {
             if (ev.keyCode === 32) {
                 if (btnIsDown) {
                     return;
@@ -71,12 +71,12 @@ window.onload = function() {
             }
         });
 
-        window.addEventListener('keyup', function(ev) {
+        window.addEventListener('keyup', function (ev) {
             if (ev.keyCode === 32) {
                 btnIsDown = false;
             }
         });
-    }());
+    } ());
 
     birdAnimationFrame();
 
@@ -95,6 +95,41 @@ window.onload = function() {
         return genericObstacle;
     }
 
+    function areColliding(bird, drawableObject) {
+        var inBottomLeft = false,
+            inBottomRight = false,
+            inTopLeft = false,
+            inTopRight = false;
+
+        var distanceBottomLeft = Math.pow(bird.x - drawableObject.x, 2) + Math.pow(bird.y - drawableObject.y, 2);
+        var distanceTopLeft = Math.pow(bird.x - drawableObject.x, 2) + Math.pow(bird.y - (drawableObject.y + drawableObject.height), 2);
+        var distanceTopRight = Math.pow(bird.x - (drawableObject.x + drawableObject.width), 2) + Math.pow(bird.y - (drawableObject.y + drawableObject.height), 2);
+        var distanceBottomRight = Math.pow(bird.x - (drawableObject.x + drawableObject.width), 2) + Math.pow(bird.y - drawableObject.y, 2);
+
+        if (distanceBottomLeft <= bird.radius * bird.radius) {
+            inBottomLeft = true;
+        }
+
+        if (distanceTopRight <= bird.radius * bird.radius) {
+            inTopRight = true;
+        }
+
+        if (distanceTopLeft <= bird.radius * bird.radius){
+            inTopLeft = true;
+        }
+        
+        if(distanceBottomRight <= bird.radius * bird.radius){
+            inBottomRight = true;
+        }
+        
+        return inTopLeft || inBottomLeft || inTopRight || inBottomRight;
+    }
+    
+/*    var testBird = drunkBird.init(50, 50);
+    var testObstacle = obstacle.init(50, 50, 20, 20);
+
+    console.log('collision: ' + areColliding(testBird, testObstacle));*/
+    
     stage.add(background);
     stage.add(birdLayer);
 
