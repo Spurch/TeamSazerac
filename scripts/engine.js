@@ -2,7 +2,7 @@ window.onload = function () {
     var CONSTANTS = {
         STAGE_WIDTH: 800,
         STAGE_HEIGHT: 600,
-        JUMP_SPEED: 75,
+        JUMP_SPEED: 60,
         GRAVITY: 3
     }
 
@@ -29,7 +29,7 @@ window.onload = function () {
     //put kinetic layers here e.g stage.add(layerName);
     function birdAnimationFrame() {
         bird.y += CONSTANTS.GRAVITY;
-        if (bird.y - bird.radius > CONSTANTS.STAGE_HEIGHT) {
+        if (bird.y >= CONSTANTS.STAGE_HEIGHT - bird.radius) {
             bird.y = CONSTANTS.STAGE_HEIGHT - bird.radius;
             bird.isFlying = false;
 
@@ -64,6 +64,21 @@ window.onload = function () {
     });
 
     birdAnimationFrame();
+
+    function obstacleFactory() {
+
+        var minHeight = 100,
+            randomHeightPart = 200,
+            obstacleHeight = Math.round(Math.random()*randomHeightPart+minHeight),
+            obstacleWidth = obstacleHeight * 0.3,
+            // Never to be exactly sure where the object will apear -> TOP or BOTTOM
+            obstacleYPosition = Math.random() > 0.5 ? 0 : CONSTANTS.STAGE_HEIGHT - obstacleHeight,
+            obstacleXPosition = CONSTANTS.STAGE_WIDTH;
+
+        var genericObstacle = obstacle.init(obstacleXPosition, obstacleYPosition, obstacleWidth, obstacleHeight);
+
+        return genericObstacle;
+    }
     
     stage.add(background);
     stage.add(birdLayer);

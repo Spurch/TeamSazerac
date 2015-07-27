@@ -1,0 +1,60 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <style>
+      body {
+        margin: 0px;
+        padding: 0px;
+      }
+      #container {
+      	border: 2px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container"></div>
+    <script src="scripts\kinetic-v5.1.0.js"></script>
+    <script defer="defer">
+      var stage = new Kinetic.Stage({
+        container: 'container',
+        width: 578,
+        height: 200
+      });
+
+      var layer = new Kinetic.Layer();
+
+      var rect = new Kinetic.Rect({
+        x: 225,
+        y: 75,
+        width: 30,
+        height: 50,
+    	fillPriority: "pattern"
+      });
+
+      var cocktailSources = [
+        'images\\Cocktails\\cocktailOne.png',
+        'images\\Cocktails\\cocktailTwo.png',
+        'images\\Cocktails\\cocktailThree.png',
+        'images\\Cocktails\\cocktailFour.png',
+        'images\\Cocktails\\cocktailFive.png'
+	];
+
+
+      var image = new Image();
+		image.onload = function () {
+    	rect.setFillPatternImage(image);
+    	rect.fillPatternScaleX(0.5);
+		rect.fillPatternScaleY(0.5);
+    	stage.draw();
+		};
+		var number = Math.round(Math.random()*4);
+		image.src = cocktailSources[number];
+
+      // add the shape to the layer
+      layer.add(rect);
+
+      // add the layer to the stage
+      stage.add(layer);
+    </script>
+  </body>
+</html>
