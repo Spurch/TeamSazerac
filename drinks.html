@@ -108,12 +108,14 @@
 
             return cocktailImage;
         }
-        /*	
+
+
+        // Marin's variant with generating only two objects
         var drinkX = 0,
                 drinkY = 0,
                 speed = 3;
 
-        // Animating the SAME object - TODO How to generate several objects from that kind?
+        // Animating the SAME object, on each loop(recursion) with different image -I think there is NO need to generate several objects!
         var softDrinkObject = generateSoftDrinkObject();
         setSoftDrinkImage(softDrinkObject);
         function animateSoftDrinkFrame(){
@@ -131,10 +133,11 @@
             if(drinkX < 0){
                 softDrinkObject.setX(800);
                 softDrinkObject.setY(randomNumberInInterval(initialIntervalMinY, initialIntervalMaxY));
+                setSoftDrinkImage(softDrinkObject);
             }
         }
 
-        // Animating the SAME object - TODO How to generate several objects from that kind?
+        // Animating the SAME object, on each loop(recursion) with different image -I think there is NO need to generate several objects!
         var cocktailObject = generateCocktailObject();
         setCocktailImage(cocktailObject);
         function animateCocktailFrame(){
@@ -151,6 +154,7 @@
             if(drinkX < 0){
                 cocktailObject.setX(800);
                 cocktailObject.setY(randomNumberInInterval(initialIntervalMinY, initialIntervalMaxY));
+                setCocktailImage(cocktailObject);
             }
         }
 
@@ -159,62 +163,62 @@
 
             if (number > 0.5) {
                 animateSoftDrinkFrame();
-                setTimeout(animateCocktailFrame, 1000);
+                setTimeout(animateCocktailFrame, 2700);
 
             } else {
                 animateCocktailFrame();
-                setTimeout(animateSoftDrinkFrame, 1000);
+                setTimeout(animateSoftDrinkFrame, 2700);
             }
         }
 
         randomFunctionCall();
-        */
 
-        var drinkX = 0,
-            drinkY = 0,
-            count = 1000,
-            drinkCount = 0,        
-            speed = -3;
+        // Chavdar's variant - generates many objects
+        /*var drinkX = 0,
+                drinkY = 0,
+                count = 1000,
+                drinkCount = 0,
+                speed = -3;
 
         setInterval(function() {
-        ++drinkCount;
-        if (drinkCount % 3 == 0) {
-            var cocktailObject = generateCocktailObject();
-            setCocktailImage(cocktailObject);            
-            drinkLayer.add(cocktailObject);
-        } else{
-        var softDrinkObject = generateSoftDrinkObject();
-            setSoftDrinkImage(softDrinkObject);
-            drinkLayer.add(softDrinkObject);
+            ++drinkCount;
+            if (drinkCount % 3 == 0) {
+                var cocktailObject = generateCocktailObject();
+                setCocktailImage(cocktailObject);
+                drinkLayer.add(cocktailObject);
+            } else{
+                var softDrinkObject = generateSoftDrinkObject();
+                setSoftDrinkImage(softDrinkObject);
+                drinkLayer.add(softDrinkObject);
             };
 
             console.log(drinkCount);
             if (drinkCount > 1000) {
-            	throw new Error ('I can not handle more than 1000 objects');
+                throw new Error ('I can not handle more than 1000 objects');
             };
         }, 750);
 
         var updateXX = Array.apply(null, {length: count}).map(function() {
-                return speed;
-            });        
+            return speed;
+        });
 
         function animFrame() {
-        drinkLayer.find('Rect').forEach(function (drinkObject, index) {
+            drinkLayer.find('Rect').forEach(function (drinkObject, index) {
 
-            var updateX = updateXX[index];
+                var updateX = updateXX[index];
 
-            var x = drinkObject.getX() + updateX;
+                var x = drinkObject.getX() + updateX;
 
-            drinkObject.setX(x);
+                drinkObject.setX(x);
 
-            updateXX[index] = updateX;
+                updateXX[index] = updateX;
 
-        });
-        drinkLayer.draw();
-        requestAnimationFrame(animFrame);
-    }
+            });
+            drinkLayer.draw();
+            requestAnimationFrame(animFrame);
+        }
 
-    animFrame();
+        animFrame();*/
 
         stage.add(drinkLayer);
     </script>
