@@ -248,5 +248,8 @@ window.onload = function () {
 
     stage.add(background);
     stage.add(drinkLayer);
+    //uncomment the 1 line below to see homePage......
+    // yet still dont know how to catch events here(engine) from there(homeScreen)
+    stage.add(homeScreen);
     stage.add(birdLayer);
 };
