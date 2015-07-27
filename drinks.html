@@ -173,12 +173,14 @@
 
         randomFunctionCall();
 
-        // Chavdar's variant - generates many objects
-        /*var drinkX = 0,
+        // Chavdar's variant - pushing many objects to array, than deletes them
+        /*
+        var drinkX = 0,
                 drinkY = 0,
                 count = 1000,
                 drinkCount = 0,
-                speed = -3;
+                speed = -3,
+                birdArr = [];
 
         setInterval(function() {
             ++drinkCount;
@@ -186,33 +188,33 @@
                 var cocktailObject = generateCocktailObject();
                 setCocktailImage(cocktailObject);
                 drinkLayer.add(cocktailObject);
+                birdArr.push({obj: cocktailObject, speed: -3});
             } else{
                 var softDrinkObject = generateSoftDrinkObject();
                 setSoftDrinkImage(softDrinkObject);
                 drinkLayer.add(softDrinkObject);
+                birdArr.push({obj: softDrinkObject, speed: -3});
             };
-
-            console.log(drinkCount);
+            
             if (drinkCount > 1000) {
                 throw new Error ('I can not handle more than 1000 objects');
             };
         }, 750);
 
-        var updateXX = Array.apply(null, {length: count}).map(function() {
-            return speed;
-        });
-
         function animFrame() {
-            drinkLayer.find('Rect').forEach(function (drinkObject, index) {
+            birdArr.forEach(function (drinkObject, index) {
 
-                var updateX = updateXX[index];
+                var updateX = drinkObject.speed;
 
-                var x = drinkObject.getX() + updateX;
+                var x = drinkObject.obj.getX() + updateX;
 
-                drinkObject.setX(x);
+                drinkObject.obj.setX(x);
 
-                updateXX[index] = updateX;
-
+                if (drinkObject.obj.getX() + drinkObject.obj.getWidth() < 0) {
+                    birdArr.splice(index, 1);
+                    console.log('Here');
+                };
+                console.log(birdArr.length);
             });
             drinkLayer.draw();
             requestAnimationFrame(animFrame);
