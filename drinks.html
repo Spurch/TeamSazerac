@@ -111,6 +111,7 @@
 
 
         // Marin's variant with generating only two objects
+        
         var drinkX = 0,
                 drinkY = 0,
                 speed = 3;
@@ -175,10 +176,7 @@
 
         // Chavdar's variant - pushing many objects to array, than deletes them
         /*
-        var drinkX = 0,
-                drinkY = 0,
-                count = 1000,
-                drinkCount = 0,
+        var     drinkCount = 0,
                 speed = -3,
                 birdArr = [];
 
@@ -188,16 +186,12 @@
                 var cocktailObject = generateCocktailObject();
                 setCocktailImage(cocktailObject);
                 drinkLayer.add(cocktailObject);
-                birdArr.push({obj: cocktailObject, speed: -3});
+                birdArr.push({obj: cocktailObject, speed: speed});
             } else{
                 var softDrinkObject = generateSoftDrinkObject();
                 setSoftDrinkImage(softDrinkObject);
                 drinkLayer.add(softDrinkObject);
-                birdArr.push({obj: softDrinkObject, speed: -3});
-            };
-            
-            if (drinkCount > 1000) {
-                throw new Error ('I can not handle more than 1000 objects');
+                birdArr.push({obj: softDrinkObject, speed: speed});
             };
         }, 750);
 
@@ -212,16 +206,16 @@
 
                 if (drinkObject.obj.getX() + drinkObject.obj.getWidth() < 0) {
                     birdArr.splice(index, 1);
-                    console.log('Here');
+                    // console.log('Here');
                 };
-                console.log(birdArr.length);
+                // console.log(birdArr.length);
             });
             drinkLayer.draw();
             requestAnimationFrame(animFrame);
         }
 
-        animFrame();*/
-
+        animFrame();
+*/
         stage.add(drinkLayer);
     </script>
 
