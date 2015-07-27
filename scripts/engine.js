@@ -36,7 +36,7 @@ window.onload = function () {
             birdShape.setY(bird.y);
             birdLayer.draw();
 
-            alert('Game Over bird is not flying');
+            alert('Game Over! Bird is not flying!');
             return;
         }
 

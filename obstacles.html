@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Teamwork</title>
+    <style>
+        canvas{
+            border: 2px solid black !important;
+        }
+    </style>
+    <script src="scripts/kinetic-v5.1.0.js"></script>
+</head>
+<body>
+    <div id="wrapper"></div>
+    <script>
+
+        function randomNumberInInterval(min, max){
+            var randomNumber = Math.floor(Math.random()*(max - min) + min);
+            return randomNumber;
+        }
+
+        var stage = new Kinetic.Stage({
+            container: 'wrapper',
+            width: 800,
+            height: 600
+        });
+
+        var obstaclesLayer = new Kinetic.Layer();
+        var x,
+            y,
+            width,
+            height,
+            initialIntervalMinX = 700,
+            initialIntervalMaxX = stage.getWidth(),
+            initialIntervalMinY = 350,
+            initialIntervalMaxY = stage.getHeight() - 150;
+
+
+        function generateObstacleObject(){
+            var obstacle = new Kinetic.Rect({
+                x: randomNumberInInterval(initialIntervalMinX, initialIntervalMaxX),
+                y: randomNumberInInterval(initialIntervalMinY, initialIntervalMaxY),
+                width: 100,
+                height: 100,
+                fillPriority: 'pattern'
+            });
+
+            return obstacle;
+        }
+
+        var obstacleSources = [
+            'images\\Obstacles\\tree-version1.jpg',
+            'images\\Obstacles\\tree-version2.jpg'
+        ];
+
+        function setObstacleImage(obstacleObject){
+            var obstacleImage = new Image();
+            var number = Math.round(Math.random()*2);
+            obstacleImage.src = obstacleSources[number];
+
+            obstacleImage.onload = function () {
+                obstacleObject.setFillPatternImage(obstacleImage);
+                obstacleObject.fillPatternScaleX(0.5);
+                obstacleObject.fillPatternScaleY(0.5);
+                stage.draw();
+            };
+
+            return obstacleImage;
+        }
+
+        var obstacleX = 0,
+            obstacleY = 0,
+            speed = 3;
+
+        var obstacleObject = generateObstacleObject();
+        setObstacleImage(obstacleObject);
+        function animateObstacleFrame(){
+            obstaclesLayer.add(obstacleObject);
+
+            obstacleX = obstacleObject.getX();
+            obstacleX -= speed;
+            obstacleObject.setX(obstacleX);
+
+            obstaclesLayer.draw();
+
+            requestAnimationFrame(animateObstacleFrame);
+
+            if(obstacleX < 0){
+                obstacleObject.setX(800);
+                obstacleObject.setY(randomNumberInInterval(initialIntervalMinY, initialIntervalMaxY));
+                setObstacleImage(obstacleObject);
+            }
+        }
+		
+		animateObstacleFrame();
+
+        stage.add(obstaclesLayer);
+    </script>
+
+</body>
+</html>
