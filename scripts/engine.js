@@ -95,6 +95,42 @@ window.onload = function() {
         return genericObstacle;
     }
 
+    // Drink Area
+    var drinkInitialXPosition = stage.getWidth(),
+        initialIntervalMinY = 100,
+        initialIntervalMaxY = stage.getHeight() - 100,
+        cocktailSources = [
+            'images\\Cocktails\\cocktailOne.png',
+            'images\\Cocktails\\cocktailTwo.png',
+            'images\\Cocktails\\cocktailThree.png',
+            'images\\Cocktails\\cocktailFour.png',
+            'images\\Cocktails\\cocktailFive.png'
+        ], softDrinkSources = [
+            'images\\SoftDrinks\\softDrinkOne.png',
+            'images\\SoftDrinks\\softDrinkTwo.png',
+            'images\\SoftDrinks\\softDrinkThree.png',
+            'images\\SoftDrinks\\softDrinkFour.png',
+            'images\\SoftDrinks\\softDrinkFive.png'
+        ],
+        basicSpeed = -2,
+        drinkCount = 0,
+        drinkArr = [],
+        drinkWidth = 30,
+        drinkHeight = 50;
+
+    setInterval(function () {
+        ++drinkCount;
+        if (drinkCount % 3 == 0) {
+        var cocktailObject = Object.create(cocktail).init(drinkInitialXPosition, randomNumberInInterval(initialIntervalMinY, initialIntervalMaxY), drinkWidth, drinkHeight);
+        cocktailObject.speed = basicSpeed - Math.round(Math.random() * 3);
+        drinkArr.push(cocktailObject);
+        } else {
+        var softDrinkObject = Object.create(softDrink).init(drinkInitialXPosition, randomNumberInInterval(initialIntervalMinY, initialIntervalMaxY), drinkWidth, drinkHeight);
+        softDrinkObject.speed = basicSpeed - Math.round(Math.random() * 3);
+        drinkArr.push(softDrinkObject);
+        }
+    }, 750);
+
     stage.add(background);
     stage.add(birdLayer);
 
