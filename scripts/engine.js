@@ -1,4 +1,4 @@
-///window.onload = function () {
+window.onload = function () {
     var CONSTANTS = {
         STAGE_WIDTH: 800,
         STAGE_HEIGHT: 600,
