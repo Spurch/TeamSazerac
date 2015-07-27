@@ -1,4 +1,4 @@
-window.onload = function () {
+///window.onload = function () {
     var CONSTANTS = {
         STAGE_WIDTH: 800,
         STAGE_HEIGHT: 600,
@@ -135,17 +135,17 @@ window.onload = function () {
         initialIntervalMinY = 100,
         initialIntervalMaxY = stage.getHeight() - 100,
         cocktailSources = [
-            '..images\\Cocktails\\cocktailOne.png',
-            '..images\\Cocktails\\cocktailTwo.png',
-            '..images\\Cocktails\\cocktailThree.png',
-            '..images\\Cocktails\\cocktailFour.png',
-            '..images\\Cocktails\\cocktailFive.png'
+            '../images/Cocktails/cocktailOne.png',
+            '../images/Cocktails/cocktailTwo.png',
+            '../images/Cocktails/cocktailThree.png',
+            '../images/Cocktails/cocktailFour.png',
+            '../images/Cocktails/cocktailFive.png'
         ], softDrinkSources = [
-            '..images\\SoftDrinks\\softDrinkOne.png',
-            '..images\\SoftDrinks\\softDrinkTwo.png',
-            '..images\\SoftDrinks\\softDrinkThree.png',
-            '..images\\SoftDrinks\\softDrinkFour.png',
-            '..images\\SoftDrinks\\softDrinkFive.png'
+            '../images/SoftDrinks/softDrinkOne.png',
+            '../images/SoftDrinks/softDrinkTwo.png',
+            '../images/SoftDrinks/softDrinkThree.png',
+            '../images/SoftDrinks/softDrinkFour.png',
+            '../images/SoftDrinks/softDrinkFive.png'
         ],
         basicSpeed = -3,
         drinkCount = 0,
@@ -232,6 +232,7 @@ window.onload = function () {
             var x = drinkObject.kineticObject.getX() + updateX;
 
             drinkObject.kineticObject.setX(x);
+            drinkObject.x = x;
 
             if (drinkObject.kineticObject.getX() + drinkObject.kineticObject.getWidth() < 0) {
                 drinkArr.splice(index, 1);
