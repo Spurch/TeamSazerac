@@ -3,7 +3,8 @@ window.onload = function () {
         STAGE_WIDTH: 800,
         STAGE_HEIGHT: 600,
         JUMP_SPEED: 60,
-        GRAVITY: 3
+        GRAVITY: 3,
+        INITIAL_BIRD_X: 100
     }
 
     var stage = new Kinetic.Stage({
@@ -14,7 +15,7 @@ window.onload = function () {
 
     var birdLayer = new Kinetic.Layer();
 
-    var bird = drunkBird.init(50, CONSTANTS.STAGE_HEIGHT/2);
+    var bird = drunkBird.init(CONSTANTS.INITIAL_BIRD_X, CONSTANTS.STAGE_HEIGHT / 2);
 
     var birdShape = new Kinetic.Circle({
         x: bird.x,
@@ -24,7 +25,7 @@ window.onload = function () {
         stroke: 'black',
         strokeWidth: 4
     });
-    
+
     birdLayer.add(birdShape);
     //put kinetic layers here e.g stage.add(layerName);
     function birdAnimationFrame() {
@@ -53,13 +54,12 @@ window.onload = function () {
         } else {
             bird.y = 0 + bird.radius;
         }
-
-        birdShape.setY(bird.y);
     }
 
     window.addEventListener('keydown', function (ev) {
         if (ev.keyCode === 32) {
             performJump(bird);
+            birdShape.setY(bird.y);
         }
     });
 
@@ -69,7 +69,7 @@ window.onload = function () {
 
         var minHeight = 100,
             randomHeightPart = 200,
-            obstacleHeight = Math.round(Math.random()*randomHeightPart+minHeight),
+            obstacleHeight = Math.round(Math.random() * randomHeightPart + minHeight),
             obstacleWidth = obstacleHeight * 0.3,
             // Never to be exactly sure where the object will apear -> TOP or BOTTOM
             obstacleYPosition = Math.random() > 0.5 ? 0 : CONSTANTS.STAGE_HEIGHT - obstacleHeight,
@@ -79,9 +79,9 @@ window.onload = function () {
 
         return genericObstacle;
     }
-    
+
     stage.add(background);
     stage.add(birdLayer);
 
-    
+
 };
