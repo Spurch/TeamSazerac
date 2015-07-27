@@ -14,6 +14,7 @@ window.onload = function () {
     });
 
     var birdLayer = new Kinetic.Layer();
+    var drinkLayer = new Kinetic.Layer();
 
     var bird = drunkBird.init(CONSTANTS.INITIAL_BIRD_X, CONSTANTS.STAGE_HEIGHT / 2);
 
@@ -114,24 +115,137 @@ window.onload = function () {
             inTopRight = true;
         }
 
-        if (distanceTopLeft <= bird.radius * bird.radius){
+        if (distanceTopLeft <= bird.radius * bird.radius) {
             inTopLeft = true;
         }
-        
-        if(distanceBottomRight <= bird.radius * bird.radius){
+
+        if (distanceBottomRight <= bird.radius * bird.radius) {
             inBottomRight = true;
         }
-        
+
         return inTopLeft || inBottomLeft || inTopRight || inBottomRight;
     }
     
-/*    var testBird = drunkBird.init(50, 50);
-    var testObstacle = obstacle.init(50, 50, 20, 20);
-
-    console.log('collision: ' + areColliding(testBird, testObstacle));*/
+    /*    var testBird = drunkBird.init(50, 50);
+        var testObstacle = obstacle.init(50, 50, 20, 20);
     
+        console.log('collision: ' + areColliding(testBird, testObstacle));*/
+
+    var drinkInitialXPosition = stage.getWidth(),
+        initialIntervalMinY = 100,
+        initialIntervalMaxY = stage.getHeight() - 100,
+        cocktailSources = [
+            '..images\\Cocktails\\cocktailOne.png',
+            '..images\\Cocktails\\cocktailTwo.png',
+            '..images\\Cocktails\\cocktailThree.png',
+            '..images\\Cocktails\\cocktailFour.png',
+            '..images\\Cocktails\\cocktailFive.png'
+        ], softDrinkSources = [
+            '..images\\SoftDrinks\\softDrinkOne.png',
+            '..images\\SoftDrinks\\softDrinkTwo.png',
+            '..images\\SoftDrinks\\softDrinkThree.png',
+            '..images\\SoftDrinks\\softDrinkFour.png',
+            '..images\\SoftDrinks\\softDrinkFive.png'
+        ],
+        basicSpeed = -3,
+        drinkCount = 0,
+        drinkArr = [],
+        drinkWidth = 30,
+        drinkHeight = 50;
+
+    function randomNumberInInterval(min, max) {
+        var randomNumber = Math.floor(Math.random() * (max - min) + min);
+        return randomNumber;
+    }
+
+    function setSoftDrinkImage(softDrinkObject) {
+        var softDrinkImage = new Image();
+        var number = Math.round(Math.random() * 4);
+        softDrinkImage.src = softDrinkSources[number];
+
+        softDrinkImage.onload = function () {
+            softDrinkObject.setFillPatternImage(softDrinkImage);
+            softDrinkObject.fillPatternScaleX(0.5);
+            softDrinkObject.fillPatternScaleY(0.5);
+            stage.draw();
+        };
+
+        return softDrinkImage;
+    }
+
+    function setCocktailImage(cocktailObject) {
+        var cocktailImage = new Image();
+        var number = Math.round(Math.random() * 4);
+        cocktailImage.src = cocktailSources[number];
+
+        cocktailImage.onload = function () {
+            cocktailObject.setFillPatternImage(cocktailImage);
+            cocktailObject.fillPatternScaleX(0.5);
+            cocktailObject.fillPatternScaleY(0.5);
+            stage.draw();
+        };
+
+        return cocktailImage;
+    }
+
+    function generateObject(x, y, width, height, type) {
+
+        var drink = new Kinetic.Rect({
+            x: x,
+            y: y,
+            width: width,
+            height: height,
+            fillPriority: 'pattern'
+        });
+
+        if (type) {
+            setCocktailImage(drink);
+        } else {
+            setSoftDrinkImage(drink);
+        }
+        return drink;
+    }
+
+    setInterval(function () {
+        ++drinkCount;
+        if (drinkCount % 3 == 0) {
+            var cocktailObject = Object.create(cocktail).init(drinkInitialXPosition, randomNumberInInterval(initialIntervalMinY, initialIntervalMaxY), drinkWidth, drinkHeight);
+            cocktailObject.speed = basicSpeed;
+            cocktailObject.kineticObject = generateObject(cocktailObject.x, cocktailObject.y, cocktailObject.width, cocktailObject.height, cocktail.isPrototypeOf(cocktailObject));
+            drinkLayer.add(cocktailObject.kineticObject);
+            drinkArr.push(cocktailObject);
+        } else {
+            var softDrinkObject = Object.create(softDrink).init(drinkInitialXPosition, randomNumberInInterval(initialIntervalMinY, initialIntervalMaxY), drinkWidth, drinkHeight);
+            softDrinkObject.speed = basicSpeed;
+            softDrinkObject.kineticObject = generateObject(softDrinkObject.x, softDrinkObject.y, softDrinkObject.width, softDrinkObject.height, cocktail.isPrototypeOf(softDrinkObject));
+            drinkLayer.add(softDrinkObject.kineticObject);
+            drinkArr.push(softDrinkObject);
+        }
+    }, 1000);
+
+
+    function animateDrinks() {
+        drinkArr.forEach(function (drinkObject, index) {
+
+            var updateX = drinkObject.speed;
+
+            var x = drinkObject.kineticObject.getX() + updateX;
+
+            drinkObject.kineticObject.setX(x);
+
+            if (drinkObject.kineticObject.getX() + drinkObject.kineticObject.getWidth() < 0) {
+                drinkArr.splice(index, 1);
+                // console.log('Here');
+            }
+            // console.log(birdArr.length);
+        });
+        drinkLayer.draw();
+        requestAnimationFrame(animateDrinks);
+    }
+
+    animateDrinks();
+
     stage.add(background);
+    stage.add(drinkLayer);
     stage.add(birdLayer);
-
-
 };
