@@ -135,17 +135,17 @@ window.onload = function () {
         initialIntervalMinY = 100,
         initialIntervalMaxY = stage.getHeight() - 100,
         cocktailSources = [
-            '../images/Cocktails/cocktailOne.png',
-            '../images/Cocktails/cocktailTwo.png',
-            '../images/Cocktails/cocktailThree.png',
-            '../images/Cocktails/cocktailFour.png',
-            '../images/Cocktails/cocktailFive.png'
+            'images/Cocktails/cocktailOne.png',
+            'images/Cocktails/cocktailTwo.png',
+            'images/Cocktails/cocktailThree.png',
+            'images/Cocktails/cocktailFour.png',
+            'images/Cocktails/cocktailFive.png'
         ], softDrinkSources = [
-            '../images/SoftDrinks/softDrinkOne.png',
-            '../images/SoftDrinks/softDrinkTwo.png',
-            '../images/SoftDrinks/softDrinkThree.png',
-            '../images/SoftDrinks/softDrinkFour.png',
-            '../images/SoftDrinks/softDrinkFive.png'
+            'images/SoftDrinks/softDrinkOne.png',
+            'images/SoftDrinks/softDrinkTwo.png',
+            'images/SoftDrinks/softDrinkThree.png',
+            'images/SoftDrinks/softDrinkFour.png',
+            'images/SoftDrinks/softDrinkFive.png'
         ],
         basicSpeed = -3,
         drinkCount = 0,
