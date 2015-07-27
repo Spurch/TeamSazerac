@@ -1,4 +1,4 @@
-window.onload = function () {
+window.onload = function() {
     var CONSTANTS = {
         STAGE_WIDTH: 800,
         STAGE_HEIGHT: 600,
@@ -56,12 +56,27 @@ window.onload = function () {
         }
     }
 
-    window.addEventListener('keydown', function (ev) {
-        if (ev.keyCode === 32) {
-            performJump(bird);
-            birdShape.setY(bird.y);
-        }
-    });
+    (function() {
+        //if you want to jump as long as you press SPACE btn comment 'keyup EventListener'
+        //and the logic with btnIsDown
+        var btnIsDown = false;
+        window.addEventListener('keydown', function(ev) {
+            if (ev.keyCode === 32) {
+                if (btnIsDown) {
+                    return;
+                }
+                btnIsDown = true;
+                performJump(bird);
+                birdShape.setY(bird.y);
+            }
+        });
+
+        window.addEventListener('keyup', function(ev) {
+            if (ev.keyCode === 32) {
+                btnIsDown = false;
+            }
+        });
+    }());
 
     birdAnimationFrame();
 
