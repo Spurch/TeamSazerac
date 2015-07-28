@@ -52,21 +52,6 @@ var drunkBird = (function () {
     };
 
     Object.defineProperties(bird, {
-        // Probably better to move to engine
-        /*
-        'draw': {
-            value: function () {
-                var birdObj = new Kinetic.Circle({
-                    x: this.x,
-                    y: this.y,
-                    radius: this.radius,
-                    fill: 'green'
-                });
-                birdLayer.add(birdObj);
-            }
-        },
-        */
-        // Changing Y position depending the state of isFlaying of the object
         'updateYPosition': {
             value: function (flies, gravity) {
                 if (flies) {
@@ -74,23 +59,10 @@ var drunkBird = (function () {
                     this.isFlaying = false;
                 } else {
                     this.y += gravity / 2;
-                }
-                // this.draw();
-            }
-        },
-        // Changing radius depending the drinks we take if we keep the bird as a circle
-        'drinkCocktail': {
-            value: function (growRate) {
-                this.radius *= growRate;
-                // this.draw();
-            }
-        },
-        'drinkSoftDrink': {
-            value: function (skinRate) {
-                this.radius /= skinRate;
-                // this.draw();
+                }                
             }
         }
     });
+    
     return bird;
 }());
