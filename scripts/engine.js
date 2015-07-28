@@ -4,7 +4,9 @@ window.onload = function () {
         STAGE_HEIGHT: 600,
         JUMP_SPEED: 60,
         GRAVITY: 3,
-        INITIAL_BIRD_X: 100
+        INITIAL_BIRD_X: 100,
+        BIRD_GROW_RATE: 1.25,
+        BIRD_SKINNIG_RATE: 1.33  
     };
 
     var stage = new Kinetic.Stage({
@@ -214,7 +216,7 @@ window.onload = function () {
             return obstacleImage;
     }
 
-    function generateObject(x, y, width, height, type) {
+    function generateDrinkObject(x, y, width, height, type) {
 
         var drink = new Kinetic.Rect({
             x: x,
@@ -249,17 +251,17 @@ window.onload = function () {
         if (drinkCount % 3 === 0) {
             var cocktailObject = Object.create(cocktail).init(initialIntervalMaxX, randomNumberInInterval(initialIntervalMinY, initialIntervalMaxY), drinkWidth, drinkHeight);
             cocktailObject.speed = basicSpeed;
-            cocktailObject.kineticObject = generateObject(cocktailObject.x, cocktailObject.y, cocktailObject.width, cocktailObject.height, cocktail.isPrototypeOf(cocktailObject));
+            cocktailObject.kineticObject = generateDrinkObject(cocktailObject.x, cocktailObject.y, cocktailObject.width, cocktailObject.height, cocktail.isPrototypeOf(cocktailObject));
             drinkLayer.add(cocktailObject.kineticObject);
             drinkArr.push(cocktailObject);
         } else {
             var softDrinkObject = Object.create(softDrink).init(initialIntervalMaxX, randomNumberInInterval(initialIntervalMinY, initialIntervalMaxY), drinkWidth, drinkHeight);
             softDrinkObject.speed = basicSpeed;
-            softDrinkObject.kineticObject = generateObject(softDrinkObject.x, softDrinkObject.y, softDrinkObject.width, softDrinkObject.height, cocktail.isPrototypeOf(softDrinkObject));
+            softDrinkObject.kineticObject = generateDrinkObject(softDrinkObject.x, softDrinkObject.y, softDrinkObject.width, softDrinkObject.height, cocktail.isPrototypeOf(softDrinkObject));
             drinkLayer.add(softDrinkObject.kineticObject);
             drinkArr.push(softDrinkObject);
         }
-    }, 1000);
+    }, 1500);
 
     function animateDrinks() {
         drinkArr.forEach(function (drinkObject, index) {
@@ -277,6 +279,12 @@ window.onload = function () {
             }
             
             if(areColliding(bird, drinkObject)){
+            	if (cocktail.isPrototypeOf(drinkObject)) {
+            		bird.radius *= CONSTANTS.BIRD_GROW_RATE;
+            	} else {
+            		bird.radius /= CONSTANTS.BIRD_SKINNIG_RATE;
+            	}
+            	// console.log(bird.radius);
                 drinkObject.kineticObject.remove();
                 drinkArr.splice(index, 1);
             }
