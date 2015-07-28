@@ -1,5 +1,5 @@
 var BIRD_DATA = {
-    initialRadius: 20,
+    initialRadius: 30,
     isFlayingDefault: false,
     isAliveDefault: true
 };
