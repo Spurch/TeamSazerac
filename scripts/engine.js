@@ -5,7 +5,7 @@ window.onload = function () {
         JUMP_SPEED: 60,
         GRAVITY: 3,
         INITIAL_BIRD_X: 100
-    }
+    };
 
     var stage = new Kinetic.Stage({
         container: 'container',
@@ -15,6 +15,7 @@ window.onload = function () {
 
     var birdLayer = new Kinetic.Layer();
     var drinkLayer = new Kinetic.Layer();
+    var obstaclesLayer = new Kinetic.Layer();
 
     var bird = drunkBird.init(CONSTANTS.INITIAL_BIRD_X, CONSTANTS.STAGE_HEIGHT / 2);
 
@@ -81,7 +82,8 @@ window.onload = function () {
 
     birdAnimationFrame();
 
-    function obstacleFactory() {
+    //Unnecessary   
+    /*function obstacleFactory() {
 
         var minHeight = 100,
             randomHeightPart = 200,
@@ -94,7 +96,7 @@ window.onload = function () {
         var genericObstacle = obstacle.init(obstacleXPosition, obstacleYPosition, obstacleWidth, obstacleHeight);
 
         return genericObstacle;
-    }
+    }*/
 
     function areColliding(bird, drawableObject) {
         var inBottomLeft = false,
@@ -131,7 +133,7 @@ window.onload = function () {
     
         console.log('collision: ' + areColliding(testBird, testObstacle));*/
 
-    var drinkInitialXPosition = stage.getWidth(),
+    var initialIntervalMaxX = stage.getWidth(),
         initialIntervalMinY = 100,
         initialIntervalMaxY = stage.getHeight() - 100,
         cocktailSources = [
@@ -146,12 +148,21 @@ window.onload = function () {
             'images/SoftDrinks/softDrinkThree.png',
             'images/SoftDrinks/softDrinkFour.png',
             'images/SoftDrinks/softDrinkFive.png'
+        ], obstacleAboveSources = [
+            'images/Obstacles/cable_above.png',
+            'images/Obstacles/chandelier_above.png',
+            'images/Obstacles/speaker_above.png'
         ],
         basicSpeed = -3,
         drinkCount = 0,
         drinkArr = [],
         drinkWidth = 30,
-        drinkHeight = 50;
+        drinkHeight = 50,
+        obstacleAboveWidth = 70,
+        obstacleAboveHeight = 30,
+        obstacleX = 0,
+        obstacleY = 0,
+        speed = 3;
 
     function randomNumberInInterval(min, max) {
         var randomNumber = Math.floor(Math.random() * (max - min) + min);
@@ -188,6 +199,21 @@ window.onload = function () {
         return cocktailImage;
     }
 
+    function setObstacleImage(obstacleObject){
+            var obstacleImage = new Image();
+            var number = Math.round(Math.random()*3);
+            obstacleImage.src = obstacleAboveSources[number];
+
+            obstacleImage.onload = function () {
+                obstacleObject.setFillPatternImage(obstacleImage);
+                obstacleObject.fillPatternScaleX(1);
+                obstacleObject.fillPatternScaleY(1);
+                stage.draw();
+            };
+
+            return obstacleImage;
+    }
+
     function generateObject(x, y, width, height, type) {
 
         var drink = new Kinetic.Rect({
@@ -206,23 +232,34 @@ window.onload = function () {
         return drink;
     }
 
+    function generateObstacleObject(){
+            var obstacle = new Kinetic.Rect({
+                x: initialIntervalMaxX,
+                y: initialIntervalMinY,
+                width: 100,
+                height: 50,
+                fillPriority: 'pattern'
+            });
+
+            return obstacle;
+    }
+
     setInterval(function () {
         ++drinkCount;
-        if (drinkCount % 3 == 0) {
-            var cocktailObject = Object.create(cocktail).init(drinkInitialXPosition, randomNumberInInterval(initialIntervalMinY, initialIntervalMaxY), drinkWidth, drinkHeight);
+        if (drinkCount % 3 === 0) {
+            var cocktailObject = Object.create(cocktail).init(initialIntervalMaxX, randomNumberInInterval(initialIntervalMinY, initialIntervalMaxY), drinkWidth, drinkHeight);
             cocktailObject.speed = basicSpeed;
             cocktailObject.kineticObject = generateObject(cocktailObject.x, cocktailObject.y, cocktailObject.width, cocktailObject.height, cocktail.isPrototypeOf(cocktailObject));
             drinkLayer.add(cocktailObject.kineticObject);
             drinkArr.push(cocktailObject);
         } else {
-            var softDrinkObject = Object.create(softDrink).init(drinkInitialXPosition, randomNumberInInterval(initialIntervalMinY, initialIntervalMaxY), drinkWidth, drinkHeight);
+            var softDrinkObject = Object.create(softDrink).init(initialIntervalMaxX, randomNumberInInterval(initialIntervalMinY, initialIntervalMaxY), drinkWidth, drinkHeight);
             softDrinkObject.speed = basicSpeed;
             softDrinkObject.kineticObject = generateObject(softDrinkObject.x, softDrinkObject.y, softDrinkObject.width, softDrinkObject.height, cocktail.isPrototypeOf(softDrinkObject));
             drinkLayer.add(softDrinkObject.kineticObject);
             drinkArr.push(softDrinkObject);
         }
     }, 1000);
-
 
     function animateDrinks() {
         drinkArr.forEach(function (drinkObject, index) {
@@ -242,14 +279,39 @@ window.onload = function () {
         });
         drinkLayer.draw();
         requestAnimationFrame(animateDrinks);
-    }
+    } 
 
+
+
+    var obstacleObject = generateObstacleObject();
+    setObstacleImage(obstacleObject);
+
+    function animateObstacleFrame(){
+        obstaclesLayer.add(obstacleObject);
+
+        obstacleX = obstacleObject.getX();
+        obstacleX -= speed;
+        obstacleObject.setX(obstacleX);
+
+        obstaclesLayer.draw();
+
+        requestAnimationFrame(animateObstacleFrame);
+
+        if(obstacleX < 0){
+            obstacleObject.setX(800);
+            //obstacleObject.setY(randomNumberInInterval(initialIntervalMinY, initialIntervalMaxY));
+            setObstacleImage(obstacleObject);
+        }
+    }
+    
+    animateObstacleFrame();
     animateDrinks();
 
     stage.add(background);
     stage.add(drinkLayer);
+    stage.add(obstaclesLayer);
     //uncomment the 1 line below to see homePage......
     // yet still dont know how to catch events here(engine) from there(homeScreen)
-    stage.add(homeScreen);
+    //stage.add(homeScreen);
     stage.add(birdLayer);
 };
