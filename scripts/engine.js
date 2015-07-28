@@ -235,8 +235,13 @@ window.onload = function () {
             drinkObject.x = x;
 
             if (drinkObject.kineticObject.getX() + drinkObject.kineticObject.getWidth() < 0) {
+                drinkObject.kineticObject.remove();
                 drinkArr.splice(index, 1);
-                // console.log('Here');
+            }
+            
+            if(areColliding(bird, drinkObject)){
+                drinkObject.kineticObject.remove();
+                drinkArr.splice(index, 1);
             }
             // console.log(birdArr.length);
         });
@@ -250,6 +255,6 @@ window.onload = function () {
     stage.add(drinkLayer);
     //uncomment the 1 line below to see homePage......
     // yet still dont know how to catch events here(engine) from there(homeScreen)
-    stage.add(homeScreen);
+    //stage.add(homeScreen);
     stage.add(birdLayer);
 };
