@@ -347,7 +347,7 @@ window.onload = function () {
     window.addEventListener('navigateToHomeScreen', function() {
     	//hide other elements and show homeScreen
 	    console.log('we change screen to HOME');
-	    stage.remove(optionsScreen);//-->>>>this isnt working find the function that removes/dells an element from the stage 
+	    optionsScreen.clear(); 
 	    stage.re
 	}, false);
 	window.addEventListener('navigateToOptionsScreen', function() {
