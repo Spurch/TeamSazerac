@@ -86,18 +86,15 @@ homeScreen.add(btnStart);
 
 
 //--------- start 'creating and dispatching events'
-var navToHome = new CustomEvent(NAVIGATE_SCREEN_EVENT.HOME, {
+var navToIngame = new CustomEvent(NAVIGATE_SCREEN_EVENT.INGAME, {
     detail: {},
     bubbles: true,
     cancelable: false
 });
 
 btnStart.addEventListener('click', function(ev) {
-    this.dispatchEvent(navToHome);
+    window.dispatchEvent(navToIngame);
 });
-window.addEventListener(NAVIGATE_SCREEN_EVENT.HOME, function() {
-    console.log('we change screen to HOME');
-}, true);
 
 
 var navToOptions = new CustomEvent(NAVIGATE_SCREEN_EVENT.OPTIONS,{
@@ -107,9 +104,7 @@ var navToOptions = new CustomEvent(NAVIGATE_SCREEN_EVENT.OPTIONS,{
 });
 
 btnOptions.addEventListener('click', function() {
-    this.dispatchEvent(navToOptions);
+    window.dispatchEvent(navToOptions);
 });
-window.addEventListener(NAVIGATE_SCREEN_EVENT.OPTIONS, function() {
-    console.log('we change screen to OPTIONS');
-}, true);
+
 //--------- end 'creating and dispatching events'

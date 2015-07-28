@@ -340,8 +340,21 @@ window.onload = function () {
     stage.add(background);
     stage.add(drinkLayer);
     stage.add(obstaclesLayer);
-    //uncomment the 1 line below to see homePage......
-    // yet still dont know how to catch events here(engine) from there(homeScreen)
-    //stage.add(homeScreen);
+    //uncomment the 2 lines below to see homePage and optionsPage......
+   	//stage.add(homeScreen);
+    //stage.add(optionsScreen);
     stage.add(birdLayer);
+
+    window.addEventListener('navigateToHomeScreen', function() {
+    	//hide other elements and show homeScreen
+	    console.log('we change screen to HOME');
+	}, false);
+	window.addEventListener('navigateToOptionsScreen', function() {
+		//hide other elements and show optionsSCreen
+	    console.log('we change screen to OPTIONS');
+	}, false);
+	window.addEventListener('navigateToIngameScreen', function() {
+		//hide other elements and show optionsSCreen
+	    console.log('we change screen to Ingame and start playing the game');
+	}, false);
 };
