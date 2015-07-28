@@ -10,3 +10,4 @@
   - Mihail Mitov
   - Vasil Pavlov 
   - Ivan Nikolov
+  - Georgi Georgiev
