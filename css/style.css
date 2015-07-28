@@ -1,23 +1,32 @@
 body{
+	margin: 0px;
+	padding: 0px;
 	font-family: Arial;
 	font-size: 12px;
 	text-align: center;
 	color: white;
-	background-color: #8f8f8f;
+	background: transparent url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFcAAABXCAMAAABGFileAAAAdVBMVEUhISEmJicuLi8sLC0oKCgoKCkpKioqKissLCwlJSUtLS4tLi4mJiYvLzArKywwMDAkJCQvMDApKSonJygnKCgoJyctLi0lJiUrLCssKywlJSYrLCwiIiIoKCcpKikhIiEoJygkJCMsLCsvMC8hISIwLzAnKCfIlHhUAAAE4UlEQVR4Xr2Yh5KzOAyAkeRegWz/2/X3f8QjkFCMHUPm5rRlZo33i6ISlSbuRTXffzXN9Xv4uf5uY05wuPXX9/HG8BW2D3NcahNxea5e33mK6+tcmXCF7KpcjTFDxvf1HXE98hy4VERkmt9lrHN9VAC9FDJIwYXP6cunM2gnaTDjtx3Xxkj3/wC667u5w+6n4gLAeBMPcFt7PX7j7IVLM1+zmyuXJ/zWmpgRs7kCda46xqUat64v/Z9ck8b4eTuour7aP6FvOMDFur7HuOqRrRoyxg5iDKlvtFEkTf45l5E462KkHDcAE0EpbL7rUUaXFrliOgfgjIHTLdiNvo7zO7eTbrRK08zPbtSivnMug1zbAXryMcIc417BoGUDPwAuXFqfGC5vu7dPqe4OCoNaIO0VJaBtcQEgsWN+w2w8/BZwpPTXt/7enY8H7WNRiOm5plS4IeVCkargRB7Lg1wfRurzXJ7FklvfYXWuyIRZ9eX5nus9ojFKMJB5Lh3gyh03gJvyzYXJ732Ja8xiW59ww47ricEgnO4RyEthhi+9nV5ACEzeFmXt260jlBfbHQQNvGfui3epuUzdb+xBmAVwDrjduwFT7t8VbhpC6JewSW3lyeKNqxnWuCJmRWRsJbSDH4xdWANY1TfEboyUpJHjOVsRTF1bzr7/7LsH5hg4VeFOghQkUY4Lu24y+p8AMj7gsliPByh2v2UuP8+F+B9x2TGuTGKmyv2Z4dbKijzAFbWpxajx91muzPvNSMLOW5I/gJY54HmuvnF9D8453TqB04HLcK1PuWgVJYZLq7G3Ukia/4QMlzhXeOUKpVSQgoFzHJN+B/R9aomxEjcfs3pcawCx9FG93QwkGnpzqxw5blpX/liOUUDbNuwCcOk/130UDtBx7jGvcynIyeeK+7l5YkXOb17h+JDpZcqqNdaqGg+LndLSlQqe52I/UGtc/3WSi2LTynyLBYEN10ucAZjlvrYb+ahyp/fE9YtUSgoOQFkuFNoon9zjia3EzXgvNm8HVuDSbwpxwKOVYw7J1AdWMGDCluzLt9x+9Un3DoPoVssk0OwRv4lim2pBj7mJaQDTA643NHOLNREVEe43PGbPJYODkGROq6wdWCwJPNJXuftcaM4Vzoj64ec6yqlPjfEk156rF97V13Kp3/oDXKsPjm/yXP9A+7VctaNkT3DbA4UIDnA/9nNLR6nO3eLfOjcN36XIBABJeIMjSUZbrjvXny1BZK+nDoAxAD2tQLxecfFwP5kGkRUwgTSo3SJR2zPc1NlIKijyucYvy8X1KbqU+xqzEvJzoaGJi8gvb/u0qCeyyK/uPHCMjQOXjFqmPchlhUa1e9HQaOiptt5xmOVCsQFW0BSzvp7I7sEg0JTauXoie13Za1TSorqnre9hPNk5jet72hrXy2DRWwoM+j9z9m3DU/udaNi4idFAc7gD13muR6Lgj3Fj7EhItR4DmMewrbYoe84AnG41x3089gm3VA2/pI+G6YXrpyZTz2OIquyjStXbyRg7CauuwyoyIzTPxTWXQi+wUI5dGCcnnY9fm7pWgjTjlgYRm1/vHMv5CXK0LObjN22+vw0avTsAp3Uj8HHeA1W7kiXEUb7qyQnFOlQnYzYlEa1FPFY3WZ6rE+7pPa2L9c8d80RfAnmue7Dv+xeffqaZLQl46wAAAABJRU5ErkJggg==") 
+		repeat scroll 0% 0%;
 }
  h1{
 	font-size: 32px;
  }
- #header{
  
+ #header{
+	margin: 0px auto;
+	padding: 0px;
+	position: relative;
+	min-height: 45px;
+	width: 800px;
+	background: transparent url("http://telerikacademy.com/Content/Images/Header.png") no-repeat scroll center center;
  }
  #content{
  position: center;
  }
  #footer{
-	position: absolute;
-	bottom: 0px;
-	left: 25%;
-	right: 25%;
+	font-weight: bold;
+	margin: 0px auto;
+	padding: 0px;
+	position: relative;
  }
 
