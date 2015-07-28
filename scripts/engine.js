@@ -272,8 +272,13 @@ window.onload = function () {
             drinkObject.x = x;
 
             if (drinkObject.kineticObject.getX() + drinkObject.kineticObject.getWidth() < 0) {
+                drinkObject.kineticObject.remove();
                 drinkArr.splice(index, 1);
-                // console.log('Here');
+            }
+            
+            if(areColliding(bird, drinkObject)){
+                drinkObject.kineticObject.remove();
+                drinkArr.splice(index, 1);
             }
             // console.log(birdArr.length);
         });
