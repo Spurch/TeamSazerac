@@ -6,7 +6,7 @@ window.onload = function () {
         GRAVITY: 3,
         INITIAL_BIRD_X: 100,
         BIRD_GROW_RATE: 1.25,
-        BIRD_SKINNIG_RATE: 1.33  
+        BIRD_SKINNIG_RATE: 1.33
     };
 
     var stage = new Kinetic.Stage({
@@ -201,19 +201,19 @@ window.onload = function () {
         return cocktailImage;
     }
 
-    function setObstacleImage(obstacleObject){
-            var obstacleImage = new Image();
-            var number = Math.round(Math.random()*3);
-            obstacleImage.src = obstacleAboveSources[number];
+    function setObstacleImage(obstacleObject) {
+        var obstacleImage = new Image();
+        var number = Math.round(Math.random() * 3);
+        obstacleImage.src = obstacleAboveSources[number];
 
-            obstacleImage.onload = function () {
-                obstacleObject.setFillPatternImage(obstacleImage);
-                obstacleObject.fillPatternScaleX(1);
-                obstacleObject.fillPatternScaleY(1);
-                stage.draw();
-            };
+        obstacleImage.onload = function () {
+            obstacleObject.setFillPatternImage(obstacleImage);
+            obstacleObject.fillPatternScaleX(1);
+            obstacleObject.fillPatternScaleY(1);
+            stage.draw();
+        };
 
-            return obstacleImage;
+        return obstacleImage;
     }
 
     function generateDrinkObject(x, y, width, height, type) {
@@ -234,16 +234,16 @@ window.onload = function () {
         return drink;
     }
 
-    function generateObstacleObject(){
-            var obstacle = new Kinetic.Rect({
-                x: initialIntervalMaxX,
-                y: initialIntervalMinY,
-                width: 100,
-                height: 50,
-                fillPriority: 'pattern'
-            });
+    function generateObstacleObject() {
+        var obstacle = new Kinetic.Rect({
+            x: initialIntervalMaxX,
+            y: initialIntervalMinY,
+            width: 100,
+            height: 50,
+            fillPriority: 'pattern'
+        });
 
-            return obstacle;
+        return obstacle;
     }
 
     setInterval(function () {
@@ -277,14 +277,16 @@ window.onload = function () {
                 drinkObject.kineticObject.remove();
                 drinkArr.splice(index, 1);
             }
-            
-            if(areColliding(bird, drinkObject)){
-            	if (cocktail.isPrototypeOf(drinkObject)) {
-            		bird.radius *= CONSTANTS.BIRD_GROW_RATE;
-            	} else {
-            		bird.radius /= CONSTANTS.BIRD_SKINNIG_RATE;
-            	}
-            	// console.log(bird.radius);
+
+            if (areColliding(bird, drinkObject)) {
+                if (cocktail.isPrototypeOf(drinkObject)) {
+                    bird.radius *= CONSTANTS.BIRD_GROW_RATE;
+                } else {
+                    bird.radius /= CONSTANTS.BIRD_SKINNIG_RATE;
+                }
+
+                birdShape.setRadius(bird.radius);
+                // console.log(bird.radius);
                 drinkObject.kineticObject.remove();
                 drinkArr.splice(index, 1);
             }
@@ -292,14 +294,14 @@ window.onload = function () {
         });
         drinkLayer.draw();
         requestAnimationFrame(animateDrinks);
-    } 
+    }
 
 
 
     var obstacleObject = generateObstacleObject();
     setObstacleImage(obstacleObject);
 
-    function animateObstacleFrame(){
+    function animateObstacleFrame() {
         obstaclesLayer.add(obstacleObject);
 
         obstacleX = obstacleObject.getX();
@@ -310,13 +312,13 @@ window.onload = function () {
 
         requestAnimationFrame(animateObstacleFrame);
 
-        if(obstacleX < 0){
+        if (obstacleX < 0) {
             obstacleObject.setX(800);
             //obstacleObject.setY(randomNumberInInterval(initialIntervalMinY, initialIntervalMaxY));
             setObstacleImage(obstacleObject);
         }
     }
-    
+
     animateObstacleFrame();
     animateDrinks();
 
