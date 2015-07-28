@@ -341,17 +341,19 @@ window.onload = function () {
     stage.add(drinkLayer);
     stage.add(obstaclesLayer);
     //uncomment the 2 lines below to see homePage and optionsPage......
-   	//stage.add(homeScreen);
-    //stage.add(optionsScreen);
+   	stage.add(homeScreen);
     stage.add(birdLayer);
 
     window.addEventListener('navigateToHomeScreen', function() {
     	//hide other elements and show homeScreen
 	    console.log('we change screen to HOME');
+	    stage.remove(optionsScreen);//-->>>>this isnt working find the function that removes/dells an element from the stage 
+	    stage.re
 	}, false);
 	window.addEventListener('navigateToOptionsScreen', function() {
 		//hide other elements and show optionsSCreen
 	    console.log('we change screen to OPTIONS');
+    	stage.add(optionsScreen);
 	}, false);
 	window.addEventListener('navigateToIngameScreen', function() {
 		//hide other elements and show optionsSCreen
