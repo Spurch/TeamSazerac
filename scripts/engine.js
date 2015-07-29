@@ -7,23 +7,22 @@ window.onload = function () {
         BIRD_GROW_RATE: 1.25,
         BIRD_SKINNIG_RATE: 1.33,
         MINIMUM_BIRD_RADIUS: 20,
-        WON_GAME_BIRD_RADIUS: 80 
-    },
-    birdGravity = 3;
+        WON_GAME_BIRD_RADIUS: 80,
+        GRAVITY_TO_RADIUS_RATION: 9  
+    },    
 
     var stage = new Kinetic.Stage({
         container: 'container',
         width: CONSTANTS.STAGE_WIDTH,
         height: CONSTANTS.STAGE_HEIGHT
-    });
+    }),
+    	birdLayer = new Kinetic.Layer(),
+    	drinkLayer = new Kinetic.Layer(),
+    	obstaclesLayer = new Kinetic.Layer();
 
-    var birdLayer = new Kinetic.Layer();
-    var drinkLayer = new Kinetic.Layer();
-    var obstaclesLayer = new Kinetic.Layer();
-
-    var bird = drunkBird.init(CONSTANTS.INITIAL_BIRD_X, CONSTANTS.STAGE_HEIGHT / 2);
-
-    var birdShape = new Kinetic.Circle({
+    var bird = drunkBird.init(CONSTANTS.INITIAL_BIRD_X, CONSTANTS.STAGE_HEIGHT / 2),
+    	birdGravity = 3,
+    	birdShape = new Kinetic.Circle({
         x: bird.x,
         y: bird.y,
         radius: bird.radius,
@@ -32,14 +31,47 @@ window.onload = function () {
         strokeWidth: 4
     });
 
+    var initialIntervalMaxX = stage.getWidth(),
+        initialIntervalMinY = 100,
+        initialIntervalMaxY = stage.getHeight() - 100,
+        cocktailSources = [
+            'images/Cocktails/cocktailOne.png',
+            'images/Cocktails/cocktailTwo.png',
+            'images/Cocktails/cocktailThree.png',
+            'images/Cocktails/cocktailFour.png',
+            'images/Cocktails/cocktailFive.png'
+        ], softDrinkSources = [
+            'images/SoftDrinks/softDrinkOne.png',
+            'images/SoftDrinks/softDrinkTwo.png',
+            'images/SoftDrinks/softDrinkThree.png',
+            'images/SoftDrinks/softDrinkFour.png',
+            'images/SoftDrinks/softDrinkFive.png'
+        ], obstacleAboveSources = [
+            'images/Obstacles/cable_above.png',
+            'images/Obstacles/chandelier_above.png',
+            'images/Obstacles/speaker_above.png'
+        ],
+        basicSpeed = -3,
+        drinkCount = 0,
+        drinkArr = [],
+        drinkWidth = 30,
+        drinkHeight = 50,
+        obstacleAboveWidth = 70,
+        obstacleAboveHeight = 30,
+        aboveObstacleX = 0,
+        belowObstacleX = 0,
+        obstacleY = 0,
+        speed = 3;
+
     birdLayer.add(birdShape);
     //put kinetic layers here e.g stage.add(layerName);
     function birdAnimationFrame() {
     	if (bird.radius > 30) {
-            birdGravity = bird.radius/8;
+            birdGravity = bird.radius/CONSTANTS.GRAVITY_TO_RADIUS_RATION;
             console.log(bird.radius);
         }
         bird.y += birdGravity;
+
         if (bird.y >= CONSTANTS.STAGE_HEIGHT - bird.radius) {
             bird.y = CONSTANTS.STAGE_HEIGHT - bird.radius;
             bird.isFlying = false;
@@ -50,15 +82,16 @@ window.onload = function () {
             alert('Game Over! Bird is not flying!');
             return;
         }
+
 		if (bird.radius < CONSTANTS.MINIMUM_BIRD_RADIUS) {
 			alert('Game Over! Bird is starved to dead without alcohol!');
             return;
-		};
+		}
+
 		if (bird.radius > CONSTANTS.WON_GAME_BIRD_RADIUS) {
 			alert('Game Won! You got one happy drunk bird!');
             return;
-		};
-
+		}
 
         birdShape.setY(bird.y);
 
@@ -144,43 +177,6 @@ window.onload = function () {
 
         return inTopLeft || inBottomLeft || inTopRight || inBottomRight;
     }
-    
-    /*    var testBird = drunkBird.init(50, 50);
-        var testObstacle = obstacle.init(50, 50, 20, 20);
-    
-        console.log('collision: ' + areColliding(testBird, testObstacle));*/
-
-    var initialIntervalMaxX = stage.getWidth(),
-        initialIntervalMinY = 100,
-        initialIntervalMaxY = stage.getHeight() - 100,
-        cocktailSources = [
-            'images/Cocktails/cocktailOne.png',
-            'images/Cocktails/cocktailTwo.png',
-            'images/Cocktails/cocktailThree.png',
-            'images/Cocktails/cocktailFour.png',
-            'images/Cocktails/cocktailFive.png'
-        ], softDrinkSources = [
-            'images/SoftDrinks/softDrinkOne.png',
-            'images/SoftDrinks/softDrinkTwo.png',
-            'images/SoftDrinks/softDrinkThree.png',
-            'images/SoftDrinks/softDrinkFour.png',
-            'images/SoftDrinks/softDrinkFive.png'
-        ], obstacleAboveSources = [
-            'images/Obstacles/cable_above.png',
-            'images/Obstacles/chandelier_above.png',
-            'images/Obstacles/speaker_above.png'
-        ],
-        basicSpeed = -3,
-        drinkCount = 0,
-        drinkArr = [],
-        drinkWidth = 30,
-        drinkHeight = 50,
-        obstacleAboveWidth = 70,
-        obstacleAboveHeight = 30,
-        aboveObstacleX = 0,
-        belowObstacleX = 0,
-        obstacleY = 0,
-        speed = 3;
 
     function randomNumberInInterval(min, max) {
         var randomNumber = Math.floor(Math.random() * (max - min) + min);
@@ -247,6 +243,7 @@ window.onload = function () {
         } else {
             setSoftDrinkImage(drink);
         }
+
         return drink;
     }
 
@@ -312,8 +309,6 @@ window.onload = function () {
         requestAnimationFrame(animateDrinks);
     }
 
-
-
     var aboveObstacleObject = generateObstacleObject(initialIntervalMaxX, initialIntervalMinY);
     var belowObstacleObject = generateObstacleObject(initialIntervalMaxX, initialIntervalMaxY);
     setObstacleImage(aboveObstacleObject);
@@ -335,13 +330,13 @@ window.onload = function () {
         requestAnimationFrame(animateObstacleFrame);
 
         if (aboveObstacleX < 0 ) {
-            aboveObstacleObject.setX(800);
+            aboveObstacleObject.setX(CONSTANTS.STAGE_WIDTH);
             //aboveObstacleObject.setY(randomNumberInInterval(initialIntervalMinY, initialIntervalMaxY));
             setObstacleImage(aboveObstacleObject);
         }
 
         if (belowObstacleX < 0 ) {
-            belowObstacleObject.setX(800);
+            belowObstacleObject.setX(CONSTANTS.STAGE_WIDTH);
             //aboveObstacleObject.setY(randomNumberInInterval(initialIntervalMinY, initialIntervalMaxY));
             setObstacleImage(belowObstacleObject);
         }
