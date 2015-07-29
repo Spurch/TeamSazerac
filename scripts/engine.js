@@ -338,7 +338,6 @@ window.onload = function () {
         }
         if (areColliding(bird, belowObstacleObject)) {
             alert('COLLISION');
-            console.log('asdasdasdsadsadsadsa');
             return;                     
         }
 
