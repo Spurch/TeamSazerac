@@ -8,7 +8,8 @@ window.onload = function () {
         BIRD_SKINNIG_RATE: 1.33,
         MINIMUM_BIRD_RADIUS: 20,
         WON_GAME_BIRD_RADIUS: 80,
-        GRAVITY_TO_RADIUS_RATION: 9  
+        GRAVITY_TO_RADIUS_RATION: 9,
+        INITIAL_BIRD_GRAVITY: 3  
     };
 
     var stage = new Kinetic.Stage({
@@ -17,12 +18,12 @@ window.onload = function () {
         height: CONSTANTS.STAGE_HEIGHT
     });
 
-    var	birdLayer = new Kinetic.Layer(),
-    	drinkLayer = new Kinetic.Layer(),
-    	obstaclesLayer = new Kinetic.Layer();
+    var	birdLayer = new Kinetic.Layer();
+    var	drinkLayer = new Kinetic.Layer();
+    var	obstaclesLayer = new Kinetic.Layer();
 
     var bird = drunkBird.init(CONSTANTS.INITIAL_BIRD_X, CONSTANTS.STAGE_HEIGHT / 2),
-    	birdGravity = 3,
+    	currentBirdGravity = CONSTANTS.INITIAL_BIRD_GRAVITY,
     	birdShape = new Kinetic.Circle({
         x: bird.x,
         y: bird.y,
@@ -68,10 +69,13 @@ window.onload = function () {
     //put kinetic layers here e.g stage.add(layerName);
     function birdAnimationFrame() {
     	if (bird.radius > 30) {
-            birdGravity = bird.radius/CONSTANTS.GRAVITY_TO_RADIUS_RATION;
-            console.log(bird.radius);
+            currentBirdGravity = bird.radius/CONSTANTS.GRAVITY_TO_RADIUS_RATION;
+            // console.log(bird.radius);
+        } else {
+            currentBirdGravity = CONSTANTS.INITIAL_BIRD_GRAVITY;
         }
-        bird.y += birdGravity;
+        console.log(currentBirdGravity);
+        bird.y += currentBirdGravity;
 
         if (bird.y >= CONSTANTS.STAGE_HEIGHT - bird.radius) {
             bird.y = CONSTANTS.STAGE_HEIGHT - bird.radius;
