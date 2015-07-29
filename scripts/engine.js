@@ -350,26 +350,31 @@ window.onload = function () {
     animateObstacleFrame();
     animateDrinks();
 
-    stage.add(background);
-    stage.add(drinkLayer);
-    stage.add(obstaclesLayer);
+    //stage.add(background);
+    //stage.add(drinkLayer);
+    //stage.add(obstaclesLayer);
     //uncomment the 2 lines below to see homePage and optionsPage......
    	stage.add(homeScreen);
-    stage.add(birdLayer);
+    //stage.add(birdLayer);
 
     window.addEventListener('navigateToHomeScreen', function() {
     	//hide other elements and show homeScreen
 	    console.log('we change screen to HOME');
 	    optionsScreen.clear(); 
-	    stage.re
+	    //stage.re
 	}, false);
 	window.addEventListener('navigateToOptionsScreen', function() {
 		//hide other elements and show optionsSCreen
 	    console.log('we change screen to OPTIONS');
-    	stage.add(optionsScreen);
 	}, false);
 	window.addEventListener('navigateToIngameScreen', function() {
 		//hide other elements and show optionsSCreen
 	    console.log('we change screen to Ingame and start playing the game');
+        homeScreen.clear();
+        stage.add(background);
+        stage.add(drinkLayer);
+        stage.add(obstaclesLayer);
+        stage.add(birdLayer);
+
 	}, false);
 };
