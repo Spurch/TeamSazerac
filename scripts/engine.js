@@ -9,14 +9,15 @@ window.onload = function () {
         MINIMUM_BIRD_RADIUS: 20,
         WON_GAME_BIRD_RADIUS: 80,
         GRAVITY_TO_RADIUS_RATION: 9  
-    },    
+    };
 
     var stage = new Kinetic.Stage({
         container: 'container',
         width: CONSTANTS.STAGE_WIDTH,
         height: CONSTANTS.STAGE_HEIGHT
-    }),
-    	birdLayer = new Kinetic.Layer(),
+    });
+
+    var	birdLayer = new Kinetic.Layer(),
     	drinkLayer = new Kinetic.Layer(),
     	obstaclesLayer = new Kinetic.Layer();
 
