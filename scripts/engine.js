@@ -9,7 +9,11 @@ window.onload = function () {
         MINIMUM_BIRD_RADIUS: 20,
         WON_GAME_BIRD_RADIUS: 80,         
         GRAVITY_TO_RADIUS_RATIO: 11,
-        INITIAL_BIRD_GRAVITY: 3   
+        INITIAL_BIRD_GRAVITY: 3,
+        OBSTACLES_ABOVE_WIDTH: 100,
+        OBSTACLES_ABOVE_HEIGHT: 50,
+        OBSTACLES_BELOW_WIDTH: 50,
+        OBSTACLES_BELOW_HEIGHT: 100   
     },
     currentBirdGravity = CONSTANTS.INITIAL_BIRD_GRAVITY;
 
@@ -161,8 +165,8 @@ window.onload = function () {
             'images/Obstacles/speaker_above.png'
         ], obstacleBelowSources = [
             'images/Obstacles/chair_below.png',
-            'images/Obstacles/treeOne_below.png',
-            'images/Obstacles/treeTwo_below.png'
+            'images/Obstacles/floorSign_below.png',
+            'images/Obstacles/bin_below.png'
         ],
         basicSpeed = -3,
         drinkCount = 0,
@@ -251,12 +255,12 @@ window.onload = function () {
         return drink;
     }
 
-    function generateObstacleObject(initialX, initialY) {
+    function generateObstacleObject(initialX, initialY, x, y) {
         var obstacle = new Kinetic.Rect({
             x: initialX,
             y: initialY,
-            width: 100,
-            height: 50,
+            width: x,
+            height: y,
             fillPriority: 'pattern'
         });
 
@@ -315,11 +319,11 @@ window.onload = function () {
 
 
 
-    var aboveObstacleObject = Object.create(obstacle).init(initialIntervalMaxX, initialIntervalMinY, 100, 50);
-        aboveObstacleObject.kineticObject = generateObstacleObject(initialIntervalMaxX, initialIntervalMinY);
+    var aboveObstacleObject = Object.create(obstacle).init(initialIntervalMaxX, initialIntervalMinY, CONSTANTS.OBSTACLES_ABOVE_WIDTH, CONSTANTS.OBSTACLES_ABOVE_HEIGHT);
+        aboveObstacleObject.kineticObject = generateObstacleObject(initialIntervalMaxX, initialIntervalMinY, CONSTANTS.OBSTACLES_ABOVE_WIDTH, CONSTANTS.OBSTACLES_ABOVE_HEIGHT);
         aboveObstacleObject.kineticObject.type = 'above';    
-    var belowObstacleObject = Object.create(obstacle).init(initialIntervalMaxX, initialIntervalMaxY, 100, 50);
-        belowObstacleObject.kineticObject = generateObstacleObject(initialIntervalMaxX, initialIntervalMaxY);
+    var belowObstacleObject = Object.create(obstacle).init(initialIntervalMaxX, initialIntervalMaxY, CONSTANTS.OBSTACLES_BELOW_WIDTH, CONSTANTS.OBSTACLES_BELOW_HEIGHT);
+        belowObstacleObject.kineticObject = generateObstacleObject(initialIntervalMaxX, initialIntervalMaxY, CONSTANTS.OBSTACLES_BELOW_WIDTH, CONSTANTS.OBSTACLES_BELOW_HEIGHT);
         belowObstacleObject.kineticObject.type = 'below';
     setObstacleImage(aboveObstacleObject.kineticObject);
     setObstacleImage(belowObstacleObject.kineticObject);
