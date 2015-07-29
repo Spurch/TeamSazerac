@@ -53,11 +53,11 @@ window.onload = function () {
 		if (bird.radius < CONSTANTS.MINIMUM_BIRD_RADIUS) {
 			alert('Game Over! Bird is starved to dead without alcohol!');
             return;
-		};
+		}
 		if (bird.radius > CONSTANTS.WON_GAME_BIRD_RADIUS) {
 			alert('Game Won! You got one happy drunk bird!');
             return;
-		};
+		}
 
 
         birdShape.setY(bird.y);
@@ -98,22 +98,6 @@ window.onload = function () {
     } ());
 
    // birdAnimationFrame();
-
-    //Unnecessary   
-    /*function obstacleFactory() {
-
-        var minHeight = 100,
-            randomHeightPart = 200,
-            obstacleHeight = Math.round(Math.random() * randomHeightPart + minHeight),
-            obstacleWidth = obstacleHeight * 0.3,
-            // Never to be exactly sure where the object will apear -> TOP or BOTTOM
-            obstacleYPosition = Math.random() > 0.5 ? 0 : CONSTANTS.STAGE_HEIGHT - obstacleHeight,
-            obstacleXPosition = CONSTANTS.STAGE_WIDTH;
-
-        var genericObstacle = obstacle.init(obstacleXPosition, obstacleYPosition, obstacleWidth, obstacleHeight);
-
-        return genericObstacle;
-    }*/
 
     function areColliding(bird, drawableObject) {
         var inBottomLeft = false,
@@ -169,6 +153,10 @@ window.onload = function () {
             'images/Obstacles/cable_above.png',
             'images/Obstacles/chandelier_above.png',
             'images/Obstacles/speaker_above.png'
+        ], obstacleBelowSources = [
+            'images/Obstacles/chair_below.png',
+            'images/Obstacles/tree-version1.png',
+            'images/Obstacles/tree-version2.png'
         ],
         basicSpeed = -3,
         drinkCount = 0,
@@ -314,36 +302,46 @@ window.onload = function () {
 
 
 
-    var aboveObstacleObject = generateObstacleObject(initialIntervalMaxX, initialIntervalMinY);
-    var belowObstacleObject = generateObstacleObject(initialIntervalMaxX, initialIntervalMaxY);
-    setObstacleImage(aboveObstacleObject);
-    setObstacleImage(belowObstacleObject);
+    var aboveObstacleObject = Object.create(obstacle).init(initialIntervalMaxX, initialIntervalMinY, 100, 50);
+        aboveObstacleObject.kineticObject = generateObstacleObject(initialIntervalMaxX, initialIntervalMinY);
+    var belowObstacleObject = Object.create(obstacle).init(initialIntervalMaxX, initialIntervalMinY, 100, 50);
+        belowObstacleObject.kineticObject = generateObstacleObject(initialIntervalMaxX, initialIntervalMaxY);
+    setObstacleImage(aboveObstacleObject.kineticObject);
+    setObstacleImage(belowObstacleObject.kineticObject);
 
     function animateObstacleFrame() {
-        obstaclesLayer.add(aboveObstacleObject);
-        obstaclesLayer.add(belowObstacleObject);
+        obstaclesLayer.add(aboveObstacleObject.kineticObject);
+        obstaclesLayer.add(belowObstacleObject.kineticObject);
 
-        aboveObstacleX = aboveObstacleObject.getX();
-        belowObstacleX = belowObstacleObject.getX();
+        aboveObstacleX = aboveObstacleObject.kineticObject.getX();
+        belowObstacleX = belowObstacleObject.kineticObject.getX();
         aboveObstacleX -= speed;
         belowObstacleX -= speed;
-        aboveObstacleObject.setX(aboveObstacleX);
-        belowObstacleObject.setX(belowObstacleX);
+        aboveObstacleObject.kineticObject.setX(aboveObstacleX);
+        belowObstacleObject.kineticObject.setX(belowObstacleX);
+
+        if (areColliding(bird, aboveObstacleObject)) {
+            console.log('COLLISION');              
+        }
+
+        if (areColliding(bird, belowObstacleObject)) {
+            console.log('COLLISION');                     
+        }
 
         obstaclesLayer.draw();
 
         requestAnimationFrame(animateObstacleFrame);
 
         if (aboveObstacleX < 0 ) {
-            aboveObstacleObject.setX(800);
+            aboveObstacleObject.kineticObject.setX(800);
             //aboveObstacleObject.setY(randomNumberInInterval(initialIntervalMinY, initialIntervalMaxY));
-            setObstacleImage(aboveObstacleObject);
+            setObstacleImage(aboveObstacleObject.kineticObject);
         }
 
         if (belowObstacleX < 0 ) {
-            belowObstacleObject.setX(800);
+            belowObstacleObject.kineticObject.setX(800);
             //aboveObstacleObject.setY(randomNumberInInterval(initialIntervalMinY, initialIntervalMaxY));
-            setObstacleImage(belowObstacleObject);
+            setObstacleImage(belowObstacleObject.kineticObject);
         }
     }
 
