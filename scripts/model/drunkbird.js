@@ -1,12 +1,9 @@
 var BIRD_DATA = {
     initialRadius: 30,
     isFlayingDefault: false,
-    isAliveDefault: true
 };
 
 //isFlaying -> is the state of the bird, it will be manipulated by the engine
-
-//isAlive -> is the state of the bird, it will be manipulated by the engine
 
 var drunkBird = (function () {
 
@@ -16,7 +13,6 @@ var drunkBird = (function () {
             this.y = y;
             this.radius = BIRD_DATA.initialRadius;
             this.isFlying = BIRD_DATA.isFlyingDefault;
-            this.isAlive = BIRD_DATA.isAliveDefault;
             return this;
         },
         get x() {
@@ -42,27 +38,8 @@ var drunkBird = (function () {
         },
         set isFlying(value) {
             this._isFlying = value;
-        }        ,
-        get isAlive() {
-            return this._isAlive
-        },
-        set isAlive(value) {
-            this._isAlive = value;
         }
     };
-
-    Object.defineProperties(bird, {
-        'updateYPosition': {
-            value: function (flies, gravity) {
-                if (flies) {
-                    this.y -= gravity;
-                    this.isFlaying = false;
-                } else {
-                    this.y += gravity / 2;
-                }                
-            }
-        }
-    });
     
     return bird;
 }());
