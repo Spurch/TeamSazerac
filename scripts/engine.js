@@ -33,11 +33,19 @@ window.onload = function () {
     var birdShape = new Kinetic.Circle({
         x: bird.x,
         y: bird.y,
-        radius: bird.radius,
-        fill: 'red',
-        stroke: 'black',
-        strokeWidth: 4
+        radius:  bird.radius,
+        fillPriority: 'pattern',
     });
+
+    var birdImage = new Image();
+    birdImage.onload = function () {
+        birdShape.fillPatternImage(birdImage);
+        birdShape.fillPatternOffsetX(580);
+        birdShape.fillPatternOffsetY(800);
+        birdShape.fillPatternScaleX(0.5);
+        birdShape.fillPatternScaleY(0.5);
+    };
+    birdImage.src = "images/Bird/orange_bird.png";
 
     var divSvgEl = document.getElementById('svg-container');
 
