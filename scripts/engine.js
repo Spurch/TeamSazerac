@@ -28,7 +28,7 @@ window.onload = function () {
     var drinkLayer = new Kinetic.Layer();
     var obstaclesLayer = new Kinetic.Layer();
 
-    var bird = drunkBird.init(CONSTANTS.INITIAL_BIRD_X, CONSTANTS.STAGE_HEIGHT / 2);
+    var bird = Object.create(drunkBird).init(CONSTANTS.INITIAL_BIRD_X, CONSTANTS.STAGE_HEIGHT / 2);
 
     var birdShape = new Kinetic.Circle({
         x: bird.x,
@@ -80,7 +80,7 @@ window.onload = function () {
             birdShape.setY(bird.y);
             birdLayer.draw();
             gameStatus = 'ENDGAME';
-            console.log(gameStatus);
+
             displayFinalResult('Game Over! Bird is not flying!', 'red');
             // alert('Game Over! Bird is not flying!');
             return;
