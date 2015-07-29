@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Teamwork</title>
+    <style>
+        canvas{
+            border: 2px solid black !important;
+        }
+    </style>
+    <script src="scripts/kinetic-v5.1.0.js"></script>
+</head>
+<body>
+    <div id="wrapper"></div>
+    <script>
+
+        function randomNumberInInterval(min, max){
+            var randomNumber = Math.floor(Math.random()*(max - min) + min);
+            return randomNumber;
+        }
+
+        var stage = new Kinetic.Stage({
+            container: 'wrapper',
+            width: 800,
+            height: 600
+        });
+
+        var drinkLayer = new Kinetic.Layer();
+        var x,
+                y,
+                width,
+                height,
+                initialIntervalMinX = 700,
+                initialIntervalMaxX = stage.getWidth(),
+                initialIntervalMinY = 50,
+                initialIntervalMaxY = stage.getHeight() - 50;
+
+        function generateSoftDrinkObject(){
+            var softDrink = new Kinetic.Rect({
+                x: randomNumberInInterval(initialIntervalMinX, initialIntervalMaxX),
+                y: randomNumberInInterval(initialIntervalMinY, initialIntervalMaxY),
+                width: 30,
+                height: 50,
+                /*stroke: 'black',
+                 fill: 'blue'*/
+                fillPriority: 'pattern'
+            });
+
+            return softDrink;
+        }
+
+        function generateCocktailObject(){
+            var cocktail = new Kinetic.Rect({
+                x: randomNumberInInterval(initialIntervalMinX, initialIntervalMaxX),
+                y: randomNumberInInterval(initialIntervalMinY, initialIntervalMaxY),
+                width: 30,
+                height: 50,
+                /*stroke: 'black',
+                 fill: 'red'*/
+                fillPriority: 'pattern'
+            });
+
+            return cocktail;
+        }
+
+        var cocktailSources = [
+            'images\\Cocktails\\cocktailOne.png',
+            'images\\Cocktails\\cocktailTwo.png',
+            'images\\Cocktails\\cocktailThree.png',
+            'images\\Cocktails\\cocktailFour.png',
+            'images\\Cocktails\\cocktailFive.png'
+        ];
+
+        var softDrinkSources = [
+            'images\\SoftDrinks\\softDrinkOne.png',
+            'images\\SoftDrinks\\softDrinkTwo.png',
+            'images\\SoftDrinks\\softDrinkThree.png',
+            'images\\SoftDrinks\\softDrinkFour.png',
+            'images\\SoftDrinks\\softDrinkFive.png'
+        ];
+
+        function setSoftDrinkImage(softDrinkObject){
+            var softDrinkImage = new Image();
+            var number = Math.round(Math.random()*4);
+            softDrinkImage.src = softDrinkSources[number];
+
+            softDrinkImage.onload = function () {
+                softDrinkObject.setFillPatternImage(softDrinkImage);
+                softDrinkObject.fillPatternScaleX(0.5);
+                softDrinkObject.fillPatternScaleY(0.5);
+                stage.draw();
+            };
+
+            return softDrinkImage;
+        }
+
+        function setCocktailImage(cocktailObject){
+            var cocktailImage = new Image();
+            var number = Math.round(Math.random()*4);
+            cocktailImage.src = cocktailSources[number];
+
+            cocktailImage.onload = function () {
+                cocktailObject.setFillPatternImage(cocktailImage);
+                cocktailObject.fillPatternScaleX(0.5);
+                cocktailObject.fillPatternScaleY(0.5);
+                stage.draw();
+            };
+
+            return cocktailImage;
+        }
+
+
+        // Marin's variant with generating only two objects
+        
+        var drinkX = 0,
+                drinkY = 0,
+                speed = 3;
+
+        // Animating the SAME object, on each loop(recursion) with different image -I think there is NO need to generate several objects!
+        var softDrinkObject = generateSoftDrinkObject();
+        setSoftDrinkImage(softDrinkObject);
+        function animateSoftDrinkFrame(){
+            drinkLayer.add(softDrinkObject);
+
+            drinkX = softDrinkObject.getX();
+            drinkX -= speed;
+            softDrinkObject.setX(drinkX);
+
+            drinkLayer.draw();
+            console.log('recoursing');
+
+            requestAnimationFrame(animateSoftDrinkFrame);
+
+            if(drinkX < 0){
+                softDrinkObject.setX(800);
+                softDrinkObject.setY(randomNumberInInterval(initialIntervalMinY, initialIntervalMaxY));
+                setSoftDrinkImage(softDrinkObject);
+            }
+        }
+
+        // Animating the SAME object, on each loop(recursion) with different image -I think there is NO need to generate several objects!
+        var cocktailObject = generateCocktailObject();
+        setCocktailImage(cocktailObject);
+        function animateCocktailFrame(){
+            drinkLayer.add(cocktailObject);
+
+            drinkX = cocktailObject.getX();
+            drinkX -= speed;
+            cocktailObject.setX(drinkX);
+
+            drinkLayer.draw();
+
+            requestAnimationFrame(animateCocktailFrame);
+
+            if(drinkX < 0){
+                cocktailObject.setX(800);
+                cocktailObject.setY(randomNumberInInterval(initialIntervalMinY, initialIntervalMaxY));
+                setCocktailImage(cocktailObject);
+            }
+        }
+
+        function randomFunctionCall() {
+            var number = Math.random();
+
+            if (number > 0.5) {
+                animateSoftDrinkFrame();
+                setTimeout(animateCocktailFrame, 2700);
+
+            } else {
+                animateCocktailFrame();
+                setTimeout(animateSoftDrinkFrame, 2700);
+            }
+        }
+
+        randomFunctionCall();
+
+        // Chavdar's variant - pushing many objects to array, than deletes them
+        /*
+        var     drinkCount = 0,
+                speed = -3,
+                birdArr = [];
+
+        setInterval(function() {
+            ++drinkCount;
+            if (drinkCount % 3 == 0) {
+                var cocktailObject = generateCocktailObject();
+                setCocktailImage(cocktailObject);
+                drinkLayer.add(cocktailObject);
+                birdArr.push({obj: cocktailObject, speed: speed});
+            } else{
+                var softDrinkObject = generateSoftDrinkObject();
+                setSoftDrinkImage(softDrinkObject);
+                drinkLayer.add(softDrinkObject);
+                birdArr.push({obj: softDrinkObject, speed: speed});
+            };
+        }, 750);
+
+        function animFrame() {
+            birdArr.forEach(function (drinkObject, index) {
+
+                var updateX = drinkObject.speed;
+
+                var x = drinkObject.obj.getX() + updateX;
+
+                drinkObject.obj.setX(x);
+
+                if (drinkObject.obj.getX() + drinkObject.obj.getWidth() < 0) {
+                    birdArr.splice(index, 1);
+                    // console.log('Here');
+                };
+                // console.log(birdArr.length);
+            });
+            drinkLayer.draw();
+            requestAnimationFrame(animFrame);
+        }
+
+        animFrame();
+*/
+        stage.add(drinkLayer);
+    </script>
+
+</body>
+</html>
