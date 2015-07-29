@@ -97,7 +97,7 @@ window.onload = function () {
         });
     } ());
 
-    birdAnimationFrame();
+   // birdAnimationFrame();
 
     //Unnecessary   
     /*function obstacleFactory() {
@@ -347,8 +347,8 @@ window.onload = function () {
         }
     }
 
-    animateObstacleFrame();
-    animateDrinks();
+    //animateObstacleFrame();
+    //animateDrinks();
 
     //stage.add(background);
     //stage.add(drinkLayer);
@@ -375,6 +375,9 @@ window.onload = function () {
         stage.add(drinkLayer);
         stage.add(obstaclesLayer);
         stage.add(birdLayer);
+        birdAnimationFrame();
+        animateObstacleFrame();
+        animateDrinks();
 
 	}, false);
 };
