@@ -40,12 +40,12 @@ window.onload = function () {
 
     var divSvgEl = document.getElementById('svg-container');
 
-    function displayFinalResult(text, styleColor) {
+	function displayFinalResult(text, styleColor) {
         divSvgEl.style.opacity = '1';
         var textEl = document.getElementById('result');
         var canvasEl = document.getElementById('container');
         canvasEl.style.opacity = '0';
-        textEl.style.fill = styleColor;        
+        textEl.style.color = styleColor;
         textEl.innerHTML = text;
     }
 
