@@ -161,8 +161,8 @@ window.onload = function () {
             'images/Obstacles/speaker_above.png'
         ], obstacleBelowSources = [
             'images/Obstacles/chair_below.png',
-            'images/Obstacles/treeOne_below.jpg',
-            'images/Obstacles/treeTwo_below.jpg'
+            'images/Obstacles/treeOne_below.png',
+            'images/Obstacles/treeTwo_below.png'
         ],
         basicSpeed = -3,
         drinkCount = 0,
