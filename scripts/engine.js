@@ -51,7 +51,7 @@ window.onload = function () {
             return;
         }
 		if (bird.radius < CONSTANTS.MINIMUM_BIRD_RADIUS) {
-			alert('Game Over! Bird is starved to dead without alkohol!');
+			alert('Game Over! Bird is starved to dead without alcohol!');
             return;
 		};
 		if (bird.radius > CONSTANTS.WON_GAME_BIRD_RADIUS) {
@@ -177,7 +177,8 @@ window.onload = function () {
         drinkHeight = 50,
         obstacleAboveWidth = 70,
         obstacleAboveHeight = 30,
-        obstacleX = 0,
+        aboveObstacleX = 0,
+        belowObstacleX = 0,
         obstacleY = 0,
         speed = 3;
 
@@ -249,10 +250,10 @@ window.onload = function () {
         return drink;
     }
 
-    function generateObstacleObject() {
+    function generateObstacleObject(initialX, initialY) {
         var obstacle = new Kinetic.Rect({
-            x: initialIntervalMaxX,
-            y: initialIntervalMinY,
+            x: initialX,
+            y: initialY,
             width: 100,
             height: 50,
             fillPriority: 'pattern'
@@ -313,24 +314,36 @@ window.onload = function () {
 
 
 
-    var obstacleObject = generateObstacleObject();
-    setObstacleImage(obstacleObject);
+    var aboveObstacleObject = generateObstacleObject(initialIntervalMaxX, initialIntervalMinY);
+    var belowObstacleObject = generateObstacleObject(initialIntervalMaxX, initialIntervalMaxY);
+    setObstacleImage(aboveObstacleObject);
+    setObstacleImage(belowObstacleObject);
 
     function animateObstacleFrame() {
-        obstaclesLayer.add(obstacleObject);
+        obstaclesLayer.add(aboveObstacleObject);
+        obstaclesLayer.add(belowObstacleObject);
 
-        obstacleX = obstacleObject.getX();
-        obstacleX -= speed;
-        obstacleObject.setX(obstacleX);
+        aboveObstacleX = aboveObstacleObject.getX();
+        belowObstacleX = belowObstacleObject.getX();
+        aboveObstacleX -= speed;
+        belowObstacleX -= speed;
+        aboveObstacleObject.setX(aboveObstacleX);
+        belowObstacleObject.setX(belowObstacleX);
 
         obstaclesLayer.draw();
 
         requestAnimationFrame(animateObstacleFrame);
 
-        if (obstacleX < 0) {
-            obstacleObject.setX(800);
-            //obstacleObject.setY(randomNumberInInterval(initialIntervalMinY, initialIntervalMaxY));
-            setObstacleImage(obstacleObject);
+        if (aboveObstacleX < 0 ) {
+            aboveObstacleObject.setX(800);
+            //aboveObstacleObject.setY(randomNumberInInterval(initialIntervalMinY, initialIntervalMaxY));
+            setObstacleImage(aboveObstacleObject);
+        }
+
+        if (belowObstacleX < 0 ) {
+            belowObstacleObject.setX(800);
+            //aboveObstacleObject.setY(randomNumberInInterval(initialIntervalMinY, initialIntervalMaxY));
+            setObstacleImage(belowObstacleObject);
         }
     }
 
