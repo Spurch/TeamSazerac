@@ -213,9 +213,15 @@ window.onload = function () {
 
     function setObstacleImage(obstacleObject) {
         var obstacleImage = new Image();
-        var number = Math.round(Math.random() * 3);
+        var number = Math.round(Math.random() * 2);
 
-        obstacleImage.src = obstacleAboveSources[number];           
+        if (obstacleObject.type === 'above') {
+            obstacleImage.src = obstacleAboveSources[number];
+        }
+
+        if (obstacleObject.type === 'below') {
+            obstacleImage.src = obstacleBelowSources[number];
+        }           
 
         obstacleImage.onload = function () {
             obstacleObject.setFillPatternImage(obstacleImage);
@@ -310,9 +316,11 @@ window.onload = function () {
 
 
     var aboveObstacleObject = Object.create(obstacle).init(initialIntervalMaxX, initialIntervalMinY, 100, 50);
-        aboveObstacleObject.kineticObject = generateObstacleObject(initialIntervalMaxX, initialIntervalMinY);    
+        aboveObstacleObject.kineticObject = generateObstacleObject(initialIntervalMaxX, initialIntervalMinY);
+        aboveObstacleObject.kineticObject.type = 'above';    
     var belowObstacleObject = Object.create(obstacle).init(initialIntervalMaxX, initialIntervalMaxY, 100, 50);
         belowObstacleObject.kineticObject = generateObstacleObject(initialIntervalMaxX, initialIntervalMaxY);
+        belowObstacleObject.kineticObject.type = 'below';
     setObstacleImage(aboveObstacleObject.kineticObject);
     setObstacleImage(belowObstacleObject.kineticObject);
 
