@@ -1,6 +1,6 @@
 var BIRD_DATA = {
     initialRadius: 30,
-    isFlayingDefault: false,
+    isFlyingDefault: true,
 };
 
 //isFlaying -> is the state of the bird, it will be manipulated by the engine

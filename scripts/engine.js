@@ -7,15 +7,16 @@ window.onload = function () {
         BIRD_GROW_RATE: 1.25,
         BIRD_SKINNIG_RATE: 1.33,
         MINIMUM_BIRD_RADIUS: 20,
-        WON_GAME_BIRD_RADIUS: 80,         
+        WON_GAME_BIRD_RADIUS: 80,
         GRAVITY_TO_RADIUS_RATIO: 11,
         INITIAL_BIRD_GRAVITY: 3,
         OBSTACLES_ABOVE_WIDTH: 100,
         OBSTACLES_ABOVE_HEIGHT: 50,
         OBSTACLES_BELOW_WIDTH: 50,
-        OBSTACLES_BELOW_HEIGHT: 100   
+        OBSTACLES_BELOW_HEIGHT: 100
     },
-    currentBirdGravity = CONSTANTS.INITIAL_BIRD_GRAVITY;
+        currentBirdGravity = CONSTANTS.INITIAL_BIRD_GRAVITY,
+        gameStatus = 'INGAME';
 
     var stage = new Kinetic.Stage({
         container: 'container',
@@ -45,15 +46,19 @@ window.onload = function () {
         var textEl = document.getElementById('result');
         var canvasEl = document.getElementById('container');
         canvasEl.style.opacity = '0';
-        textEl.style.fill = styleColor;        
+        textEl.style.fill = styleColor;
         textEl.innerHTML = text;
     }
 
     birdLayer.add(birdShape);
     //put kinetic layers here e.g stage.add(layerName);
     function birdAnimationFrame() {
+        if(gameStatus === 'ENDGAME'){
+            return;
+        }
+        
         if (bird.radius > 30) {
-            currentBirdGravity = bird.radius/CONSTANTS.GRAVITY_TO_RADIUS_RATIO;
+            currentBirdGravity = bird.radius / CONSTANTS.GRAVITY_TO_RADIUS_RATIO;
             // console.log(bird.radius);
         } else {
             currentBirdGravity = CONSTANTS.INITIAL_BIRD_GRAVITY;
@@ -66,19 +71,22 @@ window.onload = function () {
 
             birdShape.setY(bird.y);
             birdLayer.draw();
-
+            gameStatus = 'ENDGAME';
+            console.log(gameStatus);
             displayFinalResult('Game Over! Bird is not flying!', 'red');
             // alert('Game Over! Bird is not flying!');
             return;
         }
 
         if (bird.radius < CONSTANTS.MINIMUM_BIRD_RADIUS) {
+            gameStatus = 'ENDGAME';
             displayFinalResult('Game Over! Bird is starved to dead without alcohol!', 'red');
             // alert('Game Over! Bird is starved to dead without alcohol!');
             return;
         }
 
         if (bird.radius > CONSTANTS.WON_GAME_BIRD_RADIUS) {
+            gameStatus = 'ENDGAME';
             displayFinalResult('Game Won! You got one happy drunk bird!', 'green');
             // alert('Game Won! You got one happy drunk bird!');
             return;
@@ -121,7 +129,7 @@ window.onload = function () {
         });
     } ());
 
-   // birdAnimationFrame();
+    // birdAnimationFrame();
 
     function areColliding(bird, drawableObject) {
         var inBottomLeft = false,
@@ -239,7 +247,7 @@ window.onload = function () {
 
         if (obstacleObject.type === 'below') {
             obstacleImage.src = obstacleBelowSources[number];
-        }           
+        }
 
         obstacleImage.onload = function () {
             obstacleObject.setFillPatternImage(obstacleImage);
@@ -299,6 +307,10 @@ window.onload = function () {
     }, 1500);
 
     function animateDrinks() {
+        if(gameStatus === 'ENDGAME'){
+            return;
+        }
+        
         drinkArr.forEach(function (drinkObject, index) {
 
             var updateX = drinkObject.speed;
@@ -334,15 +346,18 @@ window.onload = function () {
 
 
     var aboveObstacleObject = Object.create(obstacle).init(initialIntervalMaxX, initialIntervalMinY, CONSTANTS.OBSTACLES_ABOVE_WIDTH, CONSTANTS.OBSTACLES_ABOVE_HEIGHT);
-        aboveObstacleObject.kineticObject = generateObstacleObject(initialIntervalMaxX, initialIntervalMinY, CONSTANTS.OBSTACLES_ABOVE_WIDTH, CONSTANTS.OBSTACLES_ABOVE_HEIGHT);
-        aboveObstacleObject.kineticObject.type = 'above';    
+    aboveObstacleObject.kineticObject = generateObstacleObject(initialIntervalMaxX, initialIntervalMinY, CONSTANTS.OBSTACLES_ABOVE_WIDTH, CONSTANTS.OBSTACLES_ABOVE_HEIGHT);
+    aboveObstacleObject.kineticObject.type = 'above';
     var belowObstacleObject = Object.create(obstacle).init(initialIntervalMaxX, initialIntervalMaxY, CONSTANTS.OBSTACLES_BELOW_WIDTH, CONSTANTS.OBSTACLES_BELOW_HEIGHT);
-        belowObstacleObject.kineticObject = generateObstacleObject(initialIntervalMaxX, initialIntervalMaxY, CONSTANTS.OBSTACLES_BELOW_WIDTH, CONSTANTS.OBSTACLES_BELOW_HEIGHT);
-        belowObstacleObject.kineticObject.type = 'below';
+    belowObstacleObject.kineticObject = generateObstacleObject(initialIntervalMaxX, initialIntervalMaxY, CONSTANTS.OBSTACLES_BELOW_WIDTH, CONSTANTS.OBSTACLES_BELOW_HEIGHT);
+    belowObstacleObject.kineticObject.type = 'below';
     setObstacleImage(aboveObstacleObject.kineticObject);
     setObstacleImage(belowObstacleObject.kineticObject);
 
     function animateObstacleFrame() {
+        if(gameStatus === 'ENDGAME'){
+            return;
+        }
         obstaclesLayer.add(aboveObstacleObject.kineticObject);
         obstaclesLayer.add(belowObstacleObject.kineticObject);
 
@@ -359,28 +374,28 @@ window.onload = function () {
         belowObstacleObject.kineticObject.setX(belowObstacleX);
 
         if (areColliding(bird, aboveObstacleObject)) {
-            displayFinalResult('Game Over! You hitted an obstacle', 'red');
+            displayFinalResult('Game Over! You hit an obstacle', 'red');
             // alert('COLLISION');
-            return;            
+            return;
         }
         if (areColliding(bird, belowObstacleObject)) {
-            displayFinalResult('Game Over! You hitted an obstacle', 'red');
+            displayFinalResult('Game Over! You hit an obstacle', 'red');
             //alert('COLLISION');
-            return;                     
+            return;
         }
 
         obstaclesLayer.draw();
 
         requestAnimationFrame(animateObstacleFrame);
 
-        if (aboveObstacleX < 0 ) {
+        if (aboveObstacleX < 0) {
             aboveObstacleObject.kineticObject.setX(800);
             aboveObstacleObject.x = 800;
             //aboveObstacleObject.setY(randomNumberInInterval(initialIntervalMinY, initialIntervalMaxY));
-          	setObstacleImage(aboveObstacleObject.kineticObject);   
+            setObstacleImage(aboveObstacleObject.kineticObject);
         }
 
-        if (belowObstacleX < 0 ) {
+        if (belowObstacleX < 0) {
             belowObstacleObject.kineticObject.setX(800);
             belowObstacleObject.x = 800;
             //aboveObstacleObject.setY(randomNumberInInterval(initialIntervalMinY, initialIntervalMaxY));
@@ -398,19 +413,19 @@ window.onload = function () {
    	stage.add(homeScreen);
     //stage.add(birdLayer);
 
-    window.addEventListener('navigateToHomeScreen', function() {
-    	//hide other elements and show homeScreen
-	    console.log('we change screen to HOME');
-	    optionsScreen.clear(); 
-	    //stage.re
-	}, false);
-	window.addEventListener('navigateToOptionsScreen', function() {
-		//hide other elements and show optionsSCreen
-	    console.log('we change screen to OPTIONS');
-	}, false);
-	window.addEventListener('navigateToIngameScreen', function() {
-		//hide other elements and show optionsSCreen
-	    console.log('we change screen to Ingame and start playing the game');
+    window.addEventListener('navigateToHomeScreen', function () {
+        //hide other elements and show homeScreen
+        console.log('we change screen to HOME');
+        optionsScreen.clear(); 
+        //stage.re
+    }, false);
+    window.addEventListener('navigateToOptionsScreen', function () {
+        //hide other elements and show optionsSCreen
+        console.log('we change screen to OPTIONS');
+    }, false);
+    window.addEventListener('navigateToIngameScreen', function () {
+        //hide other elements and show optionsSCreen
+        console.log('we change screen to Ingame and start playing the game');
         homeScreen.clear();
         stage.add(background);
         stage.add(drinkLayer);
@@ -419,6 +434,5 @@ window.onload = function () {
         birdAnimationFrame();
         animateObstacleFrame();
         animateDrinks();
-
-	}, false);
+    }, false);
 };
