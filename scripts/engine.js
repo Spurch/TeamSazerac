@@ -155,8 +155,8 @@ window.onload = function () {
             'images/Obstacles/speaker_above.png'
         ], obstacleBelowSources = [
             'images/Obstacles/chair_below.png',
-            'images/Obstacles/tree-version1.png',
-            'images/Obstacles/tree-version2.png'
+            'images/Obstacles/treeOne_below.jpg',
+            'images/Obstacles/treeTwo_below.jpg'
         ],
         basicSpeed = -3,
         drinkCount = 0,
@@ -208,7 +208,8 @@ window.onload = function () {
     function setObstacleImage(obstacleObject) {
         var obstacleImage = new Image();
         var number = Math.round(Math.random() * 3);
-        obstacleImage.src = obstacleAboveSources[number];
+
+        obstacleImage.src = obstacleAboveSources[number];           
 
         obstacleImage.onload = function () {
             obstacleObject.setFillPatternImage(obstacleImage);
@@ -303,7 +304,7 @@ window.onload = function () {
 
 
     var aboveObstacleObject = Object.create(obstacle).init(initialIntervalMaxX, initialIntervalMinY, 100, 50);
-        aboveObstacleObject.kineticObject = generateObstacleObject(initialIntervalMaxX, initialIntervalMinY);
+        aboveObstacleObject.kineticObject = generateObstacleObject(initialIntervalMaxX, initialIntervalMinY);    
     var belowObstacleObject = Object.create(obstacle).init(initialIntervalMaxX, initialIntervalMinY, 100, 50);
         belowObstacleObject.kineticObject = generateObstacleObject(initialIntervalMaxX, initialIntervalMaxY);
     setObstacleImage(aboveObstacleObject.kineticObject);
@@ -343,7 +344,7 @@ window.onload = function () {
             aboveObstacleObject.kineticObject.setX(800);
             aboveObstacleObject.x = 800;
             //aboveObstacleObject.setY(randomNumberInInterval(initialIntervalMinY, initialIntervalMaxY));
-            setObstacleImage(aboveObstacleObject.kineticObject);
+          	setObstacleImage(aboveObstacleObject.kineticObject);   
         }
 
         if (belowObstacleX < 0 ) {
