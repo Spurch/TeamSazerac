@@ -16,7 +16,7 @@ window.onload = function () {
         OBSTACLES_BELOW_HEIGHT: 100
     },
         currentBirdGravity = CONSTANTS.INITIAL_BIRD_GRAVITY,
-        gameStatus = 'INGAME';
+        gameHasEnded = false;
 
     var stage = new Kinetic.Stage({
         container: 'container',
@@ -61,7 +61,7 @@ window.onload = function () {
     birdLayer.add(birdShape);
     //put kinetic layers here e.g stage.add(layerName);
     function birdAnimationFrame() {
-        if(gameStatus === 'ENDGAME'){
+        if(gameHasEnded){
             return;
         }
         
@@ -79,7 +79,7 @@ window.onload = function () {
 
             birdShape.setY(bird.y);
             birdLayer.draw();
-            gameStatus = 'ENDGAME';
+            gameHasEnded = true;
 
             displayFinalResult('Game Over! Bird is not flying!', 'red');
             // alert('Game Over! Bird is not flying!');
@@ -87,14 +87,14 @@ window.onload = function () {
         }
 
         if (bird.radius < CONSTANTS.MINIMUM_BIRD_RADIUS) {
-            gameStatus = 'ENDGAME';
+            gameHasEnded = true;
             displayFinalResult('Game Over! Bird is starved to dead without alcohol!', 'red');
             // alert('Game Over! Bird is starved to dead without alcohol!');
             return;
         }
 
         if (bird.radius > CONSTANTS.WON_GAME_BIRD_RADIUS) {
-            gameStatus = 'ENDGAME';
+            gameHasEnded = true;
             displayFinalResult('Game Won! You got one happy drunk bird!', 'green');
             // alert('Game Won! You got one happy drunk bird!');
             return;
@@ -315,7 +315,7 @@ window.onload = function () {
     }, 1500);
 
     function animateDrinks() {
-        if(gameStatus === 'ENDGAME'){
+        if(gameHasEnded){
             return;
         }
         
@@ -363,7 +363,7 @@ window.onload = function () {
     setObstacleImage(belowObstacleObject.kineticObject);
 
     function animateObstacleFrame() {
-        if(gameStatus === 'ENDGAME'){
+        if(gameHasEnded){
             return;
         }
         obstaclesLayer.add(aboveObstacleObject.kineticObject);
@@ -382,13 +382,13 @@ window.onload = function () {
         belowObstacleObject.kineticObject.setX(belowObstacleX);
 
         if (areColliding(bird, aboveObstacleObject)) {
-            gameStatus = 'ENDGAME';
+            gameHasEnded = true;
             displayFinalResult('Game Over! You hit an obstacle', 'red');
             // alert('COLLISION');
             return;
         }
         if (areColliding(bird, belowObstacleObject)) {
-            gameStatus = 'ENDGAME';
+            gameHasEnded = true;
             displayFinalResult('Game Over! You hit an obstacle', 'red');
             //alert('COLLISION');
             return;
