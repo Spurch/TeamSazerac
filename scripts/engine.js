@@ -11,7 +11,7 @@ window.onload = function () {
         GRAVITY_TO_RADIUS_RATIO: 11,
         INITIAL_BIRD_GRAVITY: 3   
     },
-    currentBirdGravity = CONSTANTS.INITIAL_BIRD_GRAVITY,
+    currentBirdGravity = CONSTANTS.INITIAL_BIRD_GRAVITY;
 
     var stage = new Kinetic.Stage({
         container: 'container',
