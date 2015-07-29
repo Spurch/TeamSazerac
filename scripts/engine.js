@@ -46,7 +46,7 @@ window.onload = function () {
         var textEl = document.getElementById('result');
         var canvasEl = document.getElementById('container');
         canvasEl.style.opacity = '0';
-        textEl.style.fill = styleColor;
+        textEl.style.color = styleColor;
         textEl.innerHTML = text;
     }
 
