@@ -311,7 +311,7 @@ window.onload = function () {
 
     var aboveObstacleObject = Object.create(obstacle).init(initialIntervalMaxX, initialIntervalMinY, 100, 50);
         aboveObstacleObject.kineticObject = generateObstacleObject(initialIntervalMaxX, initialIntervalMinY);    
-    var belowObstacleObject = Object.create(obstacle).init(initialIntervalMaxX, initialIntervalMinY, 100, 50);
+    var belowObstacleObject = Object.create(obstacle).init(initialIntervalMaxX, initialIntervalMaxY, 100, 50);
         belowObstacleObject.kineticObject = generateObstacleObject(initialIntervalMaxX, initialIntervalMaxY);
     setObstacleImage(aboveObstacleObject.kineticObject);
     setObstacleImage(belowObstacleObject.kineticObject);
