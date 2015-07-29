@@ -315,17 +315,24 @@ window.onload = function () {
 
         aboveObstacleX = aboveObstacleObject.kineticObject.getX();
         belowObstacleX = belowObstacleObject.kineticObject.getX();
+
         aboveObstacleX -= speed;
         belowObstacleX -= speed;
+
+        aboveObstacleObject.x = aboveObstacleX;
+        belowObstacleObject.x = belowObstacleX;
+
         aboveObstacleObject.kineticObject.setX(aboveObstacleX);
         belowObstacleObject.kineticObject.setX(belowObstacleX);
 
         if (areColliding(bird, aboveObstacleObject)) {
-            console.log('COLLISION');              
+            alert('COLLISION');
+            return;            
         }
-
         if (areColliding(bird, belowObstacleObject)) {
-            console.log('COLLISION');                     
+            alert('COLLISION');
+            console.log('asdasdasdsadsadsadsa');
+            return;                     
         }
 
         obstaclesLayer.draw();
@@ -334,12 +341,14 @@ window.onload = function () {
 
         if (aboveObstacleX < 0 ) {
             aboveObstacleObject.kineticObject.setX(800);
+            aboveObstacleObject.x = 800;
             //aboveObstacleObject.setY(randomNumberInInterval(initialIntervalMinY, initialIntervalMaxY));
             setObstacleImage(aboveObstacleObject.kineticObject);
         }
 
         if (belowObstacleX < 0 ) {
             belowObstacleObject.kineticObject.setX(800);
+            belowObstacleObject.x = 800;
             //aboveObstacleObject.setY(randomNumberInInterval(initialIntervalMinY, initialIntervalMaxY));
             setObstacleImage(belowObstacleObject.kineticObject);
         }
