@@ -374,11 +374,13 @@ window.onload = function () {
         belowObstacleObject.kineticObject.setX(belowObstacleX);
 
         if (areColliding(bird, aboveObstacleObject)) {
+            gameStatus = 'ENDGAME';
             displayFinalResult('Game Over! You hit an obstacle', 'red');
             // alert('COLLISION');
             return;
         }
         if (areColliding(bird, belowObstacleObject)) {
+            gameStatus = 'ENDGAME';
             displayFinalResult('Game Over! You hit an obstacle', 'red');
             //alert('COLLISION');
             return;
