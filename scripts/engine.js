@@ -38,10 +38,21 @@ window.onload = function () {
         strokeWidth: 4
     });
 
+    var divSvgEl = document.getElementById('svg-container');
+
+    function displayFinalResult(text, styleColor) {
+        divSvgEl.style.opacity = '1';
+        var textEl = document.getElementById('result');
+        var canvasEl = document.getElementById('container');
+        canvasEl.style.opacity = '0';
+        textEl.style.fill = styleColor;        
+        textEl.innerHTML = text;
+    }
+
     birdLayer.add(birdShape);
     //put kinetic layers here e.g stage.add(layerName);
     function birdAnimationFrame() {
-    	if (bird.radius > 30) {
+        if (bird.radius > 30) {
             currentBirdGravity = bird.radius/CONSTANTS.GRAVITY_TO_RADIUS_RATIO;
             // console.log(bird.radius);
         } else {
@@ -56,19 +67,22 @@ window.onload = function () {
             birdShape.setY(bird.y);
             birdLayer.draw();
 
-            alert('Game Over! Bird is not flying!');
+            displayFinalResult('Game Over! Bird is not flying!', 'red');
+            // alert('Game Over! Bird is not flying!');
             return;
         }
 
-		if (bird.radius < CONSTANTS.MINIMUM_BIRD_RADIUS) {
-			alert('Game Over! Bird is starved to dead without alcohol!');
+        if (bird.radius < CONSTANTS.MINIMUM_BIRD_RADIUS) {
+            displayFinalResult('Game Over! Bird is starved to dead without alcohol!', 'red');
+            // alert('Game Over! Bird is starved to dead without alcohol!');
             return;
-		}
+        }
 
-		if (bird.radius > CONSTANTS.WON_GAME_BIRD_RADIUS) {
-			alert('Game Won! You got one happy drunk bird!');
+        if (bird.radius > CONSTANTS.WON_GAME_BIRD_RADIUS) {
+            displayFinalResult('Game Won! You got one happy drunk bird!', 'green');
+            // alert('Game Won! You got one happy drunk bird!');
             return;
-		}
+        }
 
         birdShape.setY(bird.y);
 
@@ -345,11 +359,13 @@ window.onload = function () {
         belowObstacleObject.kineticObject.setX(belowObstacleX);
 
         if (areColliding(bird, aboveObstacleObject)) {
-            alert('COLLISION');
+            displayFinalResult('Game Over! You hitted an obstacle', 'red');
+            // alert('COLLISION');
             return;            
         }
         if (areColliding(bird, belowObstacleObject)) {
-            alert('COLLISION');
+            displayFinalResult('Game Over! You hitted an obstacle', 'red');
+            //alert('COLLISION');
             return;                     
         }
 

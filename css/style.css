@@ -23,6 +23,12 @@ body{
  #content{
  position: center;
  }
+ #svg-container {
+ 	position: absolute;
+ 	left: 0%;
+ 	right: 0%;
+ 	opacity: 0;
+ } 
  #footer{
 	font-weight: bold;
 	margin: 0px auto;
