@@ -7,9 +7,11 @@ window.onload = function () {
         BIRD_GROW_RATE: 1.25,
         BIRD_SKINNIG_RATE: 1.33,
         MINIMUM_BIRD_RADIUS: 20,
-        WON_GAME_BIRD_RADIUS: 80 
+        WON_GAME_BIRD_RADIUS: 80,         
+        GRAVITY_TO_RADIUS_RATIO: 11,
+        INITIAL_BIRD_GRAVITY: 3   
     },
-    birdGravity = 3;
+    currentBirdGravity = CONSTANTS.INITIAL_BIRD_GRAVITY;
 
     var stage = new Kinetic.Stage({
         container: 'container',
@@ -36,10 +38,13 @@ window.onload = function () {
     //put kinetic layers here e.g stage.add(layerName);
     function birdAnimationFrame() {
     	if (bird.radius > 30) {
-            birdGravity = bird.radius/8;
-            console.log(bird.radius);
+            currentBirdGravity = bird.radius/CONSTANTS.GRAVITY_TO_RADIUS_RATIO;
+            // console.log(bird.radius);
+        } else {
+            currentBirdGravity = CONSTANTS.INITIAL_BIRD_GRAVITY;
         }
-        bird.y += birdGravity;
+        bird.y += currentBirdGravity;
+
         if (bird.y >= CONSTANTS.STAGE_HEIGHT - bird.radius) {
             bird.y = CONSTANTS.STAGE_HEIGHT - bird.radius;
             bird.isFlying = false;
@@ -50,15 +55,16 @@ window.onload = function () {
             alert('Game Over! Bird is not flying!');
             return;
         }
+
 		if (bird.radius < CONSTANTS.MINIMUM_BIRD_RADIUS) {
 			alert('Game Over! Bird is starved to dead without alcohol!');
             return;
 		}
+
 		if (bird.radius > CONSTANTS.WON_GAME_BIRD_RADIUS) {
 			alert('Game Won! You got one happy drunk bird!');
             return;
 		}
-
 
         birdShape.setY(bird.y);
 
