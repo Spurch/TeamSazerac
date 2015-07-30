@@ -86,6 +86,20 @@ homeScreen.add(btnStart);
 
 
 //--------- start 'creating and dispatching events'
+// You can polyfill the CustomEvent() constructor functionality in Internet Explorer 9 and higher with the following code:
+(function () {
+  function CustomEvent ( event, params ) {
+    params = params || { bubbles: false, cancelable: false, detail: undefined };
+    var evt = document.createEvent( 'CustomEvent' );
+    evt.initCustomEvent( event, params.bubbles, params.cancelable, params.detail );
+    return evt;
+   }
+
+  CustomEvent.prototype = window.Event.prototype;
+
+  window.CustomEvent = CustomEvent;
+})();
+
 var navToIngame = new CustomEvent(NAVIGATE_SCREEN_EVENT.INGAME, {
     detail: {},
     bubbles: true,
