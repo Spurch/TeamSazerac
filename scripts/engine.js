@@ -58,9 +58,36 @@ window.onload = function () {
         textEl.innerHTML = text;
     }
 
-    function displayTimer(){
-        
+    // TIMER ---------------------------------
+    var timerText = document.getElementById('timer');
+    var timer = new Timer();
+    timer.Interval = 1000;
+    timer.Tick = timerTick;
+    var seconds = 0;
+    var minutes = 0;
+
+    function timerTick(){
+        var times = '';
+
+        seconds += timer.Interval/1000;
+
+        function timerCount(){
+            times = minutes + ':' + seconds;
+            if(seconds < 59){
+                console.log(times);
+            }else{
+                seconds = -1;
+                minutes++;
+                console.log(times);
+
+            }
+
+            timerText.innerHTML = times;
+
+        }
+        timerCount();
     }
+    // TIMER ---------------------------------
 
     birdLayer.add(birdShape);
     //put kinetic layers here e.g stage.add(layerName);
@@ -87,6 +114,7 @@ window.onload = function () {
 
             displayFinalResult('Game Over! Bird is not flying!', 'red');
             // alert('Game Over! Bird is not flying!');
+            timer.Stop();
             return;
         }
 
@@ -94,6 +122,8 @@ window.onload = function () {
             gameHasEnded = true;
             displayFinalResult('Game Over! Bird is starved to dead without alcohol!', 'red');
             // alert('Game Over! Bird is starved to dead without alcohol!');
+            timer.Stop();
+
             return;
         }
 
@@ -101,6 +131,8 @@ window.onload = function () {
             gameHasEnded = true;
             displayFinalResult('Game Won! You got one happy drunk bird!', 'green');
             // alert('Game Won! You got one happy drunk bird!');
+            timer.Stop();
+
             return;
         }
 
@@ -448,5 +480,7 @@ window.onload = function () {
         birdAnimationFrame();
         animateObstacleFrame();
         animateDrinks();
+        timer.Start();
+
     }, false);
 };
