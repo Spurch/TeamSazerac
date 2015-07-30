@@ -36,7 +36,7 @@ window.onload = function () {
         x: bird.x,
         y: bird.y,
         radius:  bird.radius,
-        fillPriority: 'pattern',
+        fillPriority: 'pattern'
     });
 
     var birdImage = new Image();
@@ -61,17 +61,10 @@ window.onload = function () {
     }
 
     // TIMER ---------------------------------
-<<<<<<< HEAD
-<<<<<<< HEAD
+
     var timerDiv = document.getElementById('timer-container');
     var timerText = document.getElementById('timer-text');
-=======
-    var timerText = document.getElementById('timer');
->>>>>>> 13047d9c0900dd30bdd52f71fa1712ad73b003d3
-=======
-    var timerDiv = document.getElementById('timer-container');
-    var timerText = document.getElementById('timer-text');
->>>>>>> cde44a278d9ceed472b097ee19122a47443432e7
+
     var timer = new Timer();
     timer.Interval = 1000;
     timer.Tick = timerTick;
@@ -80,18 +73,16 @@ window.onload = function () {
 
     function timerTick(){
         var times = '';
-<<<<<<< HEAD
+
         timerDiv.style.zIndex = 1;
-=======
->>>>>>> 13047d9c0900dd30bdd52f71fa1712ad73b003d3
 
         seconds += timer.Interval/1000;
 
-        function timerCount(){
+        function timerCount() {
             times = minutes + ':' + seconds;
-            if(seconds < 59){
+            if (seconds < 59) {
                 console.log(times);
-            }else{
+            } else {
                 seconds = -1;
                 minutes++;
                 console.log(times);
@@ -99,10 +90,6 @@ window.onload = function () {
             }
 
             timerText.innerHTML = times;
-<<<<<<< HEAD
-=======
-
->>>>>>> 13047d9c0900dd30bdd52f71fa1712ad73b003d3
         }
         timerCount();
     }
