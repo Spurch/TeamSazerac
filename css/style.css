@@ -44,9 +44,10 @@ body{
 	padding: 0px;
 	position: relative;	
 }
- #watch-container{
+ #timer-container{
 	 position: absolute;
-	 left: 80%;
+	 left: 73%;
+	 //z-index: 1;
 
 
  }
