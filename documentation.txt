@@ -1,0 +1,115 @@
+#Drunk Bird Documentation
+***
+*Name:* Drunk Bird
+
+*Authors:*   
+
+1. Vyara Hristova
+
+2. Teodor Cholakov
+
+3. Chavdar Angelov
+
+4. Marin Marinov
+
+5. Mihail Mitov
+
+6. Vasil Pavlov
+
+7. Ivan Nikolov
+
+8. Georgi Georgiev
+
+*Created:* 31/07/2015
+
+*Version:* 1.0.0
+***
+Thank you for your interest in our project! If you have any questions , feel free contact us via **facebook** or **github**
+***
+##Table of Contents
+1. HTML Structure
+2. CSS Files
+3. Javascript Files
+4. Browser Compatibility
+***
+##1. HTML Structure
+The HTML Structure for each page is as follows:
+ 
+* Meta
+* Title
+* Link to CSS Files
+* Header
+* Content
+    * SVG - Container
+    * Result
+    * Timer - Container
+    * Stage container
+* Link to Javascript Files
+* Footer
+***
+##2. CSS Files
+There is one CSS file in this theme:
+ 
+* style.css
+ 
+#####style.css
+This CSS file is the main stylesheet for the theme. It holds all the values for the different elements of theme and the default color scheme.
+***
+##3. Javascript Files
+There are 8 Javascript files in this theme:
+ 
+* kinetic-v5.1.0.js
+* background.js
+* homeScreen.js
+* optionsScreen.js
+* drunkbird.js
+* engine.js
+* gameObjects.js
+* timer.js
+ 
+#####kinetic-v5.1.0.js
+The game uses kinetic.js as a game rendering engine.
+#####background.js
+Provides information about the background layer - definition as a Kinetic.Layer, sizing and functionalities.
+#####homeScreen.js
+Provides information about the home screen layer - definition as a Kinetic.Layer, buttons for game navigation, and sizing.
+#####optionsScreen.js
+Provides information about the background layer - definition as a Kinetic.Layer and sizing.**Functionalities are not available at this moment.**
+#####drunkbird.js
+Hold information about the Player's object including attributes and class definition of the player instance.
+#####engine.js
+Provides the main functionalities for the project including:
+<code>constants: Object</code>  
+*Object: Contains the necessary constants.*  
+ 
+<code>stage: Kinetic.Stage</code>  
+*Provides the stage for the rendering engine.*
+ 
+ 
+<code>layers: Kinetic.Layer</code>  
+*BirdLayer, DrinkLayer, ObstaclesLayer are the layers containing the different game objects.*  
+ 
+<code>timer: Timer</code>  
+*Provides the functionality of the result calculation.* 
+
+<code>areColliding: Function</code>  
+*Defines the collision functionalities.*  
+
+<code>randomNumberInInterval: Function</code>  
+*Provides random numbers in order to create different instances in the game independently and in random positions.*
+#####gameObjects.js
+Contains definition of drawable objects and its children - cocktail drinks, soft drinks, obstacles.
+#####timer.js
+Provides the functionality for the timer, which is the result generator.
+***
+##4. Browser Compatibility
+This theme works well (-) or great (X) in the following browsers:
+  
+**IE 9+** X  
+**Chrome** X  
+**Firefox** X  
+**Safari** X  
+**Opera** X
+***
+####Project by Team Sazerac
+If you have any other questions that aren't covered in the documentation, feel free to contact us via **facebook* or **github**.
