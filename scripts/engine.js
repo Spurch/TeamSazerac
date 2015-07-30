@@ -58,6 +58,10 @@ window.onload = function () {
         textEl.innerHTML = text;
     }
 
+    function displayTimer(){
+        
+    }
+
     birdLayer.add(birdShape);
     //put kinetic layers here e.g stage.add(layerName);
     function birdAnimationFrame() {

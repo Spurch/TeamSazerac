@@ -44,4 +44,10 @@ body{
 	padding: 0px;
 	position: relative;	
 }
+ #watch-container{
+	 position: absolute;
+	 left: 80%;
+
+
+ }
 
