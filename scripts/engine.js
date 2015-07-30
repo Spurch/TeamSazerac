@@ -82,11 +82,11 @@ window.onload = function () {
         function timerCount() {
             times = minutes + ':' + seconds;
             if (seconds < 59) {
-                console.log(times);
+                // console.log(times);
             } else {
                 seconds = -1;
                 minutes++;
-                console.log(times);
+                // console.log(times);
 
             }
 
@@ -265,7 +265,8 @@ window.onload = function () {
 
     function setSoftDrinkImage(softDrinkObject) {
         var softDrinkImage = new Image();
-        var number = Math.round(Math.random() * softDrinkSources.length-1);
+        var number = Math.ceil(Math.random() * softDrinkSources.length)-1;
+        // console.log('soft index ' + number);
         softDrinkImage.src = softDrinkSources[number];
 
         softDrinkImage.onload = function () {
@@ -280,7 +281,8 @@ window.onload = function () {
 
     function setCocktailImage(cocktailObject) {
         var cocktailImage = new Image();
-        var number = Math.round(Math.random() * cocktailSources.length-1);
+        var number = Math.ceil(Math.random() * cocktailSources.length)-1;
+        // console.log('cockt index ' + number);
         cocktailImage.src = cocktailSources[number];
 
         cocktailImage.onload = function () {
@@ -538,8 +540,9 @@ window.onload = function () {
 
     }, false);
 
-    // test onblur and onfocus
+    /* test onblur and onfocus
     setInterval(function () { 
-      console.log(isActive ? 'active' : 'inactive'); 
+      	console.log(isActive ? 'active' : 'inactive'); 
     }, 1000);
+	*/
 };
