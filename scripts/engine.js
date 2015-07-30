@@ -246,7 +246,8 @@ window.onload = function () {
         obstaclesArr = [],
         aboveObstacleX = 0,
         belowObstacleX = 0,
-        isActive = true;
+        isActive = true,
+        timeForObstacles = false;
 
     function randomNumberInInterval(min, max) {
         var randomNumber = Math.floor(Math.random() * (max - min) + min);
@@ -444,9 +445,36 @@ window.onload = function () {
                     drinkLayer.add(softDrinkObject.kineticObject);
                     drinkArr.push(softDrinkObject);
                 }
+            }
+            if (isActive && timeForObstacles) 
+            {            
+                var randomNumber = randomNumberInInterval(0, 100);
+                if (randomNumber % 2 === 0) {
+                    var aboveObstacleObject = Object.create(obstacle).init(initialIntervalMaxX, initialIntervalMinY, CONSTANTS.OBSTACLES_ABOVE_WIDTH, CONSTANTS.OBSTACLES_ABOVE_HEIGHT);
+                    aboveObstacleObject.kineticObject = generateObstacleObject(initialIntervalMaxX, initialIntervalMinY, CONSTANTS.OBSTACLES_ABOVE_WIDTH, CONSTANTS.OBSTACLES_ABOVE_HEIGHT);
+                    aboveObstacleObject.kineticObject.type = 'above';
+                    obstaclesLayer.add(aboveObstacleObject.kineticObject);
+                    obstaclesArr.push(aboveObstacleObject);
+                    setObstacleImage(aboveObstacleObject.kineticObject);
+                }else{
+                    var belowObstacleObject = Object.create(obstacle).init(initialIntervalMaxX, initialIntervalMaxY, CONSTANTS.OBSTACLES_BELOW_WIDTH, CONSTANTS.OBSTACLES_BELOW_HEIGHT);
+                    belowObstacleObject.kineticObject = generateObstacleObject(initialIntervalMaxX, initialIntervalMaxY, CONSTANTS.OBSTACLES_BELOW_WIDTH, CONSTANTS.OBSTACLES_BELOW_HEIGHT);
+                    belowObstacleObject.kineticObject.type = 'below';
+                    obstaclesLayer.add(belowObstacleObject.kineticObject);
+                    obstaclesArr.push(belowObstacleObject);
+                    setObstacleImage(belowObstacleObject.kineticObject);
+                }            
             }           
         }, 1500);
-        setInterval(function () {
+        //Control the time of the obstacles spawn
+        setInterval(function (){
+            if(timeForObstacles){
+                timeForObstacles = false;
+            }else{
+                timeForObstacles = true;
+            }
+        },2000);
+        /*setInterval(function () {
             if (isActive){                
                 var randomNumber = randomNumberInInterval(0, 100);
                 if (randomNumber % 2 === 0) {
@@ -465,7 +493,8 @@ window.onload = function () {
                     setObstacleImage(belowObstacleObject.kineticObject);
                 }
             }
-        }, 1500);
+        }, 1500);*/
+        
         //setInterval(function(){if (isFocused) { isFocused = false;}else{isFocused = true;}},4000);
         console.log('we change screen to Ingame and start playing the game');
         homeScreen.clear();
