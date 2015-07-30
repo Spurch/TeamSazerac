@@ -426,6 +426,8 @@ window.onload = function () {
             if (areColliding(bird, obstacleObject)) {
                 gameHasEnded = true;
                 displayFinalResult('Game Over! You hit an obstacle', 'red');
+                timer.Stop();
+
                 return;
             }            
         });
