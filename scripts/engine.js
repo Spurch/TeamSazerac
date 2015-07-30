@@ -61,15 +61,18 @@ window.onload = function () {
     }
 
     // TIMER ---------------------------------
-    var timerText = document.getElementById('timer');
+    var timerDiv = document.getElementById('timer-container')
+    var timerText = document.getElementById('timer-text');
     var timer = new Timer();
     timer.Interval = 1000;
     timer.Tick = timerTick;
     var seconds = 0;
     var minutes = 0;
 
+
     function timerTick(){
         var times = '';
+
 
         seconds += timer.Interval/1000;
 
@@ -85,6 +88,7 @@ window.onload = function () {
             }
 
             timerText.innerHTML = times;
+            //timerDiv.zIndex('1');
 
         }
         timerCount();
