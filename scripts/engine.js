@@ -264,9 +264,9 @@ window.onload = function () {
     }
 
     function setSoftDrinkImage(softDrinkObject) {
-        var softDrinkImage = new Image();
-        var number = randomNumberInInterval(0, softDrinkSources.length - 1);
-        softDrinkImage.src = softDrinkSources[number];
+        var softDrinkImage = new Image(),
+            index = randomNumberInInterval(0, softDrinkSources.length - 1);
+        softDrinkImage.src = softDrinkSources[index];
 
         softDrinkImage.onload = function () {
             softDrinkObject.setFillPatternImage(softDrinkImage);
@@ -279,9 +279,9 @@ window.onload = function () {
     }
 
     function setCocktailImage(cocktailObject) {
-        var cocktailImage = new Image();
-        var number = randomNumberInInterval(0, cocktailSources.length - 1);
-        cocktailImage.src = cocktailSources[number];
+        var cocktailImage = new Image(),
+            index = randomNumberInInterval(0, cocktailSources.length - 1);
+        cocktailImage.src = cocktailSources[index];
 
         cocktailImage.onload = function () {
             cocktailObject.setFillPatternImage(cocktailImage);
@@ -294,15 +294,15 @@ window.onload = function () {
     }
 
     function setObstacleImage(obstacleObject) {
-        var obstacleImage = new Image();
-        var number = Math.round(Math.random() * 2);
+        var obstacleImage = new Image(),
+            index = randomNumberInInterval(0, obstacleAboveSources.length-1);
 
         if (obstacleObject.type === 'above') {
-            obstacleImage.src = obstacleAboveSources[number];
+            obstacleImage.src = obstacleAboveSources[index];
         }
 
         if (obstacleObject.type === 'below') {
-            obstacleImage.src = obstacleBelowSources[number];
+            obstacleImage.src = obstacleBelowSources[index];
         }
 
         obstacleImage.onload = function () {
