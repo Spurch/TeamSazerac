@@ -239,6 +239,7 @@ window.onload = function () {
         basicSpeed = -3,
         drinkCount = 0,
         drinkArr = [],
+        obstaclesArr = [],
         aboveObstacleX = 0,
         belowObstacleX = 0;
 
@@ -383,66 +384,50 @@ window.onload = function () {
         requestAnimationFrame(animateDrinks);
     }
 
-
-
-    var aboveObstacleObject = Object.create(obstacle).init(initialIntervalMaxX, initialIntervalMinY, CONSTANTS.OBSTACLES_ABOVE_WIDTH, CONSTANTS.OBSTACLES_ABOVE_HEIGHT);
-    aboveObstacleObject.kineticObject = generateObstacleObject(initialIntervalMaxX, initialIntervalMinY, CONSTANTS.OBSTACLES_ABOVE_WIDTH, CONSTANTS.OBSTACLES_ABOVE_HEIGHT);
-    aboveObstacleObject.kineticObject.type = 'above';
-    var belowObstacleObject = Object.create(obstacle).init(initialIntervalMaxX, initialIntervalMaxY, CONSTANTS.OBSTACLES_BELOW_WIDTH, CONSTANTS.OBSTACLES_BELOW_HEIGHT);
-    belowObstacleObject.kineticObject = generateObstacleObject(initialIntervalMaxX, initialIntervalMaxY, CONSTANTS.OBSTACLES_BELOW_WIDTH, CONSTANTS.OBSTACLES_BELOW_HEIGHT);
-    belowObstacleObject.kineticObject.type = 'below';
-    setObstacleImage(aboveObstacleObject.kineticObject);
-    setObstacleImage(belowObstacleObject.kineticObject);
+    setInterval(function () {
+        var randomNumber = randomNumberInInterval(0, 100);
+        if (randomNumber % 2 === 0) {
+            var aboveObstacleObject = Object.create(obstacle).init(initialIntervalMaxX, initialIntervalMinY, CONSTANTS.OBSTACLES_ABOVE_WIDTH, CONSTANTS.OBSTACLES_ABOVE_HEIGHT);
+            aboveObstacleObject.kineticObject = generateObstacleObject(initialIntervalMaxX, initialIntervalMinY, CONSTANTS.OBSTACLES_ABOVE_WIDTH, CONSTANTS.OBSTACLES_ABOVE_HEIGHT);
+            aboveObstacleObject.kineticObject.type = 'above';
+            obstaclesLayer.add(aboveObstacleObject.kineticObject);
+            obstaclesArr.push(aboveObstacleObject);
+            setObstacleImage(aboveObstacleObject.kineticObject);
+        }else{
+            var belowObstacleObject = Object.create(obstacle).init(initialIntervalMaxX, initialIntervalMaxY, CONSTANTS.OBSTACLES_BELOW_WIDTH, CONSTANTS.OBSTACLES_BELOW_HEIGHT);
+            belowObstacleObject.kineticObject = generateObstacleObject(initialIntervalMaxX, initialIntervalMaxY, CONSTANTS.OBSTACLES_BELOW_WIDTH, CONSTANTS.OBSTACLES_BELOW_HEIGHT);
+            belowObstacleObject.kineticObject.type = 'below';
+            obstaclesLayer.add(belowObstacleObject.kineticObject);
+            obstaclesArr.push(belowObstacleObject);
+            setObstacleImage(belowObstacleObject.kineticObject);
+        }
+    }, 1500);    
 
     function animateObstacleFrame() {
         if(gameHasEnded){
             return;
         }
-        obstaclesLayer.add(aboveObstacleObject.kineticObject);
-        obstaclesLayer.add(belowObstacleObject.kineticObject);
 
-        aboveObstacleX = aboveObstacleObject.kineticObject.getX();
-        belowObstacleX = belowObstacleObject.kineticObject.getX();
+        obstaclesArr.forEach(function (obstacleObject, index) {
+            obstacleObjectX = obstacleObject.kineticObject.getX();
+            obstacleObjectX += basicSpeed;
+            obstacleObject.x = obstacleObjectX;
+            obstacleObject.kineticObject.setX(obstacleObjectX);
 
-        aboveObstacleX += basicSpeed;
-        belowObstacleX += basicSpeed;
+            if (obstacleObject.kineticObject.getX() + obstacleObject.kineticObject.getWidth() < 0) {
+                obstacleObject.kineticObject.remove();
+                obstaclesArr.splice(index, 1);
+            }
 
-        aboveObstacleObject.x = aboveObstacleX;
-        belowObstacleObject.x = belowObstacleX;
-
-        aboveObstacleObject.kineticObject.setX(aboveObstacleX);
-        belowObstacleObject.kineticObject.setX(belowObstacleX);
-
-        if (areColliding(bird, aboveObstacleObject)) {
-            gameHasEnded = true;
-            displayFinalResult('Game Over! You hit an obstacle', 'red');
-            // alert('COLLISION');
-            return;
-        }
-        if (areColliding(bird, belowObstacleObject)) {
-            gameHasEnded = true;
-            displayFinalResult('Game Over! You hit an obstacle', 'red');
-            //alert('COLLISION');
-            return;
-        }
+            if (areColliding(bird, obstacleObject)) {
+                gameHasEnded = true;
+                displayFinalResult('Game Over! You hit an obstacle', 'red');
+                return;
+            }            
+        });
 
         obstaclesLayer.draw();
-
         requestAnimationFrame(animateObstacleFrame);
-
-        if (aboveObstacleX < 0) {
-            aboveObstacleObject.kineticObject.setX(800);
-            aboveObstacleObject.x = 800;
-            //aboveObstacleObject.setY(randomNumberInInterval(initialIntervalMinY, initialIntervalMaxY));
-            setObstacleImage(aboveObstacleObject.kineticObject);
-        }
-
-        if (belowObstacleX < 0) {
-            belowObstacleObject.kineticObject.setX(800);
-            belowObstacleObject.x = 800;
-            //aboveObstacleObject.setY(randomNumberInInterval(initialIntervalMinY, initialIntervalMaxY));
-            setObstacleImage(belowObstacleObject.kineticObject);
-        }
     }
 
     //animateObstacleFrame();
