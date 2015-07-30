@@ -384,7 +384,7 @@ window.onload = function () {
         }
 
         obstaclesArr.forEach(function (obstacleObject, index) {
-            obstacleObjectX = obstacleObject.kineticObject.getX();
+            var obstacleObjectX = obstacleObject.kineticObject.getX();
             obstacleObjectX += basicSpeed;
             obstacleObject.x = obstacleObjectX;
             obstacleObject.kineticObject.setX(obstacleObjectX);
@@ -420,7 +420,7 @@ window.onload = function () {
         console.log('we change screen to OPTIONS');
     }, false);
     window.addEventListener('navigateToIngameScreen', function () {
-        //hide other elements and show inGameScreen 
+        //hide other elements and show inGameScreen
         window.onfocus = function () {
             isActive = true;
         };
