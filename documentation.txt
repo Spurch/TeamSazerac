@@ -24,15 +24,21 @@
 
 *Version:* 1.0.0
 ***
-Thank you for your interest in our project! If you have any questions , feel free contact us via **facebook** or **github**
+Thank you for your interest in our project! 
+
+<a href="http://github.com/Spurch/TeamSazerac" alt="Project-Adress">Github for Team Sazerac</a>
 ***
 ##Table of Contents
-1. HTML Structure
-2. CSS Files
-3. Javascript Files
-4. Browser Compatibility
+1. Game Description
+2. HTML Structure
+3. CSS Files
+4. Javascript Files
+5. Browser Compatibility
 ***
-##1. HTML Structure
+##1. Game Description
+A Flappy-bird like game, where your object is to drink as much as possible cocktails in order to win the game. While performing this heroic task the player must avoid many obstacles and to defy the even increasing gravity by hitting the space button.
+***
+##2. HTML Structure
 The HTML Structure for each page is as follows:
  
 * Meta
@@ -47,7 +53,7 @@ The HTML Structure for each page is as follows:
 * Link to Javascript Files
 * Footer
 ***
-##2. CSS Files
+##3. CSS Files
 There is one CSS file in this theme:
  
 * style.css
@@ -55,7 +61,7 @@ There is one CSS file in this theme:
 #####style.css
 This CSS file is the main stylesheet for the theme. It holds all the values for the different elements of theme and the default color scheme.
 ***
-##3. Javascript Files
+##4. Javascript Files
 There are 8 Javascript files in this theme:
  
 * kinetic-v5.1.0.js
@@ -97,19 +103,30 @@ Provides the main functionalities for the project including:
 
 <code>randomNumberInInterval: Function</code>  
 *Provides random numbers in order to create different instances in the game independently and in random positions.*
+
+<code>setSoftDrinkImage: Function</code>
+*fills the Kintic object with a random image from pre-set array*
+
+<code>generateDrinkObject: Function</code>
+*creates a Kinetic object which is the graphic representation of an instance of gameObjects*
+
 #####gameObjects.js
 Contains definition of drawable objects and its children - cocktail drinks, soft drinks, obstacles.
 #####timer.js
 Provides the functionality for the timer, which is the result generator.
 ***
-##4. Browser Compatibility
-This theme works well (-) or great (X) in the following browsers:
+##5. Browser Compatibility
   
-**IE 9+** X  
-**Chrome** X  
-**Firefox** X  
-**Safari** X  
-**Opera** X
-***
+**IE 9+**
+
+**Chrome**  
+
+**Firefox** 
+ 
+**Safari** 
+
+**Opera**
+
 ####Project by Team Sazerac
-If you have any other questions that aren't covered in the documentation, feel free to contact us via **facebook* or **github**.
+Thank you for your interest in our project! 
+<a href="http://github.com/Spurch/TeamSazerac" alt="Project-Adress">Github for Team Sazerac</a>
