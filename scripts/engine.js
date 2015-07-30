@@ -87,7 +87,6 @@ window.onload = function () {
                 seconds = -1;
                 minutes++;
                 console.log(times);
-
             }
 
             timerText.innerHTML = times;
@@ -97,15 +96,14 @@ window.onload = function () {
     // TIMER ---------------------------------
 
     birdLayer.add(birdShape);
-    //put kinetic layers here e.g stage.add(layerName);
+
     function birdAnimationFrame() {
         if(gameHasEnded){
             return;
         }
         
         if (bird.radius > CONSTANTS.INITIAL_BIRD_RADIUS) {
-            currentBirdGravity = bird.radius / CONSTANTS.GRAVITY_TO_RADIUS_RATIO;
-            // console.log(bird.radius);
+            currentBirdGravity = bird.radius / CONSTANTS.GRAVITY_TO_RADIUS_RATIO;            
         } else {
             currentBirdGravity = CONSTANTS.INITIAL_BIRD_GRAVITY;
         }
@@ -119,7 +117,7 @@ window.onload = function () {
             gameHasEnded = true;
 
             displayFinalResult('Game Over! Bird is not flying!', 'red');
-            // alert('Game Over! Bird is not flying!');
+            
             timer.Stop();
             return;
         }
@@ -127,7 +125,7 @@ window.onload = function () {
         if (bird.radius < CONSTANTS.MINIMUM_BIRD_RADIUS) {
             gameHasEnded = true;
             displayFinalResult('Game Over! Bird is starved to dead without alcohol!', 'red');
-            // alert('Game Over! Bird is starved to dead without alcohol!');
+            
             timer.Stop();
 
             return;
@@ -136,7 +134,6 @@ window.onload = function () {
         if (bird.radius > CONSTANTS.WON_GAME_BIRD_RADIUS) {
             gameHasEnded = true;
             displayFinalResult('Game Won! You got one happy drunk bird!', 'green');
-            // alert('Game Won! You got one happy drunk bird!');
             timer.Stop();
 
             return;
@@ -179,8 +176,6 @@ window.onload = function () {
         });
     } ());
 
-    // birdAnimationFrame();
-
     function areColliding(bird, drawableObject) {
         var inBottomLeft = false,
             inBottomRight = false,
@@ -196,11 +191,6 @@ window.onload = function () {
         var distanceTopLeft = xPow + yHeight;
         var distanceTopRight = xWidth + yHeight;
         var distanceBottomRight = xWidth + yPow;
-
-        //var distanceBottomLeft = Math.pow(bird.x - drawableObject.x, 2) + Math.pow(bird.y - drawableObject.y, 2);
-        //var distanceTopLeft = Math.pow(bird.x - drawableObject.x, 2) + Math.pow(bird.y - (drawableObject.y + drawableObject.height), 2);
-        //var distanceTopRight = Math.pow(bird.x - (drawableObject.x + drawableObject.width), 2) + Math.pow(bird.y - (drawableObject.y + drawableObject.height), 2);
-        //var distanceBottomRight = Math.pow(bird.x - (drawableObject.x + drawableObject.width), 2) + Math.pow(bird.y - drawableObject.y, 2);
 
         if (distanceBottomLeft <= radiusPow) {
             inBottomLeft = true;
@@ -221,11 +211,6 @@ window.onload = function () {
 
         return inTopLeft || inBottomLeft || inTopRight || inBottomRight;
     }
-    
-    /*    var testBird = drunkBird.init(50, 50);
-        var testObstacle = obstacle.init(50, 50, 20, 20);
-    
-        console.log('collision: ' + areColliding(testBird, testObstacle));*/
 
     var initialIntervalMaxX = stage.getWidth(),
         initialIntervalMinY = 100,
@@ -371,13 +356,12 @@ window.onload = function () {
                     bird.radius /= CONSTANTS.BIRD_SKINNIG_RATE;
                 }
 
-                birdShape.setRadius(bird.radius);
-                // console.log(bird.radius);
+                birdShape.setRadius(bird.radius);                
                 drinkObject.kineticObject.remove();
                 drinkArr.splice(index, 1);
             }
-            // console.log(birdArr.length);
         });
+
         drinkLayer.draw();
         requestAnimationFrame(animateDrinks);
     }        
@@ -410,22 +394,15 @@ window.onload = function () {
         obstaclesLayer.draw();
         requestAnimationFrame(animateObstacleFrame);
     }
-    //animateObstacleFrame();
-    //animateDrinks();
 
-    //stage.add(background);
-    //stage.add(drinkLayer);
-    //stage.add(obstaclesLayer);
-    //uncomment the 2 lines below to see homePage and optionsPage......
    	stage.add(homeScreen);
-    //stage.add(birdLayer);
 
     window.addEventListener('navigateToHomeScreen', function () {
         //hide other elements and show homeScreen
         console.log('we change screen to HOME');
-        optionsScreen.clear(); 
-        //stage.re
+        optionsScreen.clear();         
     }, false);
+
     window.addEventListener('navigateToOptionsScreen', function () {
         //hide other elements and show optionsSCreen
         console.log('we change screen to OPTIONS');
@@ -482,29 +459,8 @@ window.onload = function () {
             }else{
                 timeForObstacles = true;
             }
-        },2000);
-        /*setInterval(function () {
-            if (isActive){                
-                var randomNumber = randomNumberInInterval(0, 100);
-                if (randomNumber % 2 === 0) {
-                    var aboveObstacleObject = Object.create(obstacle).init(initialIntervalMaxX, initialIntervalMinY, CONSTANTS.OBSTACLES_ABOVE_WIDTH, CONSTANTS.OBSTACLES_ABOVE_HEIGHT);
-                    aboveObstacleObject.kineticObject = generateObstacleObject(initialIntervalMaxX, initialIntervalMinY, CONSTANTS.OBSTACLES_ABOVE_WIDTH, CONSTANTS.OBSTACLES_ABOVE_HEIGHT);
-                    aboveObstacleObject.kineticObject.type = 'above';
-                    obstaclesLayer.add(aboveObstacleObject.kineticObject);
-                    obstaclesArr.push(aboveObstacleObject);
-                    setObstacleImage(aboveObstacleObject.kineticObject);
-                }else{
-                    var belowObstacleObject = Object.create(obstacle).init(initialIntervalMaxX, initialIntervalMaxY, CONSTANTS.OBSTACLES_BELOW_WIDTH, CONSTANTS.OBSTACLES_BELOW_HEIGHT);
-                    belowObstacleObject.kineticObject = generateObstacleObject(initialIntervalMaxX, initialIntervalMaxY, CONSTANTS.OBSTACLES_BELOW_WIDTH, CONSTANTS.OBSTACLES_BELOW_HEIGHT);
-                    belowObstacleObject.kineticObject.type = 'below';
-                    obstaclesLayer.add(belowObstacleObject.kineticObject);
-                    obstaclesArr.push(belowObstacleObject);
-                    setObstacleImage(belowObstacleObject.kineticObject);
-                }
-            }
-        }, 1500);*/
+        },2000);        
         
-        //setInterval(function(){if (isFocused) { isFocused = false;}else{isFocused = true;}},4000);
         console.log('we change screen to Ingame and start playing the game');
         homeScreen.clear();
         stage.add(background);
@@ -517,9 +473,4 @@ window.onload = function () {
         timer.Start();
 
     }, false);
-
-    // test onblur and onfocus
-    setInterval(function () { 
-      console.log(isActive ? 'active' : 'inactive'); 
-    }, 1000);
 };
