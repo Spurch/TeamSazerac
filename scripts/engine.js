@@ -113,7 +113,6 @@ window.onload = function () {
 
         if (bird.y >= CONSTANTS.STAGE_HEIGHT - bird.radius) {
             bird.y = CONSTANTS.STAGE_HEIGHT - bird.radius;
-            bird.isFlying = false;
 
             birdShape.setY(bird.y);
             birdLayer.draw();

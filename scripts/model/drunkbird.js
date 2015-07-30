@@ -11,7 +11,6 @@ var drunkBird = (function () {
             this.x = x;
             this.y = y;
             this.radius = radius;
-            this.isFlying = BIRD_DATA.isFlyingDefault;
             return this;
         },
         get x() {
@@ -32,12 +31,6 @@ var drunkBird = (function () {
         set radius(value) {
             this._radius = value;
         },
-        get isFlying() {
-            return this._isFlying
-        },
-        set isFlying(value) {
-            this._isFlying = value;
-        }
     };
     
     return bird;
