@@ -417,12 +417,16 @@ window.onload = function () {
             gameHasEnded = true;
             displayFinalResult('Game Over! You hit an obstacle', 'red');
             // alert('COLLISION');
+            timer.Stop();
+
             return;
         }
         if (areColliding(bird, belowObstacleObject)) {
             gameHasEnded = true;
             displayFinalResult('Game Over! You hit an obstacle', 'red');
             //alert('COLLISION');
+            timer.Stop();
+
             return;
         }
 
