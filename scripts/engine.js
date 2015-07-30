@@ -3,7 +3,8 @@ window.onload = function () {
         STAGE_WIDTH: 800,
         STAGE_HEIGHT: 600,
         JUMP_SPEED: 60,
-        INITIAL_BIRD_X: 100,
+        INITIAL_BIRD_X: 100,        
+        INITIAL_BIRD_RADIUS: 30,
         BIRD_GROW_RATE: 1.25,
         BIRD_SKINNIG_RATE: 1.33,
         MINIMUM_BIRD_RADIUS: 20,
@@ -102,7 +103,7 @@ window.onload = function () {
             return;
         }
         
-        if (bird.radius > 30) {
+        if (bird.radius > CONSTANTS.INITIAL_BIRD_RADIUS) {
             currentBirdGravity = bird.radius / CONSTANTS.GRAVITY_TO_RADIUS_RATIO;
             // console.log(bird.radius);
         } else {
@@ -256,7 +257,7 @@ window.onload = function () {
 
     function setSoftDrinkImage(softDrinkObject) {
         var softDrinkImage = new Image();
-        var number = Math.round(Math.random() * 4);
+        var number = Math.round(Math.random() * softDrink.length-1);
         softDrinkImage.src = softDrinkSources[number];
 
         softDrinkImage.onload = function () {
@@ -271,7 +272,7 @@ window.onload = function () {
 
     function setCocktailImage(cocktailObject) {
         var cocktailImage = new Image();
-        var number = Math.round(Math.random() * 4);
+        var number = Math.round(Math.random() * cocktailSources.length-1);
         cocktailImage.src = cocktailSources[number];
 
         cocktailImage.onload = function () {
