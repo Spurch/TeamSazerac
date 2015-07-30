@@ -333,24 +333,6 @@ window.onload = function () {
         return drink;
     }
 
-    /*function generateDrinkObject(x, y, width, height, type) {
-
-        var drink = new Kinetic.Rect({
-            x: x,
-            y: y,
-            width: width,
-            height: height,
-            fillPriority: 'pattern'
-        });
-
-        if (type) {
-            setCocktailImage(drink);
-        } else {
-            setSoftDrinkImage(drink);
-        }
-        return drink;
-    }*/
-
     function generateObstacleObject(initialX, initialY, x, y) {
         var obstacle = new Kinetic.Rect({
             x: initialX,
@@ -463,14 +445,12 @@ window.onload = function () {
                     var cocktailObject = Object.create(cocktail).init(initialIntervalMaxX, randomNumberInInterval(initialIntervalMinY, initialIntervalMaxY), CONSTANTS.DRINK_WIDTH, CONSTANTS.DRINK_HEIGHT);
                     cocktailObject.speed = basicSpeed;
                     cocktailObject.kineticObject = generateDrinkObject(cocktailObject);
-                    //cocktailObject.kineticObject = generateDrinkObject(cocktailObject.x, cocktailObject.y, cocktailObject.width, cocktailObject.height, cocktail.isPrototypeOf(cocktailObject));
                     drinkLayer.add(cocktailObject.kineticObject);
                     drinkArr.push(cocktailObject);
                 } else {
                     var softDrinkObject = Object.create(softDrink).init(initialIntervalMaxX, randomNumberInInterval(initialIntervalMinY, initialIntervalMaxY), CONSTANTS.DRINK_WIDTH, CONSTANTS.DRINK_HEIGHT);
                     softDrinkObject.speed = basicSpeed;
                     softDrinkObject.kineticObject = generateDrinkObject(softDrinkObject);
-                    //softDrinkObject.kineticObject = generateDrinkObject(softDrinkObject.x, softDrinkObject.y, softDrinkObject.width, softDrinkObject.height, cocktail.isPrototypeOf(softDrinkObject));
                     drinkLayer.add(softDrinkObject.kineticObject);
                     drinkArr.push(softDrinkObject);
                 }
