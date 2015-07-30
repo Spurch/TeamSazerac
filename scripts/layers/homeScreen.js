@@ -40,7 +40,7 @@ var howToPlay = new Kinetic.Rect({
 });
 
 var howToPlayImage = new Image();
-howToPlayImage.src = 'images\\Navigation\\howToPlay.png';
+//howToPlayImage.src = 'images\\Navigation\\howToPlay.png';
 howToPlayImage.onload = function() {
     howToPlay.setFillPatternImage(howToPlayImage);
 };
