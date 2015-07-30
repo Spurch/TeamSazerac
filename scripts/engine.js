@@ -265,7 +265,7 @@ window.onload = function () {
 
     function setSoftDrinkImage(softDrinkObject) {
         var softDrinkImage = new Image();
-        var number = Math.round(Math.random() * softDrinkSources.length-1);
+        var number = randomNumberInInterval(softDrinkSources.length - 1, 0);
         softDrinkImage.src = softDrinkSources[number];
 
         softDrinkImage.onload = function () {
@@ -280,7 +280,7 @@ window.onload = function () {
 
     function setCocktailImage(cocktailObject) {
         var cocktailImage = new Image();
-        var number = Math.round(Math.random() * cocktailSources.length-1);
+        var number = randomNumberInInterval(cocktailSources.length - 1, 0);
         cocktailImage.src = cocktailSources[number];
 
         cocktailImage.onload = function () {
