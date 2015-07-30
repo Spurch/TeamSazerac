@@ -36,7 +36,8 @@ Thank you for your interest in our project!
 5. Browser Compatibility
 ***
 ##1. Game Description
-A Flappy-bird like game, where your object is to drink as much as possible cocktails in order to win the game. While performing this heroic task the player must avoid many obstacles and to defy the even increasing gravity by hitting the space button.
+A Flappy-bird like game, where your goal is to drink as much as possible cocktails in order to win the game. While performing this heroic task the player must avoid many obstacles and defy the increasing gravity pull by hitting the space button.
+Soft drinks shrink the size of the bird, while cocktails enlarge it. Upon shrinking to a minimum size, the game ends. Obstacles move both on the upper and the lower end of the game screen. If the bird collides with an obstacle, it dies and the game ends.
 ***
 ##2. HTML Structure
 The HTML Structure for each page is as follows:
@@ -82,7 +83,7 @@ Provides information about the home screen layer - definition as a Kinetic.Layer
 #####optionsScreen.js
 Provides information about the background layer - definition as a Kinetic.Layer and sizing.**Functionalities are not available at this moment.**
 #####drunkbird.js
-Hold information about the Player's object including attributes and class definition of the player instance.
+Holds information about the Player's object including attributes and class definition of the player instance.
 #####engine.js
 Provides the main functionalities for the project including:
 <code>constants: Object</code>  

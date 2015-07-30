@@ -1,426 +1,470 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>documentation</title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<style type="text/css">
-/* GitHub stylesheet for MarkdownPad (http://markdownpad.com) */
-/* Author: Nicolas Hery - http://nicolashery.com */
-/* Version: b13fe65ca28d2e568c6ed5d7f06581183df8f2ff */
-/* Source: https://github.com/nicolahery/markdownpad-github */
+    <title>documentation</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <style type="text/css">
+        /* GitHub stylesheet for MarkdownPad (http://markdownpad.com) */
+        /* Author: Nicolas Hery - http://nicolashery.com */
+        /* Version: b13fe65ca28d2e568c6ed5d7f06581183df8f2ff */
+        /* Source: https://github.com/nicolahery/markdownpad-github */
 
-/* RESET
-=============================================================================*/
+        /* RESET
+        =============================================================================*/
 
-html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
-  margin: 0;
-  padding: 0;
-  border: 0;
-}
+        html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+            margin: 0;
+            padding: 0;
+            border: 0;
+        }
 
-/* BODY
-=============================================================================*/
+        /* BODY
+        =============================================================================*/
 
-body {
-  font-family: Helvetica, arial, freesans, clean, sans-serif;
-  font-size: 14px;
-  line-height: 1.6;
-  color: #333;
-  background-color: #fff;
-  padding: 20px;
-  max-width: 960px;
-  margin: 0 auto;
-}
+        body {
+            font-family: Helvetica, arial, freesans, clean, sans-serif;
+            font-size: 14px;
+            line-height: 1.6;
+            color: #333;
+            background-color: #fff;
+            padding: 20px;
+            max-width: 960px;
+            margin: 0 auto;
+        }
 
-body>*:first-child {
-  margin-top: 0 !important;
-}
+        body > *:first-child {
+            margin-top: 0 !important;
+        }
 
-body>*:last-child {
-  margin-bottom: 0 !important;
-}
+        body > *:last-child {
+            margin-bottom: 0 !important;
+        }
 
-/* BLOCKS
-=============================================================================*/
+        /* BLOCKS
+        =============================================================================*/
 
-p, blockquote, ul, ol, dl, table, pre {
-  margin: 15px 0;
-}
+        p, blockquote, ul, ol, dl, table, pre {
+            margin: 15px 0;
+        }
 
-/* HEADERS
-=============================================================================*/
+        /* HEADERS
+        =============================================================================*/
 
-h1, h2, h3, h4, h5, h6 {
-  margin: 20px 0 10px;
-  padding: 0;
-  font-weight: bold;
-  -webkit-font-smoothing: antialiased;
-}
+        h1, h2, h3, h4, h5, h6 {
+            margin: 20px 0 10px;
+            padding: 0;
+            font-weight: bold;
+            -webkit-font-smoothing: antialiased;
+        }
 
-h1 tt, h1 code, h2 tt, h2 code, h3 tt, h3 code, h4 tt, h4 code, h5 tt, h5 code, h6 tt, h6 code {
-  font-size: inherit;
-}
+        h1 tt, h1 code, h2 tt, h2 code, h3 tt, h3 code, h4 tt, h4 code, h5 tt, h5 code, h6 tt, h6 code {
+            font-size: inherit;
+        }
 
-h1 {
-  font-size: 28px;
-  color: #000;
-}
+        h1 {
+            font-size: 28px;
+            color: #000;
+        }
 
-h2 {
-  font-size: 24px;
-  border-bottom: 1px solid #ccc;
-  color: #000;
-}
+        h2 {
+            font-size: 24px;
+            border-bottom: 1px solid #ccc;
+            color: #000;
+        }
 
-h3 {
-  font-size: 18px;
-}
+        h3 {
+            font-size: 18px;
+        }
 
-h4 {
-  font-size: 16px;
-}
+        h4 {
+            font-size: 16px;
+        }
 
-h5 {
-  font-size: 14px;
-}
+        h5 {
+            font-size: 14px;
+        }
 
-h6 {
-  color: #777;
-  font-size: 14px;
-}
+        h6 {
+            color: #777;
+            font-size: 14px;
+        }
 
-body>h2:first-child, body>h1:first-child, body>h1:first-child+h2, body>h3:first-child, body>h4:first-child, body>h5:first-child, body>h6:first-child {
-  margin-top: 0;
-  padding-top: 0;
-}
+        body > h2:first-child, body > h1:first-child, body > h1:first-child + h2, body > h3:first-child, body > h4:first-child, body > h5:first-child, body > h6:first-child {
+            margin-top: 0;
+            padding-top: 0;
+        }
 
-a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
-  margin-top: 0;
-  padding-top: 0;
-}
+        a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+            margin-top: 0;
+            padding-top: 0;
+        }
 
-h1+p, h2+p, h3+p, h4+p, h5+p, h6+p {
-  margin-top: 10px;
-}
+        h1 + p, h2 + p, h3 + p, h4 + p, h5 + p, h6 + p {
+            margin-top: 10px;
+        }
 
-/* LINKS
-=============================================================================*/
+        /* LINKS
+        =============================================================================*/
 
-a {
-  color: #4183C4;
-  text-decoration: none;
-}
+        a {
+            color: #4183C4;
+            text-decoration: none;
+        }
 
-a:hover {
-  text-decoration: underline;
-}
+        a:hover {
+            text-decoration: underline;
+        }
 
-/* LISTS
-=============================================================================*/
+        /* LISTS
+        =============================================================================*/
 
-ul, ol {
-  padding-left: 30px;
-}
+        ul, ol {
+            padding-left: 30px;
+        }
 
-ul li > :first-child, 
-ol li > :first-child, 
-ul li ul:first-of-type, 
-ol li ol:first-of-type, 
-ul li ol:first-of-type, 
-ol li ul:first-of-type {
-  margin-top: 0px;
-}
+        ul li > :first-child,
+        ol li > :first-child,
+        ul li ul:first-of-type,
+        ol li ol:first-of-type,
+        ul li ol:first-of-type,
+        ol li ul:first-of-type {
+            margin-top: 0px;
+        }
 
-ul ul, ul ol, ol ol, ol ul {
-  margin-bottom: 0;
-}
+        ul ul, ul ol, ol ol, ol ul {
+            margin-bottom: 0;
+        }
 
-dl {
-  padding: 0;
-}
+        dl {
+            padding: 0;
+        }
 
-dl dt {
-  font-size: 14px;
-  font-weight: bold;
-  font-style: italic;
-  padding: 0;
-  margin: 15px 0 5px;
-}
+        dl dt {
+            font-size: 14px;
+            font-weight: bold;
+            font-style: italic;
+            padding: 0;
+            margin: 15px 0 5px;
+        }
 
-dl dt:first-child {
-  padding: 0;
-}
+        dl dt:first-child {
+            padding: 0;
+        }
 
-dl dt>:first-child {
-  margin-top: 0px;
-}
+        dl dt > :first-child {
+            margin-top: 0px;
+        }
 
-dl dt>:last-child {
-  margin-bottom: 0px;
-}
+        dl dt > :last-child {
+            margin-bottom: 0px;
+        }
 
-dl dd {
-  margin: 0 0 15px;
-  padding: 0 15px;
-}
+        dl dd {
+            margin: 0 0 15px;
+            padding: 0 15px;
+        }
 
-dl dd>:first-child {
-  margin-top: 0px;
-}
+        dl dd > :first-child {
+            margin-top: 0px;
+        }
 
-dl dd>:last-child {
-  margin-bottom: 0px;
-}
+        dl dd > :last-child {
+            margin-bottom: 0px;
+        }
 
-/* CODE
-=============================================================================*/
+        /* CODE
+        =============================================================================*/
 
-pre, code, tt {
-  font-size: 12px;
-  font-family: Consolas, "Liberation Mono", Courier, monospace;
-}
+        pre, code, tt {
+            font-size: 12px;
+            font-family: Consolas, "Liberation Mono", Courier, monospace;
+        }
 
-code, tt {
-  margin: 0 0px;
-  padding: 0px 0px;
-  white-space: nowrap;
-  border: 1px solid #eaeaea;
-  background-color: #f8f8f8;
-  border-radius: 3px;
-}
+        code, tt {
+            margin: 0 0px;
+            padding: 0px 0px;
+            white-space: nowrap;
+            border: 1px solid #eaeaea;
+            background-color: #f8f8f8;
+            border-radius: 3px;
+        }
 
-pre>code {
-  margin: 0;
-  padding: 0;
-  white-space: pre;
-  border: none;
-  background: transparent;
-}
+        pre > code {
+            margin: 0;
+            padding: 0;
+            white-space: pre;
+            border: none;
+            background: transparent;
+        }
 
-pre {
-  background-color: #f8f8f8;
-  border: 1px solid #ccc;
-  font-size: 13px;
-  line-height: 19px;
-  overflow: auto;
-  padding: 6px 10px;
-  border-radius: 3px;
-}
+        pre {
+            background-color: #f8f8f8;
+            border: 1px solid #ccc;
+            font-size: 13px;
+            line-height: 19px;
+            overflow: auto;
+            padding: 6px 10px;
+            border-radius: 3px;
+        }
 
-pre code, pre tt {
-  background-color: transparent;
-  border: none;
-}
+        pre code, pre tt {
+            background-color: transparent;
+            border: none;
+        }
 
-kbd {
-    -moz-border-bottom-colors: none;
-    -moz-border-left-colors: none;
-    -moz-border-right-colors: none;
-    -moz-border-top-colors: none;
-    background-color: #DDDDDD;
-    background-image: linear-gradient(#F1F1F1, #DDDDDD);
-    background-repeat: repeat-x;
-    border-color: #DDDDDD #CCCCCC #CCCCCC #DDDDDD;
-    border-image: none;
-    border-radius: 2px 2px 2px 2px;
-    border-style: solid;
-    border-width: 1px;
-    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-    line-height: 10px;
-    padding: 1px 4px;
-}
+        kbd {
+            -moz-border-bottom-colors: none;
+            -moz-border-left-colors: none;
+            -moz-border-right-colors: none;
+            -moz-border-top-colors: none;
+            background-color: #DDDDDD;
+            background-image: linear-gradient(#F1F1F1, #DDDDDD);
+            background-repeat: repeat-x;
+            border-color: #DDDDDD #CCCCCC #CCCCCC #DDDDDD;
+            border-image: none;
+            border-radius: 2px 2px 2px 2px;
+            border-style: solid;
+            border-width: 1px;
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            line-height: 10px;
+            padding: 1px 4px;
+        }
 
-/* QUOTES
-=============================================================================*/
+        /* QUOTES
+        =============================================================================*/
 
-blockquote {
-  border-left: 4px solid #DDD;
-  padding: 0 15px;
-  color: #777;
-}
+        blockquote {
+            border-left: 4px solid #DDD;
+            padding: 0 15px;
+            color: #777;
+        }
 
-blockquote>:first-child {
-  margin-top: 0px;
-}
+        blockquote > :first-child {
+            margin-top: 0px;
+        }
 
-blockquote>:last-child {
-  margin-bottom: 0px;
-}
+        blockquote > :last-child {
+            margin-bottom: 0px;
+        }
 
-/* HORIZONTAL RULES
-=============================================================================*/
+        /* HORIZONTAL RULES
+        =============================================================================*/
 
-hr {
-  clear: both;
-  margin: 15px 0;
-  height: 0px;
-  overflow: hidden;
-  border: none;
-  background: transparent;
-  border-bottom: 4px solid #ddd;
-  padding: 0;
-}
+        hr {
+            clear: both;
+            margin: 15px 0;
+            height: 0px;
+            overflow: hidden;
+            border: none;
+            background: transparent;
+            border-bottom: 4px solid #ddd;
+            padding: 0;
+        }
 
-/* TABLES
-=============================================================================*/
+        /* TABLES
+        =============================================================================*/
 
-table th {
-  font-weight: bold;
-}
+        table th {
+            font-weight: bold;
+        }
 
-table th, table td {
-  border: 1px solid #ccc;
-  padding: 6px 13px;
-}
+        table th, table td {
+            border: 1px solid #ccc;
+            padding: 6px 13px;
+        }
 
-table tr {
-  border-top: 1px solid #ccc;
-  background-color: #fff;
-}
+        table tr {
+            border-top: 1px solid #ccc;
+            background-color: #fff;
+        }
 
-table tr:nth-child(2n) {
-  background-color: #f8f8f8;
-}
+        table tr:nth-child(2n) {
+            background-color: #f8f8f8;
+        }
 
-/* IMAGES
-=============================================================================*/
+        /* IMAGES
+        =============================================================================*/
 
-img {
-  max-width: 100%
-}
-</style>
+        img {
+            max-width: 100%
+        }
+    </style>
 </head>
 <body>
 <h1>Drunk Bird Documentation</h1>
-<hr />
+<hr/>
 <p><em>Name:</em> Drunk Bird</p>
-<p><em>Authors:</em>   </p>
+
+<p><em>Authors:</em>
+</p>
 <ol>
-<li>
-<p>Vyara Hristova</p>
-</li>
-<li>
-<p>Teodor Cholakov</p>
-</li>
-<li>
-<p>Chavdar Angelov</p>
-</li>
-<li>
-<p>Marin Marinov</p>
-</li>
-<li>
-<p>Mihail Mitov</p>
-</li>
-<li>
-<p>Vasil Pavlov</p>
-</li>
-<li>
-<p>Ivan Nikolov</p>
-</li>
-<li>
-<p>Georgi Georgiev</p>
-</li>
+    <li>
+        <p>Vyara Hristova</p>
+    </li>
+    <li>
+        <p>Teodor Cholakov</p>
+    </li>
+    <li>
+        <p>Chavdar Angelov</p>
+    </li>
+    <li>
+        <p>Marin Marinov</p>
+    </li>
+    <li>
+        <p>Mihail Mitov</p>
+    </li>
+    <li>
+        <p>Vasil Pavlov</p>
+    </li>
+    <li>
+        <p>Ivan Nikolov</p>
+    </li>
+    <li>
+        <p>Georgi Georgiev</p>
+    </li>
 </ol>
 <p><em>Created:</em> 31/07/2015</p>
+
 <p><em>Version:</em> 1.0.0</p>
-<hr />
+<hr/>
 <p>Thank you for your interest in our project! </p>
+
 <p><a href="http://github.com/Spurch/TeamSazerac" alt="Project-Adress">Github for Team Sazerac</a></p>
-<hr />
+<hr/>
 <h2>Table of Contents</h2>
 <ol>
-<li>Game Description</li>
-<li>HTML Structure</li>
-<li>CSS Files</li>
-<li>Javascript Files</li>
-<li>Browser Compatibility</li>
+    <li>Game Description</li>
+    <li>HTML Structure</li>
+    <li>CSS Files</li>
+    <li>Javascript Files</li>
+    <li>Browser Compatibility</li>
 </ol>
-<hr />
+<hr/>
 <h2>1. Game Description</h2>
-<p>A Flappy-bird like game, where your object is to drink as much as possible cocktails in order to win the game. While performing this heroic task the player must avoid many obstacles and to defy the even increasing gravity by hitting the space button.</p>
-<hr />
+
+<p>A Flappy-bird like game, where your goal is to drink as much as possible cocktails in order to win the game. While
+    performing this heroic task the player must avoid many obstacles and defy the increasing gravity pull by hitting the
+    space button.
+    Soft drinks shrink the size of the bird, while cocktails enlarge it. Upon shrinking to a minimum size, the game
+    ends. Obstacles move both on the upper and the lower end of the game screen. If the bird collides with an obstacle,
+    it dies and the game ends.
+</p>
+<hr/>
 <h2>2. HTML Structure</h2>
+
 <p>The HTML Structure for each page is as follows:</p>
 <ul>
-<li>Meta</li>
-<li>Title</li>
-<li>Link to CSS Files</li>
-<li>Header</li>
-<li>
-Content
-<ul>
-<li>SVG - Container</li>
-<li>Result</li>
-<li>Timer - Container</li>
-<li>Stage container</li>
+    <li>Meta</li>
+    <li>Title</li>
+    <li>Link to CSS Files</li>
+    <li>Header</li>
+    <li>
+        Content
+        <ul>
+            <li>SVG - Container</li>
+            <li>Result</li>
+            <li>Timer - Container</li>
+            <li>Stage container</li>
+        </ul>
+    </li>
+    <li>Link to Javascript Files</li>
+    <li>Footer</li>
 </ul>
-</li>
-<li>Link to Javascript Files</li>
-<li>Footer</li>
-</ul>
-<hr />
+<hr/>
 <h2>3. CSS Files</h2>
+
 <p>There is one CSS file in this theme:</p>
 <ul>
-<li>style.css</li>
+    <li>style.css</li>
 </ul>
 <h5>style.css</h5>
-<p>This CSS file is the main stylesheet for the theme. It holds all the values for the different elements of theme and the default color scheme.</p>
-<hr />
+
+<p>This CSS file is the main stylesheet for the theme. It holds all the values for the different elements of theme and
+    the default color scheme.</p>
+<hr/>
 <h2>4. Javascript Files</h2>
+
 <p>There are 8 Javascript files in this theme:</p>
 <ul>
-<li>kinetic-v5.1.0.js</li>
-<li>background.js</li>
-<li>homeScreen.js</li>
-<li>optionsScreen.js</li>
-<li>drunkbird.js</li>
-<li>engine.js</li>
-<li>gameObjects.js</li>
-<li>timer.js</li>
+    <li>kinetic-v5.1.0.js</li>
+    <li>background.js</li>
+    <li>homeScreen.js</li>
+    <li>optionsScreen.js</li>
+    <li>drunkbird.js</li>
+    <li>engine.js</li>
+    <li>gameObjects.js</li>
+    <li>timer.js</li>
 </ul>
 <h5>kinetic-v5.1.0.js</h5>
+
 <p>The game uses kinetic.js as a game rendering engine.</p>
 <h5>background.js</h5>
+
 <p>Provides information about the background layer - definition as a Kinetic.Layer, sizing and functionalities.</p>
 <h5>homeScreen.js</h5>
-<p>Provides information about the home screen layer - definition as a Kinetic.Layer, buttons for game navigation, and sizing.</p>
+
+<p>Provides information about the home screen layer - definition as a Kinetic.Layer, buttons for game navigation, and
+    sizing.</p>
 <h5>optionsScreen.js</h5>
-<p>Provides information about the background layer - definition as a Kinetic.Layer and sizing.<strong>Functionalities are not available at this moment.</strong></p>
+
+<p>Provides information about the background layer - definition as a Kinetic.Layer and sizing.<strong>Functionalities
+    are not available at this moment.</strong></p>
 <h5>drunkbird.js</h5>
-<p>Hold information about the Player's object including attributes and class definition of the player instance.</p>
+
+<p>Holds information about the Player's object including attributes and class definition of the player instance.</p>
 <h5>engine.js</h5>
+
 <p>Provides the main functionalities for the project including:
-<code>constants: Object</code><br />
-<em>Object: Contains the necessary constants.</em>  </p>
-<p><code>stage: Kinetic.Stage</code><br />
-<em>Provides the stage for the rendering engine.</em></p>
-<p><code>layers: Kinetic.Layer</code><br />
-<em>BirdLayer, DrinkLayer, ObstaclesLayer are the layers containing the different game objects.</em>  </p>
-<p><code>timer: Timer</code><br />
-<em>Provides the functionality of the result calculation.</em> </p>
-<p><code>areColliding: Function</code><br />
-<em>Defines the collision functionalities.</em>  </p>
-<p><code>randomNumberInInterval: Function</code><br />
-<em>Provides random numbers in order to create different instances in the game independently and in random positions.</em></p>
+    <code>constants: Object</code><br/>
+    <em>Object: Contains the necessary constants.</em>
+</p>
+
+<p><code>stage: Kinetic.Stage</code><br/>
+    <em>Provides the stage for the rendering engine.</em></p>
+
+<p><code>layers: Kinetic.Layer</code><br/>
+    <em>BirdLayer, DrinkLayer, ObstaclesLayer are the layers containing the different game objects.</em>
+</p>
+
+<p><code>timer: Timer</code><br/>
+    <em>Provides the functionality of the result calculation.</em></p>
+
+<p><code>areColliding: Function</code><br/>
+    <em>Defines the collision functionalities.</em>
+</p>
+
+<p><code>randomNumberInInterval: Function</code><br/>
+    <em>Provides random numbers in order to create different instances in the game independently and in random
+        positions.</em></p>
+
 <p><code>setSoftDrinkImage: Function</code>
-<em>fills the Kintic object with a random image from pre-set array</em></p>
+    <em>fills the Kintic object with a random image from pre-set array</em></p>
+
 <p><code>generateDrinkObject: Function</code>
-<em>creates a Kinetic object which is the graphic representation of an instance of gameObjects</em></p>
+    <em>creates a Kinetic object which is the graphic representation of an instance of gameObjects</em></p>
 <h5>gameObjects.js</h5>
+
 <p>Contains definition of drawable objects and its children - cocktail drinks, soft drinks, obstacles.</p>
 <h5>timer.js</h5>
+
 <p>Provides the functionality for the timer, which is the result generator.</p>
-<hr />
+<hr/>
 <h2>5. Browser Compatibility</h2>
+
 <p><strong>IE 9+</strong></p>
-<p><strong>Chrome</strong>  </p>
-<p><strong>Firefox</strong> </p>
-<p><strong>Safari</strong> </p>
+
+<p><strong>Chrome</strong>
+</p>
+
+<p><strong>Firefox</strong></p>
+
+<p><strong>Safari</strong></p>
+
 <p><strong>Opera</strong></p>
 <h4>Project by Team Sazerac</h4>
-<p>Thank you for your interest in our project! 
-<a href="http://github.com/Spurch/TeamSazerac" alt="Project-Adress">Github for Team Sazerac</a></p>
+
+<p>Thank you for your interest in our project!
+    <a href="http://github.com/Spurch/TeamSazerac" alt="Project-Adress">Github for Team Sazerac</a></p>
 
 </body>
 </html>
