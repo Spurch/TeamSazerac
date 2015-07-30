@@ -13,7 +13,9 @@ window.onload = function () {
         OBSTACLES_ABOVE_WIDTH: 100,
         OBSTACLES_ABOVE_HEIGHT: 50,
         OBSTACLES_BELOW_WIDTH: 50,
-        OBSTACLES_BELOW_HEIGHT: 100
+        OBSTACLES_BELOW_HEIGHT: 100,
+        DRINK_WIDTH: 30,
+        DRINK_HEIGHT: 50
     },
         currentBirdGravity = CONSTANTS.INITIAL_BIRD_GRAVITY,
         gameHasEnded = false;
@@ -237,14 +239,8 @@ window.onload = function () {
         basicSpeed = -3,
         drinkCount = 0,
         drinkArr = [],
-        drinkWidth = 30,
-        drinkHeight = 50,
-        obstacleAboveWidth = 70,
-        obstacleAboveHeight = 30,
         aboveObstacleX = 0,
-        belowObstacleX = 0,
-        obstacleY = 0,
-        speed = 3;
+        belowObstacleX = 0;
 
     function randomNumberInInterval(min, max) {
         var randomNumber = Math.floor(Math.random() * (max - min) + min);
@@ -336,13 +332,13 @@ window.onload = function () {
     setInterval(function () {
         ++drinkCount;
         if (drinkCount % 3 === 0) {
-            var cocktailObject = Object.create(cocktail).init(initialIntervalMaxX, randomNumberInInterval(initialIntervalMinY, initialIntervalMaxY), drinkWidth, drinkHeight);
+            var cocktailObject = Object.create(cocktail).init(initialIntervalMaxX, randomNumberInInterval(initialIntervalMinY, initialIntervalMaxY), CONSTANTS.DRINK_WIDTH, CONSTANTS.DRINK_HEIGHT);
             cocktailObject.speed = basicSpeed;
             cocktailObject.kineticObject = generateDrinkObject(cocktailObject.x, cocktailObject.y, cocktailObject.width, cocktailObject.height, cocktail.isPrototypeOf(cocktailObject));
             drinkLayer.add(cocktailObject.kineticObject);
             drinkArr.push(cocktailObject);
         } else {
-            var softDrinkObject = Object.create(softDrink).init(initialIntervalMaxX, randomNumberInInterval(initialIntervalMinY, initialIntervalMaxY), drinkWidth, drinkHeight);
+            var softDrinkObject = Object.create(softDrink).init(initialIntervalMaxX, randomNumberInInterval(initialIntervalMinY, initialIntervalMaxY), CONSTANTS.DRINK_WIDTH, CONSTANTS.DRINK_HEIGHT);
             softDrinkObject.speed = basicSpeed;
             softDrinkObject.kineticObject = generateDrinkObject(softDrinkObject.x, softDrinkObject.y, softDrinkObject.width, softDrinkObject.height, cocktail.isPrototypeOf(softDrinkObject));
             drinkLayer.add(softDrinkObject.kineticObject);
@@ -408,8 +404,8 @@ window.onload = function () {
         aboveObstacleX = aboveObstacleObject.kineticObject.getX();
         belowObstacleX = belowObstacleObject.kineticObject.getX();
 
-        aboveObstacleX -= speed;
-        belowObstacleX -= speed;
+        aboveObstacleX += basicSpeed;
+        belowObstacleX += basicSpeed;
 
         aboveObstacleObject.x = aboveObstacleX;
         belowObstacleObject.x = belowObstacleX;
