@@ -61,7 +61,8 @@ window.onload = function () {
     }
 
     // TIMER ---------------------------------
-    var timerText = document.getElementById('timer');
+    var timerDiv = document.getElementById('timer-container');
+    var timerText = document.getElementById('timer-text');
     var timer = new Timer();
     timer.Interval = 1000;
     timer.Tick = timerTick;
