@@ -31,7 +31,7 @@ window.onload = function () {
     var drinkLayer = new Kinetic.Layer();
     var obstaclesLayer = new Kinetic.Layer();
 
-    var bird = Object.create(drunkBird).init(CONSTANTS.INITIAL_BIRD_X, CONSTANTS.STAGE_HEIGHT / 2);
+    var bird = Object.create(drunkBird).init(CONSTANTS.INITIAL_BIRD_X, CONSTANTS.STAGE_HEIGHT / 2, CONSTANTS.INITIAL_BIRD_RADIUS);
 
     var birdShape = new Kinetic.Circle({
         x: bird.x,

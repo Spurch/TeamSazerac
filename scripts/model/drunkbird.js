@@ -1,6 +1,5 @@
 var BIRD_DATA = {
-    initialRadius: 30,
-    isFlyingDefault: true,
+    initialRadius: 30
 };
 
 //isFlaying -> is the state of the bird, it will be manipulated by the engine
@@ -8,10 +7,10 @@ var BIRD_DATA = {
 var drunkBird = (function () {
 
     var bird = {
-        init: function (x, y) {
+        init: function (x, y, radius) {
             this.x = x;
             this.y = y;
-            this.radius = BIRD_DATA.initialRadius;
+            this.radius = radius;
             this.isFlying = BIRD_DATA.isFlyingDefault;
             return this;
         },
