@@ -186,28 +186,39 @@ window.onload = function () {
         var inBottomLeft = false,
             inBottomRight = false,
             inTopLeft = false,
-            inTopRight = false;
+            inTopRight = false,
+            radiusPow = bird.radius * bird.radius,
+            xPow = Math.pow(bird.x - drawableObject.x, 2),
+            yPow = Math.pow(bird.y - drawableObject.y, 2),
+            xWidth = Math.pow(bird.x - (drawableObject.x + drawableObject.width), 2),
+            yHeight = Math.pow(bird.y - (drawableObject.y + drawableObject.height), 2);
 
-        var distanceBottomLeft = Math.pow(bird.x - drawableObject.x, 2) + Math.pow(bird.y - drawableObject.y, 2);
-        var distanceTopLeft = Math.pow(bird.x - drawableObject.x, 2) + Math.pow(bird.y - (drawableObject.y + drawableObject.height), 2);
-        var distanceTopRight = Math.pow(bird.x - (drawableObject.x + drawableObject.width), 2) + Math.pow(bird.y - (drawableObject.y + drawableObject.height), 2);
-        var distanceBottomRight = Math.pow(bird.x - (drawableObject.x + drawableObject.width), 2) + Math.pow(bird.y - drawableObject.y, 2);
+        var distanceBottomLeft = xPow + yPow;
+        var distanceTopLeft = xPow + yHeight;
+        var distanceTopRight = xWidth + yHeight;
+        var distanceBottomRight = xWidth + yPow;
 
-        if (distanceBottomLeft <= bird.radius * bird.radius) {
+        //var distanceBottomLeft = Math.pow(bird.x - drawableObject.x, 2) + Math.pow(bird.y - drawableObject.y, 2);
+        //var distanceTopLeft = Math.pow(bird.x - drawableObject.x, 2) + Math.pow(bird.y - (drawableObject.y + drawableObject.height), 2);
+        //var distanceTopRight = Math.pow(bird.x - (drawableObject.x + drawableObject.width), 2) + Math.pow(bird.y - (drawableObject.y + drawableObject.height), 2);
+        //var distanceBottomRight = Math.pow(bird.x - (drawableObject.x + drawableObject.width), 2) + Math.pow(bird.y - drawableObject.y, 2);
+
+        if (distanceBottomLeft <= radiusPow) {
             inBottomLeft = true;
         }
 
-        if (distanceTopRight <= bird.radius * bird.radius) {
+        if (distanceTopRight <= radiusPow) {
             inTopRight = true;
         }
 
-        if (distanceTopLeft <= bird.radius * bird.radius) {
+        if (distanceTopLeft <= radiusPow) {
             inTopLeft = true;
         }
 
-        if (distanceBottomRight <= bird.radius * bird.radius) {
+        if (distanceBottomRight <= radiusPow) {
             inBottomRight = true;
         }
+
 
         return inTopLeft || inBottomLeft || inTopRight || inBottomRight;
     }
