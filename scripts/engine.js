@@ -245,7 +245,8 @@ window.onload = function () {
         drinkArr = [],
         obstaclesArr = [],
         aboveObstacleX = 0,
-        belowObstacleX = 0;
+        belowObstacleX = 0,
+        isActive = true;
 
     function randomNumberInInterval(min, max) {
         var randomNumber = Math.floor(Math.random() * (max - min) + min);
@@ -332,24 +333,7 @@ window.onload = function () {
         });
 
         return obstacle;
-    }
-
-    setInterval(function () {
-        ++drinkCount;
-        if (drinkCount % 3 === 0) {
-            var cocktailObject = Object.create(cocktail).init(initialIntervalMaxX, randomNumberInInterval(initialIntervalMinY, initialIntervalMaxY), CONSTANTS.DRINK_WIDTH, CONSTANTS.DRINK_HEIGHT);
-            cocktailObject.speed = basicSpeed;
-            cocktailObject.kineticObject = generateDrinkObject(cocktailObject.x, cocktailObject.y, cocktailObject.width, cocktailObject.height, cocktail.isPrototypeOf(cocktailObject));
-            drinkLayer.add(cocktailObject.kineticObject);
-            drinkArr.push(cocktailObject);
-        } else {
-            var softDrinkObject = Object.create(softDrink).init(initialIntervalMaxX, randomNumberInInterval(initialIntervalMinY, initialIntervalMaxY), CONSTANTS.DRINK_WIDTH, CONSTANTS.DRINK_HEIGHT);
-            softDrinkObject.speed = basicSpeed;
-            softDrinkObject.kineticObject = generateDrinkObject(softDrinkObject.x, softDrinkObject.y, softDrinkObject.width, softDrinkObject.height, cocktail.isPrototypeOf(softDrinkObject));
-            drinkLayer.add(softDrinkObject.kineticObject);
-            drinkArr.push(softDrinkObject);
-        }
-    }, 1500);
+    }    
 
     function animateDrinks() {
         if(gameHasEnded){
@@ -386,26 +370,7 @@ window.onload = function () {
         });
         drinkLayer.draw();
         requestAnimationFrame(animateDrinks);
-    }
-
-    setInterval(function () {
-        var randomNumber = randomNumberInInterval(0, 100);
-        if (randomNumber % 2 === 0) {
-            var aboveObstacleObject = Object.create(obstacle).init(initialIntervalMaxX, initialIntervalMinY, CONSTANTS.OBSTACLES_ABOVE_WIDTH, CONSTANTS.OBSTACLES_ABOVE_HEIGHT);
-            aboveObstacleObject.kineticObject = generateObstacleObject(initialIntervalMaxX, initialIntervalMinY, CONSTANTS.OBSTACLES_ABOVE_WIDTH, CONSTANTS.OBSTACLES_ABOVE_HEIGHT);
-            aboveObstacleObject.kineticObject.type = 'above';
-            obstaclesLayer.add(aboveObstacleObject.kineticObject);
-            obstaclesArr.push(aboveObstacleObject);
-            setObstacleImage(aboveObstacleObject.kineticObject);
-        }else{
-            var belowObstacleObject = Object.create(obstacle).init(initialIntervalMaxX, initialIntervalMaxY, CONSTANTS.OBSTACLES_BELOW_WIDTH, CONSTANTS.OBSTACLES_BELOW_HEIGHT);
-            belowObstacleObject.kineticObject = generateObstacleObject(initialIntervalMaxX, initialIntervalMaxY, CONSTANTS.OBSTACLES_BELOW_WIDTH, CONSTANTS.OBSTACLES_BELOW_HEIGHT);
-            belowObstacleObject.kineticObject.type = 'below';
-            obstaclesLayer.add(belowObstacleObject.kineticObject);
-            obstaclesArr.push(belowObstacleObject);
-            setObstacleImage(belowObstacleObject.kineticObject);
-        }
-    }, 1500);    
+    }        
 
     function animateObstacleFrame() {
         if(gameHasEnded){
@@ -435,7 +400,6 @@ window.onload = function () {
         obstaclesLayer.draw();
         requestAnimationFrame(animateObstacleFrame);
     }
-
     //animateObstacleFrame();
     //animateDrinks();
 
@@ -457,7 +421,52 @@ window.onload = function () {
         console.log('we change screen to OPTIONS');
     }, false);
     window.addEventListener('navigateToIngameScreen', function () {
-        //hide other elements and show optionsSCreen
+        //hide other elements and show inGameScreen 
+        window.onfocus = function () { 
+            isActive = true; 
+        };
+        window.onblur = function () { 
+            isActive = false; 
+        }; 
+        setInterval(function () {
+            if (isActive){
+                 ++drinkCount;
+                if (drinkCount % 3 === 0) {
+                    var cocktailObject = Object.create(cocktail).init(initialIntervalMaxX, randomNumberInInterval(initialIntervalMinY, initialIntervalMaxY), CONSTANTS.DRINK_WIDTH, CONSTANTS.DRINK_HEIGHT);
+                    cocktailObject.speed = basicSpeed;
+                    cocktailObject.kineticObject = generateDrinkObject(cocktailObject.x, cocktailObject.y, cocktailObject.width, cocktailObject.height, cocktail.isPrototypeOf(cocktailObject));
+                    drinkLayer.add(cocktailObject.kineticObject);
+                    drinkArr.push(cocktailObject);
+                } else {
+                    var softDrinkObject = Object.create(softDrink).init(initialIntervalMaxX, randomNumberInInterval(initialIntervalMinY, initialIntervalMaxY), CONSTANTS.DRINK_WIDTH, CONSTANTS.DRINK_HEIGHT);
+                    softDrinkObject.speed = basicSpeed;
+                    softDrinkObject.kineticObject = generateDrinkObject(softDrinkObject.x, softDrinkObject.y, softDrinkObject.width, softDrinkObject.height, cocktail.isPrototypeOf(softDrinkObject));
+                    drinkLayer.add(softDrinkObject.kineticObject);
+                    drinkArr.push(softDrinkObject);
+                }
+            }           
+        }, 1500);
+        setInterval(function () {
+            if (isActive){                
+                var randomNumber = randomNumberInInterval(0, 100);
+                if (randomNumber % 2 === 0) {
+                    var aboveObstacleObject = Object.create(obstacle).init(initialIntervalMaxX, initialIntervalMinY, CONSTANTS.OBSTACLES_ABOVE_WIDTH, CONSTANTS.OBSTACLES_ABOVE_HEIGHT);
+                    aboveObstacleObject.kineticObject = generateObstacleObject(initialIntervalMaxX, initialIntervalMinY, CONSTANTS.OBSTACLES_ABOVE_WIDTH, CONSTANTS.OBSTACLES_ABOVE_HEIGHT);
+                    aboveObstacleObject.kineticObject.type = 'above';
+                    obstaclesLayer.add(aboveObstacleObject.kineticObject);
+                    obstaclesArr.push(aboveObstacleObject);
+                    setObstacleImage(aboveObstacleObject.kineticObject);
+                }else{
+                    var belowObstacleObject = Object.create(obstacle).init(initialIntervalMaxX, initialIntervalMaxY, CONSTANTS.OBSTACLES_BELOW_WIDTH, CONSTANTS.OBSTACLES_BELOW_HEIGHT);
+                    belowObstacleObject.kineticObject = generateObstacleObject(initialIntervalMaxX, initialIntervalMaxY, CONSTANTS.OBSTACLES_BELOW_WIDTH, CONSTANTS.OBSTACLES_BELOW_HEIGHT);
+                    belowObstacleObject.kineticObject.type = 'below';
+                    obstaclesLayer.add(belowObstacleObject.kineticObject);
+                    obstaclesArr.push(belowObstacleObject);
+                    setObstacleImage(belowObstacleObject.kineticObject);
+                }
+            }
+        }, 1500);
+        //setInterval(function(){if (isFocused) { isFocused = false;}else{isFocused = true;}},4000);
         console.log('we change screen to Ingame and start playing the game');
         homeScreen.clear();
         stage.add(background);
@@ -470,4 +479,9 @@ window.onload = function () {
         timer.Start();
 
     }, false);
+
+    // test onblur and onfocus
+    setInterval(function () { 
+      console.log(isActive ? 'active' : 'inactive'); 
+    }, 1000);
 };
