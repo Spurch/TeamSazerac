@@ -256,8 +256,6 @@ window.onload = function () {
         drinkCount = 0,
         drinkArr = [],
         obstaclesArr = [],
-        aboveObstacleX = 0,
-        belowObstacleX = 0,
         isActive = true,
         timeForObstacles = false;
 
