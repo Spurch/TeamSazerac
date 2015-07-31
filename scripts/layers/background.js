@@ -46,7 +46,7 @@ bar = (function () {
                 });
 
                 background.add(newBar);
-                stage.add(background);
+                // stage.add(background);
             };
 
             img.src = this.image;

@@ -1,56 +1,87 @@
 window.onload = function () {
     var CONSTANTS = {
-            STAGE_WIDTH: 800,
-            STAGE_HEIGHT: 600,
-            JUMP_SPEED: 60,
-            INITIAL_BIRD_X: 100,
-            INITIAL_BIRD_RADIUS: 30,
-            BIRD_GROW_RATE: 1.25,
-            BIRD_SHRINKING_RATE: 1.33,
-            MINIMUM_BIRD_RADIUS: 20,
-            WON_GAME_BIRD_RADIUS: 80,
-            GRAVITY_TO_RADIUS_RATIO: 11,
-            INITIAL_BIRD_GRAVITY: 3,
-            BIRD_SHAPE_OFFSET_X: 580,
-            BIRD_SHAPE_OFFSET_Y: 800,
-            BIRD_SHAPE_SCALE_X: 0.5,
-            BIRD_SHAPE_SCALE_Y: 0.5,
-            OBSTACLES_ABOVE_WIDTH: 100,
-            OBSTACLES_ABOVE_HEIGHT: 50,
-            OBSTACLES_BELOW_WIDTH: 50,
-            OBSTACLES_BELOW_HEIGHT: 100,
-            OBSTACLES_SCALE_X: 1,
-            OBSTACLES_SCALE_Y: 1,
-            DRINK_WIDTH: 30,
-            DRINK_HEIGHT: 50,
-            SOFT_DRINK_SCALE_X: 0.5,
-            SOFT_DRINK_SCALE_Y: 0.5,
-            COCKTAIL_SCALE_X: 0.5,
-            COCKTAIL_SCALE_Y: 0.5
-        },
-        currentBirdGravity = CONSTANTS.INITIAL_BIRD_GRAVITY,
-        gameHasEnded = false;
+        STAGE_WIDTH: 800,
+        STAGE_HEIGHT: 600,
+        JUMP_SPEED: 60,
+        INITIAL_BIRD_X: 100,
+        INITIAL_BIRD_RADIUS: 30,
+        BIRD_GROW_RATE: 1.25,
+        BIRD_SHRINKING_RATE: 1.33,
+        MINIMUM_BIRD_RADIUS: 20,
+        WON_GAME_BIRD_RADIUS: 80,
+        GRAVITY_TO_RADIUS_RATIO: 11,
+        INITIAL_BIRD_GRAVITY: 3,
+        BIRD_SHAPE_OFFSET_X: 580,
+        BIRD_SHAPE_OFFSET_Y: 800,
+        BIRD_SHAPE_SCALE_X: 0.5,
+        BIRD_SHAPE_SCALE_Y: 0.5,
+        OBSTACLES_ABOVE_WIDTH: 100,
+        OBSTACLES_ABOVE_HEIGHT: 50,
+        OBSTACLES_BELOW_WIDTH: 50,
+        OBSTACLES_BELOW_HEIGHT: 100,
+        OBSTACLES_SCALE_X: 1,
+        OBSTACLES_SCALE_Y: 1,
+        DRINK_WIDTH: 30,
+        DRINK_HEIGHT: 50,
+        SOFT_DRINK_SCALE_X: 0.5,
+        SOFT_DRINK_SCALE_Y: 0.5,
+        COCKTAIL_SCALE_X: 0.5,
+        COCKTAIL_SCALE_Y: 0.5
+    };
 
     var stage = new Kinetic.Stage({
-        container: 'container',
-        width: CONSTANTS.STAGE_WIDTH,
-        height: CONSTANTS.STAGE_HEIGHT
-    });
+            container: 'container',
+            width: CONSTANTS.STAGE_WIDTH,
+            height: CONSTANTS.STAGE_HEIGHT
+        }),
+        birdLayer = new Kinetic.Layer(),
+        drinkLayer = new Kinetic.Layer(),
+        obstaclesLayer = new Kinetic.Layer();
 
-    var birdLayer = new Kinetic.Layer();
-    var drinkLayer = new Kinetic.Layer();
-    var obstaclesLayer = new Kinetic.Layer();
+    var currentBirdGravity = CONSTANTS.INITIAL_BIRD_GRAVITY,
+        gameHasEnded = false,
+        initialIntervalMaxX = stage.getWidth(),
+        initialIntervalMinY = 100,
+        initialIntervalMaxY = stage.getHeight() - 100,
+        cocktailSources = [
+            'images/Cocktails/cocktailOne.png',
+            'images/Cocktails/cocktailTwo.png',
+            'images/Cocktails/cocktailThree.png',
+            'images/Cocktails/cocktailFour.png',
+            'images/Cocktails/cocktailFive.png'
+        ], softDrinkSources = [
+            'images/SoftDrinks/softDrinkOne.png',
+            'images/SoftDrinks/softDrinkTwo.png',
+            'images/SoftDrinks/softDrinkThree.png',
+            'images/SoftDrinks/softDrinkFour.png',
+            'images/SoftDrinks/softDrinkFive.png'
+        ], obstacleAboveSources = [
+            'images/Obstacles/cable_above.png',
+            'images/Obstacles/chandelier_above.png',
+            'images/Obstacles/speaker_above.png'
+        ], obstacleBelowSources = [
+            'images/Obstacles/chair_below.png',
+            'images/Obstacles/floorSign_below.png',
+            'images/Obstacles/bin_below.png'
+        ],
+        basicSpeed = -3,
+        drinkCount = 0,
+        drinkArr = [],
+        obstaclesArr = [],
+        isActive = true,
+        timeForObstacles = false;
 
-    var bird = Object.create(drunkBird).init(CONSTANTS.INITIAL_BIRD_X, CONSTANTS.STAGE_HEIGHT / 2, CONSTANTS.INITIAL_BIRD_RADIUS);
+    var divSvgEl = document.getElementById('svg-container');
 
-    var birdShape = new Kinetic.Circle({
-        x: bird.x,
-        y: bird.y,
-        radius: bird.radius,
-        fillPriority: 'pattern'
-    });
+    var bird = Object.create(drunkBird).init(CONSTANTS.INITIAL_BIRD_X, CONSTANTS.STAGE_HEIGHT / 2, CONSTANTS.INITIAL_BIRD_RADIUS),
+        birdShape = new Kinetic.Circle({
+            x: bird.x,
+            y: bird.y,
+            radius: bird.radius,
+            fillPriority: 'pattern'
+        }),
+        birdImage = new Image();
 
-    var birdImage = new Image();
     birdImage.onload = function () {
         birdShape.fillPatternImage(birdImage);
         birdShape.fillPatternOffsetX(CONSTANTS.BIRD_SHAPE_OFFSET_X);
@@ -58,21 +89,10 @@ window.onload = function () {
         birdShape.fillPatternScaleX(CONSTANTS.BIRD_SHAPE_SCALE_X);
         birdShape.fillPatternScaleY(CONSTANTS.BIRD_SHAPE_SCALE_Y);
     };
+
     birdImage.src = "images/Bird/orange_bird.png";
 
-    var divSvgEl = document.getElementById('svg-container');
-
-    function displayFinalResult(text, styleColor) {
-        divSvgEl.style.opacity = '1';
-        var textEl = document.getElementById('result');
-        var canvasEl = document.getElementById('container');
-        canvasEl.style.opacity = '0';
-        textEl.style.color = styleColor;
-        textEl.innerHTML = text;
-    }
-
     // TIMER ---------------------------------
-
     var timerDiv = document.getElementById('timer-container');
     var timerText = document.getElementById('timer-text');
 
@@ -104,8 +124,16 @@ window.onload = function () {
 
         timerCount();
     }
-
     // TIMER ---------------------------------
+
+    function displayFinalResult(text, styleColor) {
+        divSvgEl.style.opacity = '1';
+        var textEl = document.getElementById('result');
+        var canvasEl = document.getElementById('container');
+        canvasEl.style.opacity = '0';
+        textEl.style.color = styleColor;
+        textEl.innerHTML = text;
+    }
 
     birdLayer.add(birdShape);
 
@@ -223,37 +251,6 @@ window.onload = function () {
 
         return inTopLeft || inBottomLeft || inTopRight || inBottomRight;
     }
-
-    var initialIntervalMaxX = stage.getWidth(),
-        initialIntervalMinY = 100,
-        initialIntervalMaxY = stage.getHeight() - 100,
-        cocktailSources = [
-            'images/Cocktails/cocktailOne.png',
-            'images/Cocktails/cocktailTwo.png',
-            'images/Cocktails/cocktailThree.png',
-            'images/Cocktails/cocktailFour.png',
-            'images/Cocktails/cocktailFive.png'
-        ], softDrinkSources = [
-            'images/SoftDrinks/softDrinkOne.png',
-            'images/SoftDrinks/softDrinkTwo.png',
-            'images/SoftDrinks/softDrinkThree.png',
-            'images/SoftDrinks/softDrinkFour.png',
-            'images/SoftDrinks/softDrinkFive.png'
-        ], obstacleAboveSources = [
-            'images/Obstacles/cable_above.png',
-            'images/Obstacles/chandelier_above.png',
-            'images/Obstacles/speaker_above.png'
-        ], obstacleBelowSources = [
-            'images/Obstacles/chair_below.png',
-            'images/Obstacles/floorSign_below.png',
-            'images/Obstacles/bin_below.png'
-        ],
-        basicSpeed = -3,
-        drinkCount = 0,
-        drinkArr = [],
-        obstaclesArr = [],
-        isActive = true,
-        timeForObstacles = false;
 
     function randomNumberInInterval(min, max) {
         var randomNumber = Math.floor(Math.random() * (max - min) + min);
