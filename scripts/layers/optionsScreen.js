@@ -42,11 +42,8 @@ backButtonsImage.onload = function() {
 };
 //------- end btnOptions 
 
-
 optionsScreen.add(backround);
 optionsScreen.add(btnBack);
-
-
 
 //--------- start 'creating and dispatching events'
 var navToHome = new CustomEvent(NAVIGATE_SCREEN_EVENT.HOME, {

@@ -30,7 +30,7 @@ var drunkBird = (function () {
         },
         set radius(value) {
             this._radius = value;
-        },
+        }
     };
     
     return bird;

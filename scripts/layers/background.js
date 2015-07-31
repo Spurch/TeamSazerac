@@ -1,5 +1,4 @@
 var background = new Kinetic.Layer({
-
     }),
 
     BACKGROUND_CONSTANTS = {
@@ -11,8 +10,6 @@ var background = new Kinetic.Layer({
     bar,
     image,
     backGroundBar;
-
-
 
 bar = (function () {
     var img = new Image(),
@@ -54,10 +51,8 @@ bar = (function () {
         }
     });
 
-
     return bar;
 }());
-
 
 function generateBar(x, y, speed) {
     return Object.create(bar).init('images/Bar/bar3.png', x, y, speed);
@@ -65,9 +60,3 @@ function generateBar(x, y, speed) {
 
 backGroundBar = generateBar(0, 0, 1);
 backGroundBar.draw();
-
-
-
-
-
-

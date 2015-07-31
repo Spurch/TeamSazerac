@@ -75,13 +75,13 @@ var obstacle = (function(parent){
     return obstacle;
 }(drawableObject));
 
-var bloodyMarry = Object.create(cocktail).init(20, 30, 50, 100);
+/*var bloodyMarry = Object.create(cocktail).init(20, 30, 50, 100);
 var pepsi = Object.create(softDrink).init(20, 30, 50, 100);
-var barrier = Object.create(obstacle).init(20, 30, 50, 100);
+var barrier = Object.create(obstacle).init(20, 30, 50, 100);*/
 
-console.log(drawableObject.isPrototypeOf(bloodyMarry)); //true
+/*console.log(drawableObject.isPrototypeOf(bloodyMarry)); //true
 console.log(cocktail.isPrototypeOf(bloodyMarry)); //true
 console.log(drawableObject.isPrototypeOf(pepsi)); //true
 console.log(softDrink.isPrototypeOf(pepsi)); //true
 console.log(drawableObject.isPrototypeOf(barrier)); //true
-console.log(obstacle.isPrototypeOf(barrier)); //true
+console.log(obstacle.isPrototypeOf(barrier)); //true*/

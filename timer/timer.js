@@ -49,5 +49,3 @@ function timerTick(){
     }
     timerCount();
 }
-
-
